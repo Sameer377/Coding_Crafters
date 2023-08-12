@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.agpitcodeclub.app.MainActivity">
+
+    
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/splashtag"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/splashtag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="60dp"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        android:gravity="center"
+        android:paddingTop="30dp"
+        android:textColor="@color/tagline"
+        android:textSize="23dp"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        android:gravity="center"
+        android:lineHeight="20dp"
+        android:padding="20dp"
+        android:text="By \nA. G. Patil Institute of technology"
+        android:textAlignment="center"
+        android:textColor="@color/tagline"
+        android:textSize="13dp"
+        android:textStyle="normal"
+        tools:ignore="MissingConstraints" />
+
+
+</RelativeLayout>
