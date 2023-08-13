@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Spinner" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="submit_btn">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18dp</item>
+        <item name="elevation">2dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/std_btn</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/baloo_bhai_2_medium</item>
+    </style>
+
+</resources>

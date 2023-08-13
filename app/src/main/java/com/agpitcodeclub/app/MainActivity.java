@@ -1,13 +1,16 @@
 package com.agpitcodeclub.app;
 
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.agpitcodeclub.app.credentials.AddMember;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,13 +30,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 300);
 
-        splashtag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent=new Intent(MainActivity.this, AddUser.class);
-//                startActivity(intent);
-            }
-        });
+
     }
 
 
@@ -60,8 +57,19 @@ public class MainActivity extends AppCompatActivity {
                 }, delay);
             }
 
+            if(i==14){
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent adduser = new Intent(MainActivity.this, AddMember.class);
+                        startActivity(adduser);
+                        finish();
+                    }
+                }, delay+800);
 
+            }
         }
+
 
     }
 

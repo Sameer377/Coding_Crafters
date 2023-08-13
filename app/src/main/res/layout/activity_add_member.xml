@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:background="@color/background"
+    tools:context=".credentials.AddMember">
+
+
+    <RelativeLayout
+        android:id="@+id/actionbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingTop="30dp">
+
+        <ImageView
+            android:id="@+id/img_back_adduser"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back_arrow_white" />
+
+        <TextView
+            android:id="@+id/addmemtag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/baloo_bhai_2_medium"
+            android:text="Add Member"
+            android:textColor="@color/tagline"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionbar1"
+        android:layout_marginTop="30dp"
+        android:layout_centerInParent="true"
+        android:padding="30dp">
+
+
+        <ImageView
+            android:id="@+id/imgprofile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/profilebg"
+            android:padding="30dp"
+            android:src="@drawable/camera_white" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgprofile"
+            android:layout_marginTop="70dp"
+            android:hint="Name"
+            android:textColorHint="@color/outline_active"
+            app:boxStrokeColor="@color/outline_active"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="@color/inputbg"
+                android:inputType="text"
+                android:paddingStart="20dp"
+                android:textColor="@color/tagline"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/designation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/add_name"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/spinner_bg" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_below="@id/designation"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="30dp"
+            style="@style/submit_btn"
+            android:text="Add"
+             />
+
+    </RelativeLayout>
+
+</RelativeLayout>
