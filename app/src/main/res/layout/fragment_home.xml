@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/frag_bg"
+    tools:context=".fragments.Home">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/intro"
+            android:background="@drawable/dash_welcome_banner"
+            android:layout_marginTop="-2dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="-2dp"
+            android:layout_marginLeft="-2dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp"
+            >
+
+            <ImageView
+                android:id="@+id/rel_logo"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rel_logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/baloo_bhai"
+                android:text="Welcome"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+
+            <TextView
+
+                android:id="@+id/to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/welcome"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/baloo_bhai"
+                android:text="to"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/codingcra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/to"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/baloo_bhai"
+                android:labelFor="@id/to"
+                android:text="Coding Crafters"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/intro"
+                android:id="@+id/content">
+
+                <TextView
+                    android:id="@+id/txt_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/intro"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:textColor="@color/white"
+                    android:justificationMode="inter_word"
+                    android:textSize="16dp"
+                    />
+
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/intro_img_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/txt_intro"
+                    android:layout_marginTop="20dp"
+                    android:scrollIndicators="bottom"
+                    app:iss_auto_cycle="true"
+                    app:iss_corner_radius="40"
+                    app:iss_delay="2000"
+                    app:iss_error_image="@drawable/error"
+                    app:iss_period="2500"
+                    app:iss_title_background="@drawable/gradient" />
+
+                <TextView
+                    android:layout_below="@id/intro_img_slider"
+                    android:id="@+id/benefits"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/benefits_of_club"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:textColor="@color/white"
+                    android:justificationMode="inter_word"
+                    android:textSize="16dp"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+    <!-- TODO: Update blank fragment layout -->
+
+</FrameLayout>

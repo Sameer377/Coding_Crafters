@@ -3,22 +3,17 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
 
     <!--    app color-->
     <color name="background">#141414</color>
     <color name="actionbar">#121212</color>
-    <color name="logo_pink">#FA17D7</color>
     <color name="pink_100">#C65EB6</color>
-    <color name="typewriter">#0EEA16</color>
 
     <color name="frag_bg">#2C2929</color>
 
     <!--    Font Color-->
-    <color name="title">#DBD8D8</color>
     <color name="tagline">#FFFFFF</color>
 
 <!--    input text outline-->
@@ -27,8 +22,4 @@
 
     <color name="inputbg">#212121</color>
 
-    <color name="profilecolor">#7689EB</color>
-
-    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/outline_deactive</color>
-        <color name="button_blue">#6200EE</color>
 </resources>

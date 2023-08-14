@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Coding Crafters</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="intro">Step into Code Club, the ultimate launchpad for future tech buddies in the realm of CSE  engineering.
+Beyond code, we cultivate indispensable soft skills and communication prowess, shaping well-rounded Professionals Skills.so get ready toEmbark on a transformative journey where innovation meets holistic growth!..  Coding Crafters Club Founded in 2023.</string>
+
+
+    <string name="benefits_of_club"> Working in a group exposes you to a range of viewpoints, ideas, and approaches. This diversity of thought can lead to more innovative and creative solutions to problems.In a group, members often possess different skills and expertise. This allows individuals to leverage each others strengths, filling gaps and collectively achieving more than what they could individually.Collaborating with others allows you to learn from their experiences, knowledge, and techniques. This accelerates your own skill development and broadens your understanding of various subjects.Group work encourages critical thinking and the exploration of multiple solutions to challenges. Through discussion and debate, you can refine ideas and identify the best course of action.Group interactions hone your communication abilities, including active listening, articulation of ideas, and effective presentation. Clear communication is vital for success in various aspects of life. Group work provides opportunities to learn how to navigate conflicts, differing opinions, and interpersonal challenges. Developing these skills contributes to better teamwork and collaboration. In a group setting, you\'ll often need to coordinate schedules and allocate tasks efficiently. </string>
 </resources>

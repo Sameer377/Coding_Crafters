@@ -6,6 +6,7 @@
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/announce_filled.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.3111111111111111" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/btm_nav_bg.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/dash_welcome_banner.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/home_filled.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/profilebg.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/spinner_bg.xml" value="0.36614583333333334" />
@@ -14,6 +15,9 @@
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_add_member.xml" value="0.33" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_dashboard.xml" value="0.33" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_community.xml" value="0.3458333333333333" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_home.xml" value="0.3458333333333333" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_scrolling.xml" value="0.3458333333333333" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3458333333333333" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18645833333333334" />
       </map>
