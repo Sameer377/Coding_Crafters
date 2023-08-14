@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "193742457678",
+    "project_id": "codingcrafters-fac21",
+    "storage_bucket": "codingcrafters-fac21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193742457678:android:48775ed94d761736f42c1f",
+        "android_client_info": {
+          "package_name": "com.agpitcodeclub.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193742457678-g3o4q7btkfff7k66uare10c2im03bo5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXZni8vQn1mI0Zgoyxvu6C7zKelLKUdpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193742457678-g3o4q7btkfff7k66uare10c2im03bo5p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
