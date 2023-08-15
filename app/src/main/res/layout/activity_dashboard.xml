@@ -8,17 +8,40 @@
     tools:context=".Dashboard">
 
 
-    <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/inputbg"
+            android:id="@+id/rel_frag_header"
+            android:padding="17dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:text="Community"
+                android:textColor="@color/white"
+                android:fontFamily="@font/baloo_bhai_2_medium"
+                android:layout_alignParentRight="true"
+                android:id="@+id/frag_title_txt"
+                />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back_arrow_white"
+                android:id="@+id/frag_title_back"
+                />
+
+        </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/dashboardframe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btm_nav_main"
-        android:background="@color/frag_bg" >
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/dashboardframe"
-            />
-    </RelativeLayout>
+        android:layout_above="@id/btm_nav_main"
+        android:layout_below="@id/rel_frag_header" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btm_nav_main"

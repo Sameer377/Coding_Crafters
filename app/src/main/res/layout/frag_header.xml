@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/inputbg"
+    android:id="@+id/rel_frag_header"
+    android:padding="17dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:text="Community"
+        android:textColor="@color/white"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        android:layout_alignParentRight="true"
+        android:id="@+id/frag_title_txt"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/back_arrow_white"
+        android:id="@+id/frag_title_back"
+        />
+
+</RelativeLayout>
