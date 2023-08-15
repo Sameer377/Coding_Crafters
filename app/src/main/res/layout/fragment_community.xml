@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/frag_bg"
     tools:context=".fragments.Community">
 
@@ -10,12 +11,24 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-   <androidx.appcompat.widget.AppCompatImageView
-       android:layout_width="match_parent"
-       android:layout_height="250dp"
-      android:src="@drawable/community"
-       android:background="@color/white"
-       />
+      <androidx.appcompat.widget.AppCompatImageView
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          android:background="@color/white"
+          android:src="@drawable/community" />
+
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+          android:id="@+id/add_member"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentBottom="true"
+          android:layout_marginBottom="10dp"
+          android:layout_marginRight="10dp"
+          android:scaleType="center"
+          app:backgroundTint="@color/pink_100"
+          app:fabSize="normal"
+          android:src="@drawable/add_member" />
 
    </RelativeLayout>
 

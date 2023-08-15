@@ -75,6 +75,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     }
 
     private void navbar() {
+
         nav.setSelectedItemId(R.id.home);
 
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -86,27 +87,35 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     case R.id.home:
                         header.setVisibility(View.GONE);
                         loadFragment(new Home(), false);
+                        nav.setVisibility(View.VISIBLE);
+
                         break;
                     case R.id.community:
                         title.setText("Community");
                         header.setVisibility(View.VISIBLE);
                         loadFragment(new Community(), false);
+                        nav.setVisibility(View.GONE);
                         break;
                     case R.id.post:
                         title.setText("Post");
                         header.setVisibility(View.VISIBLE);
                         loadFragment(new Post(), false);
+                        nav.setVisibility(View.GONE);
+
                         break;
                     case R.id.announcement:
                         title.setText("Inbox");
                         header.setVisibility(View.VISIBLE);
                         loadFragment(new Announcement(), false);
+                        nav.setVisibility(View.GONE);
+
                         break;
                     case R.id.profile:
                         title.setText("Profile");
-
                         header.setVisibility(View.VISIBLE);
                         loadFragment(new Profile(), false);
+                        nav.setVisibility(View.GONE);
+
                         break;
                     default:
                         Toast.makeText(Dashboard.this, "btm", Toast.LENGTH_SHORT).show();

@@ -10,12 +10,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import com.agpitcodeclub.app.FirebasePath;
 import com.agpitcodeclub.app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class AddMember extends AppCompatActivity implements View.OnClickListener {
     private Spinner designationspinner;
     private ImageView back;
-    private TextInputEditText name,email;
+    private AppCompatEditText name,email;
     private char[] password;
     private String designation="";
     private String userId="";
@@ -75,7 +75,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
 
     private void initiateFirebase(){
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseDatabase = mFirebaseInstance.getReference(FirebasePath.USERS);
+        mFirebaseDatabase = mFirebaseInstance.getReference(FirebasePath.COMMUNITY);
     }
 
 
@@ -89,6 +89,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         arrayList.add("Revenue Manger");
         arrayList.add("Assistant Revenue Manger");
         arrayList.add("Developer");
+        arrayList.add("Member");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item, arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.select_dialog_item);
         designationspinner.setAdapter(arrayAdapter);
@@ -119,11 +120,11 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         password = obj.password();
 
         if(_name.isEmpty()){
-            name.setError("Full Name Required");
-            name.requestFocus();
+
+            toast("Invalid name");
         }else if(_email.isEmpty()){
-            email.setError("Email is required");
-            email.requestFocus();
+            toast("Invalid email");
+
         }else if(designation=="Select designation"){
             toast("select designation");
         }
@@ -171,12 +172,13 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
     void adddetailstoDB(){
         User user;
         /* Adding details in realtime */
-        if(designation=="President"){
+        if(designation=="Developer"||designation=="Member") {
             user = new User(_name,_email,_password,"profile","hello");
-            mFirebaseDatabase.child(FirebasePath.PRESIDENT).setValue(user);
-        }else{
-            user = new User(_name,_email,_password,"profile","hello",designation);
-            mFirebaseDatabase.child(userId).setValue(user);
+            mFirebaseDatabase.child(designation).child(userId).setValue(user);
+        }
+        else{
+            user = new User(_name,_email,_password,"profile","hello");
+            mFirebaseDatabase.child(designation).setValue(user);
         }
     }
 

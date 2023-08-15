@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:background="@color/background"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context=".credentials.AddMember">
 
 
@@ -41,8 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/actionbar1"
-        android:layout_marginTop="30dp"
         android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
         android:padding="30dp">
 
 
@@ -56,70 +57,49 @@
             android:src="@drawable/camera_white" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_below="@id/imgprofile"
             android:layout_marginTop="50dp"
+            android:background="@drawable/edt_bg"
+            android:fontFamily="@font/baloo_bhai_2_medium"
             android:hint="Name"
-            android:textColorHint="@color/outline_active"
-            app:boxStrokeColor="@color/outline_active"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/inputbg"
-                android:inputType="text"
-                android:paddingStart="20dp"
-                android:textColor="@color/tagline"
-                android:textStyle="bold" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:textColor="@color/tagline"
+            android:textColorHint="@color/white"
+            android:textStyle="bold" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tl_email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_email_adduser"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/add_name"
+            android:layout_height="50dp"
+            android:layout_below="@id/edt_name"
             android:layout_marginTop="10dp"
+            android:background="@drawable/edt_bg"
+            android:fontFamily="@font/baloo_bhai_2_medium"
             android:hint="Email"
-            android:textColorHint="@color/outline_active"
-            app:boxStrokeColor="@color/outline_active"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:inputType="textEmailAddress"
+            android:paddingStart="20dp"
+            android:textColor="@color/tagline"
+            android:textColorHint="@color/white"
+            android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_email_adduser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/inputbg"
-                android:inputType="textEmailAddress"
-                android:paddingStart="20dp"
-                android:textColor="@color/tagline"
-                android:textStyle="bold" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/designation"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/tl_email"
+            android:layout_below="@id/edt_email_adduser"
             android:layout_marginTop="10dp"
             android:background="@drawable/spinner_bg" />
 
         <Button
-            style="@style/submit_btn"
             android:id="@+id/btn_add_addmember"
+            style="@style/submit_btn"
             android:layout_width="150dp"
             android:layout_below="@id/designation"
             android:layout_alignParentRight="true"
