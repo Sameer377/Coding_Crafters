@@ -25,9 +25,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView title;
-    private ImageView back;
-    private RelativeLayout header;
+//    private TextView title;
+//    private ImageView back;
+//    private RelativeLayout header;
     private BottomNavigationView nav;
     private FrameLayout mainframe;
     @Override
@@ -36,7 +36,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_dashboard);
 
         initui();
-        initListener();
+//        initListener();
         navbar();
     }
 
@@ -61,18 +61,18 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         nav=findViewById(R.id.btm_nav_main);
         mainframe=findViewById(R.id.dashboardframe);
 
-        header=findViewById(R.id.rel_frag_header);
+      /*  header=findViewById(R.id.rel_frag_header);
         title=findViewById(R.id.frag_title_txt);
         back=findViewById(R.id.frag_title_back);
-
+*/
         nav.setSelectedItemId(R.id.home);
-        header.setVisibility(View.GONE);
+//        header.setVisibility(View.GONE);
         loadFragment(new Home(),true);
 
     }
-    private void initListener() {
-        back.setOnClickListener(this);
-    }
+//    private void initListener() {
+//        back.setOnClickListener(this);
+//    }
 
     private void navbar() {
 
@@ -85,36 +85,32 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
                 switch (id) {
                     case R.id.home:
-                        header.setVisibility(View.GONE);
+//                        header.setVisibility(View.GONE);
                         loadFragment(new Home(), false);
                         nav.setVisibility(View.VISIBLE);
 
                         break;
                     case R.id.community:
-                        title.setText("Community");
-                        header.setVisibility(View.VISIBLE);
-                        loadFragment(new Community(), false);
-                        nav.setVisibility(View.GONE);
+//                        title.setText("Community");
+//                        header.setVisibility(View.VISIBLE);
+                        loadFragment(new Community(Dashboard.this), false);
                         break;
                     case R.id.post:
-                        title.setText("Post");
-                        header.setVisibility(View.VISIBLE);
+//                        title.setText("Post");
+//                        header.setVisibility(View.VISIBLE);
                         loadFragment(new Post(), false);
-                        nav.setVisibility(View.GONE);
 
                         break;
                     case R.id.announcement:
-                        title.setText("Inbox");
-                        header.setVisibility(View.VISIBLE);
+//                        title.setText("Inbox");
+//                        header.setVisibility(View.VISIBLE);
                         loadFragment(new Announcement(), false);
-                        nav.setVisibility(View.GONE);
 
                         break;
                     case R.id.profile:
-                        title.setText("Profile");
-                        header.setVisibility(View.VISIBLE);
+//                        title.setText("Profile");
+//                        header.setVisibility(View.VISIBLE);
                         loadFragment(new Profile(), false);
-                        nav.setVisibility(View.GONE);
 
                         break;
                     default:
@@ -131,7 +127,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         int id = view.getId();
         switch (id){
-            case R.id.frag_title_back: nav.setSelectedItemId(R.id.home); header.setVisibility(View.GONE); loadFragment(new Home(),false); break;
+//            case R.id.frag_title_back: nav.setSelectedItemId(R.id.home); header.setVisibility(View.GONE); loadFragment(new Home(),false); break;
         }
     }
 }

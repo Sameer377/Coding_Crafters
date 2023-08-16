@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.agpitcodeclub.app.FirebasePath;
+import com.agpitcodeclub.app.Models.CommunityModel;
+import com.agpitcodeclub.app.Models.User;
 import com.agpitcodeclub.app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -170,14 +172,14 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
     }
 
     void adddetailstoDB(){
-        User user;
+        CommunityModel user;
         /* Adding details in realtime */
         if(designation=="Developer"||designation=="Member") {
-            user = new User(_name,_email,_password,"profile","hello");
+            user = new CommunityModel (_name,_email,_password,"profile","hello","ds");
             mFirebaseDatabase.child(designation).child(userId).setValue(user);
         }
         else{
-            user = new User(_name,_email,_password,"profile","hello");
+            user = new CommunityModel (_name,_email,_password,"profile","hello","des");
             mFirebaseDatabase.child(designation).setValue(user);
         }
     }

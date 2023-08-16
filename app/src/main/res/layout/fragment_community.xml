@@ -4,18 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/frag_bg"
+    android:background="@color/inputbg"
     tools:context=".fragments.Community">
+
+
 
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-      <androidx.appcompat.widget.AppCompatImageView
+      <TextView
+
+          android:id="@+id/frag_title"
           android:layout_width="match_parent"
-          android:layout_height="200dp"
-          android:background="@color/white"
-          android:src="@drawable/community" />
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:fontFamily="@font/baloo_bhai"
+          android:padding="10dp"
+          android:text="Community"
+          android:textAlignment="center"
+          android:textColor="@color/white"
+          android:textSize="25dp" />
+
+      <ScrollView
+          android:layout_below="@id/frag_title"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+         <!--   <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/commmunity_img"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/white"
+                android:src="@drawable/community" />
+-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/community_list_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="500dp"
+                android:scrollbars="none" />
+         </RelativeLayout>
+
+      </ScrollView>
+
 
       <com.google.android.material.floatingactionbutton.FloatingActionButton
           android:id="@+id/add_member"

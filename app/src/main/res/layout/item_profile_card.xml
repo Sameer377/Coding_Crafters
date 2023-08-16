@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/per_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/community_profile_card"
+        android:paddingBottom="30dp">
+
+        <TextView
+            android:id="@+id/community_profile_designation_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            android:fontFamily="@font/baloo_bhai"
+            android:gravity="center"
+            android:maxWidth="300dp"
+            android:text=" Revenue manager"
+            android:textColor="@color/white"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rel_card_deco_line"
+            android:layout_width="250dp"
+            android:layout_height="3dp"
+            android:layout_below="@id/community_profile_designation_txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/card_deco_line1" />
+
+        <TextView
+            android:id="@+id/community_profile_name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rel_card_deco_line"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/baloo_bhai"
+            android:text="Vivek Solapure"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/community_profile_year_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/community_profile_name_txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/baloo_bhai_2_medium"
+            android:text="Persuing : 3rd year"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/community_profile_selected_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/community_profile_year_txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/baloo_bhai_2_medium"
+            android:text="Elected for : 2023 - 2024"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+
+    </RelativeLayout>
+
+   <RelativeLayout
+       android:id="@+id/rel_img_profile"
+       android:layout_centerHorizontal="true"
+       android:layout_width="200dp"
+       android:layout_height="200dp"
+       android:padding="10dp"
+       android:background="@drawable/community_profile_bg"
+       >
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:background="@drawable/profilebg" />
+   </RelativeLayout>
+
+
+
+</RelativeLayout>

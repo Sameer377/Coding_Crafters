@@ -1,4 +1,4 @@
-package com.agpitcodeclub.app.credentials;
+package com.agpitcodeclub.app.Models;
 
 public class User {
     public String name,Email,password,username,profile,description,designation;

@@ -7,7 +7,7 @@ public class FirebasePath {
     public static final String USERS="users";
     public static final String PRESIDENT="president";
     public static final String COMMUNITY="community";
-
+    public static final String MEMBER = "Member";
     /* Firebase Storage */
 
 
