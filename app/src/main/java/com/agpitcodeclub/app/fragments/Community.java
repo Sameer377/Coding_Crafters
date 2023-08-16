@@ -81,21 +81,56 @@ public class Community extends Fragment {
         recyclerView.setAdapter(adapter);
         String t="DB status";
         Toast.makeText(context,"Entering",Toast.LENGTH_SHORT).show();
+        ArrayList<CommunityModel> listinner=new ArrayList<>();
         Log.v(t,"Entering.......");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NotNull DataSnapshot snapshot) {
-
+                list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     CommunityModel user = dataSnapshot.getValue(CommunityModel.class);
                     user.setDesignation(dataSnapshot.getKey().substring(2));
-                    list.add(user);
                     Log.v(t,"Name : "+user.getName()+"\nDesignation : "+user.getDesignation());
-                    Log.v(t,"Name : "+list.get(0).getName()+"\nDesignation : "+list.get(0).getDesignation());
+                    System.out.println("Node1 : "+dataSnapshot.getKey().toString()+"\n"+dataSnapshot.getKey().equals(FirebasePath.DEVELOPER));
+                    if (dataSnapshot.getKey().equals(FirebasePath.DEVELOPER)||dataSnapshot.getKey().equals(FirebasePath.MEMBER)){
+                        System.out.println("Entered in node2\n");
+                        Toast.makeText(context,"Entered in inner node ",Toast.LENGTH_SHORT).show();
+                        DatabaseReference innerChild = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY).child(dataSnapshot.getKey());
+                        innerChild.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot1) {
+
+                                for (DataSnapshot dataSnapshot1 : snapshot1.getChildren()){
+                                    CommunityModel user1 = dataSnapshot1.getValue(CommunityModel.class);
+                                    user1.setDesignation(dataSnapshot.getKey().substring(2));
+//                                    System.out.println("Name : "+user1.getName());
+//                                    System.out.println("des2 : "+user1.getDesignation());
+                                    list.add(user1);
+
+                                    System.out.println("list status : "+list.contains(user1));
+
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+
+                            }
+                        });
+
+
+                    }else {
+                        list.add(user);
+                    }
 
                 }
                 adapter.notifyDataSetChanged();
+                System.out.println("\n.............................................\n");
+                for (CommunityModel l:list) {
+                    System.out.println("Names : "+l.getName()+"\n");
+                }
             }
 
             @Override

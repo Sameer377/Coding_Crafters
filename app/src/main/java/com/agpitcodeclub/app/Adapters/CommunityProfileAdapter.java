@@ -21,7 +21,6 @@ ArrayList<CommunityModel> list;
     public CommunityProfileAdapter(Context context, ArrayList<CommunityModel> list) {
    this.context =context;
    this.list=list;
-   Log.v("DB status","constructor");
     }
 
 
@@ -61,7 +60,6 @@ ArrayList<CommunityModel> list;
         public CommunityProfileViewholder(@NotNull View itemView)
         {
             super(itemView);
-            Log.v("DB status : ","entering view hodeler class");
             name = itemView.findViewById(R.id.community_profile_name_txt);
             designation= itemView.findViewById(R.id.community_profile_designation_txt);
             persuingyr = itemView.findViewById(R.id.community_profile_year_txt);
