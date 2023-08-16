@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/inputbg"
+    android:background="@color/frag_bg"
     tools:context=".fragments.Community">
 
 
@@ -13,40 +13,46 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-      <TextView
-
-          android:id="@+id/frag_title"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-          android:fontFamily="@font/baloo_bhai"
-          android:padding="10dp"
-          android:text="Community"
-          android:textAlignment="center"
-          android:textColor="@color/white"
-          android:textSize="25dp" />
+       <TextView
+           android:background="@color/inputbg"
+           android:id="@+id/frag_title"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:elevation="5dp"
+           android:fontFamily="@font/baloo_bhai"
+           android:padding="10dp"
+           android:text="Community"
+           android:textAlignment="center"
+           android:textColor="@color/white"
+           android:textSize="25dp" />
 
       <ScrollView
           android:layout_below="@id/frag_title"
           android:layout_width="match_parent"
           android:layout_height="match_parent">
          <RelativeLayout
+             android:layout_below="@id/frag_title"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-         <!--   <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/commmunity_img"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/white"
-                android:src="@drawable/community" />
--->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/community_list_profile"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:minHeight="500dp"
-                android:scrollbars="none" />
+             <androidx.appcompat.widget.AppCompatImageView
+                 android:id="@+id/commmunity_img"
+                 android:layout_width="wrap_content"
+                 android:layout_height="210dp"
+                 android:background="@color/white"
+                 android:src="@drawable/communitybanner" />
+
+             <androidx.recyclerview.widget.RecyclerView
+                 android:paddingTop="20dp"
+                 android:id="@+id/community_list_profile"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/commmunity_img"
+                 android:nestedScrollingEnabled="false"
+                 android:paddingLeft="20dp"
+                 android:paddingRight="20dp"
+                 android:scrollbars="none" />
          </RelativeLayout>
 
       </ScrollView>

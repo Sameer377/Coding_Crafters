@@ -174,14 +174,47 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
     void adddetailstoDB(){
         CommunityModel user;
         /* Adding details in realtime */
-        if(designation=="Developer"||designation=="Member") {
-            user = new CommunityModel (_name,_email,_password,"profile","hello","ds");
-            mFirebaseDatabase.child(designation).child(userId).setValue(user);
+        /*  arrayList.add("Select designation");
+        arrayList.add("President");
+        arrayList.add("Vice President");
+        arrayList.add("Secretary");
+        arrayList.add("Vice Secretary");
+        arrayList.add("Revenue Manger");
+        arrayList.add("Assistant Revenue Manger");
+        arrayList.add("Developer");
+        arrayList.add("Member");*/
+        switch (designation){
+            case "President" :
+                user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+                mFirebaseDatabase.child(FirebasePath.PRESIDENT).setValue(user);
+                break;
+            case "Vice President" :   user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+                mFirebaseDatabase.child(FirebasePath.VPRESIDENT).setValue(user); break;
+            case "Secretary" :  user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+                mFirebaseDatabase.child(FirebasePath.SECRETARY).setValue(user); break;
+            case "Vice Secretary" :  user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+                mFirebaseDatabase.child(FirebasePath.VSECRETARY).setValue(user); break;
+            case "Revenue Manger" :  user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+                mFirebaseDatabase.child(FirebasePath.REVENUE_MANAGER).setValue(user); break;
+            case "Assistant Revenue Manger" :  user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+                mFirebaseDatabase.child(FirebasePath.VREVENUE_MANAGER).setValue(user); break;
+            case "Developer" :      user = new CommunityModel (_name,_email,_password,"profile","hello","ds");
+                mFirebaseDatabase.child(FirebasePath.DEVELOPER).child(userId).setValue(user);
+                break;
+            case "Member" :
+                user = new CommunityModel (_name,_email,_password,"profile","hello","ds");
+                mFirebaseDatabase.child(FirebasePath.MEMBER).child(userId).setValue(user);
+                break;
         }
-        else{
-            user = new CommunityModel (_name,_email,_password,"profile","hello","des");
-            mFirebaseDatabase.child(designation).setValue(user);
-        }
+//
+//        if(designation=="Developer"||designation=="Member") {
+//            user = new CommunityModel (_name,_email,_password,"profile","hello","ds");
+//            mFirebaseDatabase.child(designation).child(userId).setValue(user);
+//        }
+//        else{
+//            user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+//            mFirebaseDatabase.child(designation).setValue(user);
+//        }
     }
 
     @Override

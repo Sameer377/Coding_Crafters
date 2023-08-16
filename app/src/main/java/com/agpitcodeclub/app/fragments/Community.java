@@ -28,6 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.Tag;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class Community extends Fragment {
@@ -59,7 +61,7 @@ public class Community extends Fragment {
     private void initui(View view) {
         addmember=view.findViewById(R.id.add_member);
         recyclerView=view.findViewById(R.id.community_list_profile);
-
+        recyclerView.setLayoutFrozen(true);
         addmember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,26 +74,26 @@ public class Community extends Fragment {
 
     void loadContentInList(){
         databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY);
-
-        list=new ArrayList<CommunityModel>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        adapter = new CommunityProfileAdapter(context,list);
         recyclerView.setHasFixedSize(true);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        list=new ArrayList<>();
+        adapter = new CommunityProfileAdapter(context,list);
+        recyclerView.setAdapter(adapter);
         String t="DB status";
         Toast.makeText(context,"Entering",Toast.LENGTH_SHORT).show();
         Log.v(t,"Entering.......");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
-            public void onDataChange( DataSnapshot snapshot) {
+            public void onDataChange(@NotNull DataSnapshot snapshot) {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     CommunityModel user = dataSnapshot.getValue(CommunityModel.class);
+                    user.setDesignation(dataSnapshot.getKey().substring(2));
                     list.add(user);
                     Log.v(t,"Name : "+user.getName()+"\nDesignation : "+user.getDesignation());
+                    Log.v(t,"Name : "+list.get(0).getName()+"\nDesignation : "+list.get(0).getDesignation());
 
-                    int length=list.size();
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -101,7 +103,6 @@ public class Community extends Fragment {
                 Toast.makeText(context,"Database error",Toast.LENGTH_SHORT).show();
             }
         });
-        recyclerView.setAdapter(adapter);
     }
 
 }

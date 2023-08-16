@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/community_profile_card"
         android:paddingBottom="30dp">
 
@@ -20,14 +20,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="120dp"
-            android:fontFamily="@font/baloo_bhai"
+            android:layout_marginTop="90dp"
+            android:fontFamily="@font/inter_extrabold"
             android:gravity="center"
             android:maxWidth="300dp"
             android:text=" Revenue manager"
             android:textColor="@color/white"
-            android:textSize="35dp"
-            android:textStyle="bold" />
+            android:textSize="25dp" />
 
         <RelativeLayout
             android:id="@+id/rel_card_deco_line"
@@ -45,10 +44,11 @@
             android:layout_below="@id/rel_card_deco_line"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/baloo_bhai"
+            android:fontFamily="@font/baloo_bhai_2_medium"
             android:text="Vivek Solapure"
             android:textColor="@color/white"
-            android:textSize="30dp" />
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/community_profile_year_txt"
@@ -60,7 +60,7 @@
             android:fontFamily="@font/baloo_bhai_2_medium"
             android:text="Persuing : 3rd year"
             android:textColor="@color/white"
-            android:textSize="18dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/community_profile_selected_txt"
@@ -72,7 +72,7 @@
             android:fontFamily="@font/baloo_bhai_2_medium"
             android:text="Elected for : 2023 - 2024"
             android:textColor="@color/white"
-            android:textSize="18dp" />
+            android:textSize="15dp" />
 
 
     </RelativeLayout>
@@ -80,13 +80,14 @@
    <RelativeLayout
        android:id="@+id/rel_img_profile"
        android:layout_centerHorizontal="true"
-       android:layout_width="200dp"
-       android:layout_height="200dp"
+       android:layout_width="150dp"
+       android:layout_height="150dp"
        android:padding="10dp"
        android:background="@drawable/community_profile_bg"
        >
 
        <RelativeLayout
+
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:background="@drawable/profilebg" />

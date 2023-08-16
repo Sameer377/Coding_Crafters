@@ -26,18 +26,13 @@ ArrayList<CommunityModel> list;
 
 
 
-
+    @NotNull
     @Override
     public CommunityProfileViewholder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_profile_card,parent,false);
         return  new CommunityProfileViewholder(v);
     }
 
-
-    // Function to bind the view in Card view(here
-    // "CommunityModel.xml") iwth data in
-    // model class(here "CommunityModel.class")
-    @NotNull
     @Override
     public void onBindViewHolder(@NotNull CommunityProfileViewholder holder, int position)
     {
@@ -56,14 +51,14 @@ ArrayList<CommunityModel> list;
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     // Sub Class to create references of the views in Crad
     // view (here "CommunityModel.xml")
     public static class CommunityProfileViewholder extends RecyclerView.ViewHolder {
         TextView name, designation, persuingyr;
-        public CommunityProfileViewholder( View itemView)
+        public CommunityProfileViewholder(@NotNull View itemView)
         {
             super(itemView);
             Log.v("DB status : ","entering view hodeler class");
