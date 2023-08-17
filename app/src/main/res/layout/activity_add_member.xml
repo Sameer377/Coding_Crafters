@@ -47,21 +47,37 @@
         android:padding="30dp">
 
 
-        <ImageView
-            android:id="@+id/imgprofile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+
+        <RelativeLayout
+            android:id="@+id/rel_profile"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/profilebg"
-            android:padding="30dp"
-            android:src="@drawable/camera_white" />
+            android:layout_width="130dp"
+            android:layout_height="130dp">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgprofile_addmember"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/profilebg"
+                android:scaleType="fitXY"
+                app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+            <ImageView
+                android:id="@+id/profile_img_action"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/camera_white"
+                android:padding="35dp"
+                />
+        </RelativeLayout>
+
 
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edt_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/imgprofile"
+            android:layout_below="@id/rel_profile"
             android:layout_marginTop="50dp"
             android:background="@drawable/edt_bg"
             android:fontFamily="@font/baloo_bhai_2_medium"
