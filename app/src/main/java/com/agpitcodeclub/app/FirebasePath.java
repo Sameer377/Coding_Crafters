@@ -15,6 +15,8 @@ public class FirebasePath {
     public static final String COMMUNITY="community";
     public static final String MEMBER = "h_Member";
     /* Firebase Storage */
-
+    public static final String STORAGE_ROOT="/MemberFiles";
+//    public static final String STORAGE_MEMBER_FILES=STORAGE_ROOT+"/MemberFiles";
+    public static final String STORAGE_MEMBER_PROFILE=STORAGE_ROOT+"/ProfileImage";
 
 }

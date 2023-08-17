@@ -25,12 +25,17 @@ import com.agpitcodeclub.app.Models.CommunityModel;
 import com.agpitcodeclub.app.Models.User;
 import com.agpitcodeclub.app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -55,12 +60,13 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
     private ImageView profileActionImg;
     private  ImageView profileImg;
     private ArrayList arrayListFileObjects=null;
-
+    private Uri fileUrl;
     /* Firebase variables */
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mFirebaseDatabase;
-
+    private StorageReference storageReference;
+    private String profilePath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +142,9 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
 
     private String _name="",_email="",_password="";
     void addmember(){
+
+
+
         _name=name.getText().toString().trim();
         _email=email.getText().toString().trim();
 
@@ -155,10 +164,43 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         }
         else{
             addcredential();
+            uploadFileInStorage();
         }
+
 
     }
 
+
+    void uploadFileInStorage(){
+        Toast.makeText(AddMember.this, "Entered in file upload",Toast.LENGTH_LONG).show();
+
+        storageReference = FirebaseStorage.getInstance().getReference(FirebasePath.STORAGE_MEMBER_PROFILE+"/"+userId);
+        storageReference.putFile(fileUrl)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                profilePath=uri.toString();
+                                System.out.println("Profile path : "+uri.toString());
+                            }
+                        });
+                    }
+
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(AddMember.this, "Profile "+e,Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        Toast.makeText(AddMember.this, "Entered in file upload",Toast.LENGTH_LONG).show();
+
+    }
 
     private void addcredential() {
 
@@ -198,24 +240,24 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         CommunityModel user;
         switch (designation){
             case "President" :
-                user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+                user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
                 mFirebaseDatabase.child(FirebasePath.PRESIDENT).setValue(user);
                 break;
-            case "Vice President" :   user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+            case "Vice President" :   user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
                 mFirebaseDatabase.child(FirebasePath.VPRESIDENT).setValue(user); break;
-            case "Secretary" :  user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+            case "Secretary" :  user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
                 mFirebaseDatabase.child(FirebasePath.SECRETARY).setValue(user); break;
-            case "Vice Secretary" :  user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+            case "Vice Secretary" :  user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
                 mFirebaseDatabase.child(FirebasePath.VSECRETARY).setValue(user); break;
-            case "Revenue Manger" :  user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+            case "Revenue Manger" :  user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
                 mFirebaseDatabase.child(FirebasePath.REVENUE_MANAGER).setValue(user); break;
-            case "Assistant Revenue Manger" :  user = new CommunityModel (_name,_email,_password,"profile","hello","des");
+            case "Assistant Revenue Manger" :  user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
                 mFirebaseDatabase.child(FirebasePath.VREVENUE_MANAGER).setValue(user); break;
-            case "Developer" :      user = new CommunityModel (_name,_email,_password,"profile","hello","ds");
+            case "Developer" :      user = new CommunityModel (_name,_email,_password,profilePath,"hello","ds");
                 mFirebaseDatabase.child(FirebasePath.DEVELOPER).child(userId).setValue(user);
                 break;
             case "Member" :
-                user = new CommunityModel (_name,_email,_password,"profile","hello","ds");
+                user = new CommunityModel (_name,_email,_password,profilePath,"hello","ds");
                 mFirebaseDatabase.child(FirebasePath.MEMBER).child(userId).setValue(user);
                 break;
         }
@@ -250,6 +292,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK&&data.getData()!=null){
             Uri img=data.getData();
+            fileUrl=data.getData();
             if(img!=null){
                 profileActionImg.setImageResource(R.drawable.edit_img_profile);
                 profileImg.setImageURI(img);

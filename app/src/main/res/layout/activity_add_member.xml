@@ -62,13 +62,13 @@
                 android:background="@drawable/profilebg"
                 android:scaleType="fitXY"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
             <ImageView
                 android:id="@+id/profile_img_action"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/camera_white"
                 android:padding="35dp"
-                />
+                android:src="@drawable/camera_white" />
         </RelativeLayout>
 
 

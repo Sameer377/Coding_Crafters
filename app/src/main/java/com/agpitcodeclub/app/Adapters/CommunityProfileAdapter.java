@@ -5,11 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agpitcodeclub.app.Models.CommunityModel;
 import com.agpitcodeclub.app.R;
+import com.bumptech.glide.Glide;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,9 +41,9 @@ ArrayList<CommunityModel> list;
     {
 
         CommunityModel model = list.get(position);
-
         holder.name.setText(model.getName());
-
+        System.out.println("Profile Address : "+model.getProfile());
+        Glide.with(context).load(model.getProfile()).into(holder.profileImg);
         holder.designation.setText(model.getDesignation());
 
         holder.persuingyr.setText("Persuing : "+model.getPersuing());
@@ -57,12 +61,14 @@ ArrayList<CommunityModel> list;
     // view (here "CommunityModel.xml")
     public static class CommunityProfileViewholder extends RecyclerView.ViewHolder {
         TextView name, designation, persuingyr;
+        ImageView profileImg;
         public CommunityProfileViewholder(@NotNull View itemView)
         {
             super(itemView);
             name = itemView.findViewById(R.id.community_profile_name_txt);
             designation= itemView.findViewById(R.id.community_profile_designation_txt);
             persuingyr = itemView.findViewById(R.id.community_profile_year_txt);
+            profileImg=itemView.findViewById(R.id.item_card_profile_img);
         }
     }
 }
