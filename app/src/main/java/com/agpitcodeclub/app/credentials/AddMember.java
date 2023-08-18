@@ -66,6 +66,15 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
     private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mFirebaseDatabase;
     private StorageReference storageReference;
+
+    public String getProfilePath() {
+        return profilePath;
+    }
+
+    public void setProfilePath(String profilePath) {
+        this.profilePath = profilePath;
+    }
+
     private String profilePath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +173,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         }
         else{
             addcredential();
-            uploadFileInStorage();
+
         }
 
 
@@ -182,8 +191,6 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-
-                                profilePath=uri.toString();
                                 System.out.println("Profile path : "+uri.toString());
                             }
                         });
@@ -236,31 +243,69 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
 
     }
 
+    public String tempUri="";
+
+    public String getTempUri() {
+        return tempUri;
+    }
+
+    public void setTempUri(String tempUri) {
+        this.tempUri = tempUri;
+    }
+
     void adddetailstoDB(){
-        CommunityModel user;
-        switch (designation){
-            case "President" :
-                user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
-                mFirebaseDatabase.child(FirebasePath.PRESIDENT).setValue(user);
-                break;
-            case "Vice President" :   user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
-                mFirebaseDatabase.child(FirebasePath.VPRESIDENT).setValue(user); break;
-            case "Secretary" :  user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
-                mFirebaseDatabase.child(FirebasePath.SECRETARY).setValue(user); break;
-            case "Vice Secretary" :  user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
-                mFirebaseDatabase.child(FirebasePath.VSECRETARY).setValue(user); break;
-            case "Revenue Manger" :  user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
-                mFirebaseDatabase.child(FirebasePath.REVENUE_MANAGER).setValue(user); break;
-            case "Assistant Revenue Manger" :  user = new CommunityModel (_name,_email,_password,profilePath,"hello","des");
-                mFirebaseDatabase.child(FirebasePath.VREVENUE_MANAGER).setValue(user); break;
-            case "Developer" :      user = new CommunityModel (_name,_email,_password,profilePath,"hello","ds");
-                mFirebaseDatabase.child(FirebasePath.DEVELOPER).child(userId).setValue(user);
-                break;
-            case "Member" :
-                user = new CommunityModel (_name,_email,_password,profilePath,"hello","ds");
-                mFirebaseDatabase.child(FirebasePath.MEMBER).child(userId).setValue(user);
-                break;
-        }
+        final CommunityModel[] user = new CommunityModel[1];
+
+        storageReference = FirebaseStorage.getInstance().getReference(FirebasePath.STORAGE_MEMBER_PROFILE+"/"+userId);
+        storageReference.putFile(fileUrl)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                tempUri=uri.toString();
+                                Log.v("profileurrrii","Above user path : "+tempUri);
+                                user[0] = new CommunityModel (_name,_email,_password,tempUri   ,"hello","des","ok");
+                                switch (designation){
+                                    case "President" :
+                                        mFirebaseDatabase.child(FirebasePath.PRESIDENT).setValue(user[0]);
+                                        break;
+                                    case "Vice President" :
+                                        mFirebaseDatabase.child(FirebasePath.VPRESIDENT).setValue(user[0]); break;
+                                    case "Secretary" :
+                                        mFirebaseDatabase.child(FirebasePath.SECRETARY).setValue(user[0]); break;
+                                    case "Vice Secretary" :
+                                        mFirebaseDatabase.child(FirebasePath.VSECRETARY).setValue(user[0]); break;
+                                    case "Revenue Manger" :
+                                        mFirebaseDatabase.child(FirebasePath.REVENUE_MANAGER).setValue(user[0]); break;
+                                    case "Assistant Revenue Manger" :
+                                        mFirebaseDatabase.child(FirebasePath.VREVENUE_MANAGER).setValue(user[0]); break;
+                                    case "Developer" :
+                                        mFirebaseDatabase.child(FirebasePath.DEVELOPER).child(userId).setValue(user[0]);
+                                        break;
+                                    case "Member" :
+
+                                        mFirebaseDatabase.child(FirebasePath.MEMBER).child(userId).setValue(user[0]);
+                                        break;
+                                }
+                                System.out.println("Profile path : "+uri.toString());
+                            }
+                        });
+                    }
+
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(AddMember.this, "Profile "+e,Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+
+        System.out.println("final path : "+getProfilePath());
     }
 
 
