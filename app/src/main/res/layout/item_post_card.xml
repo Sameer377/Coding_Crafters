@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/frag_bg"
+
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rel_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp">
+
+        <ImageView
+            android:id="@+id/img_posticon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/people_outline" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/img_posticon"
+            android:fontFamily="@font/baloo_bhai_2_medium"
+            android:text="Group Discussion"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/baloo_bhai_2_medium"
+            android:text="Posted on : 18 / 08 / 023"
+            android:textColor="#B2B1B1"
+            android:textSize="10dp"
+
+            />
+    </RelativeLayout>
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/post_imgslider"
+        android:layout_width="match_parent"
+
+        android:layout_height="340dp"
+        android:layout_below="@id/rel_1"
+        android:layout_marginLeft="-4dp"
+        android:layout_marginRight="-4dp"
+        android:background="@drawable/post_bg"
+        android:scaleType="fitXY"
+        android:src="@drawable/communitybanner" />
+
+    <TextView
+        android:id="@+id/post_description_txt"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/post_imgslider"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        android:justificationMode="inter_word"
+        android:text="@string/benefits_of_club"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/btn_feedback_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/post_description_txt"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/baloo_bhai"
+        android:text="Give Feedback"
+        android:textColor="@color/teal_200" />
+
+    <TextView
+        android:id="@+id/txt_read_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/post_description_txt"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/baloo_bhai"
+        android:text="Read more"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/inputbg"
+        android:layout_below="@id/btn_feedback_txt"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+</RelativeLayout>

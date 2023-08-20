@@ -3,25 +3,20 @@
     android:layout_width="match_parent"
     android:background="@color/inputbg"
     android:id="@+id/rel_frag_header"
-    android:padding="17dp"
     android:layout_height="wrap_content">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/frag_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22dp"
-        android:text="Community"
+        android:layout_centerHorizontal="true"
+        android:background="@color/inputbg"
+        android:elevation="5dp"
+        android:fontFamily="@font/baloo_bhai"
+        android:padding="10dp"
+        android:text="Title"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:fontFamily="@font/baloo_bhai_2_medium"
-        android:layout_alignParentRight="true"
-        android:id="@+id/frag_title_txt"
-        />
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/back_arrow_white"
-        android:id="@+id/frag_title_back"
-        />
+        android:textSize="25dp" />
 
 </RelativeLayout>

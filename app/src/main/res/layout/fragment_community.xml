@@ -13,50 +13,41 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-       <TextView
-           android:background="@color/inputbg"
-           android:id="@+id/frag_title"
+       <include
+           android:id="@+id/title"
+           layout="@layout/frag_header" />
+
+       <ScrollView
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_centerHorizontal="true"
-           android:elevation="5dp"
-           android:fontFamily="@font/baloo_bhai"
-           android:padding="10dp"
-           android:text="Community"
-           android:textAlignment="center"
-           android:textColor="@color/white"
-           android:textSize="25dp" />
+           android:layout_height="match_parent"
+           android:layout_below="@id/title">
 
-      <ScrollView
-          android:layout_below="@id/frag_title"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent">
-         <RelativeLayout
-             android:layout_below="@id/frag_title"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_below="@id/frag_title">
 
-             <androidx.appcompat.widget.AppCompatImageView
-                 android:scaleType="fitXY"
-                 android:id="@+id/commmunity_img"
-                 android:layout_width="wrap_content"
-                 android:layout_height="210dp"
-                 android:background="@color/white"
-                 android:src="@drawable/communitybanner" />
+               <androidx.appcompat.widget.AppCompatImageView
+                   android:id="@+id/commmunity_img"
+                   android:layout_width="wrap_content"
+                   android:layout_height="210dp"
+                   android:background="@color/white"
+                   android:scaleType="fitXY"
+                   android:src="@drawable/communitybanner" />
 
-             <androidx.recyclerview.widget.RecyclerView
-                 android:paddingTop="20dp"
-                 android:id="@+id/community_list_profile"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@id/commmunity_img"
-                 android:nestedScrollingEnabled="false"
-                 android:paddingLeft="20dp"
-                 android:paddingRight="20dp"
-                 android:scrollbars="none" />
-         </RelativeLayout>
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/community_list_profile"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@id/commmunity_img"
+                   android:nestedScrollingEnabled="false"
+                   android:paddingLeft="20dp"
+                   android:paddingTop="20dp"
+                   android:paddingRight="20dp"
+                   android:scrollbars="none" />
+           </RelativeLayout>
 
-      </ScrollView>
+       </ScrollView>
 
 
       <com.google.android.material.floatingactionbutton.FloatingActionButton

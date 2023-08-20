@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/frag_bg"
+    tools:context=".credentials.UploadPost">
+
+    <RelativeLayout
+        android:id="@+id/actionbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/inputbg"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_back_post"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_arrow_white" />
+
+        <TextView
+            android:id="@+id/addmemtag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/baloo_bhai_2_medium"
+            android:text="Post"
+            android:textColor="@color/tagline"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/actionbar2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="60dp">
+
+            <TextView
+                android:id="@+id/up_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/post_filled"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/baloo_bhai"
+                android:padding="10dp"
+                android:text="Upload Image"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <RelativeLayout
+                android:id="@+id/rel_post_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/up_txt"
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:elevation="1dp">
+
+                    <ImageView
+                        android:id="@+id/img_up"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/upload_img" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/img_up"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:text="Browse Image"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </RelativeLayout>
+
+
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/post_imgslider_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="340dp"
+                    android:background="@drawable/post_bg"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/communitybanner" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/t_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rel_post_img"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/baloo_bhai"
+                android:padding="10dp"
+                android:text="Add Description"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edt_post_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/t_description"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/post_desc_bg_input"
+                android:fontFamily="@font/baloo_bhai_2_medium"
+                android:gravity="top"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:minHeight="100dp"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/submit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_post_desc"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="upload"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

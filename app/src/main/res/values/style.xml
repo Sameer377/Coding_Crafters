@@ -2,7 +2,7 @@
 <resources>
 
 
-    <style name="submit_btn">
+    <style name="submit_btn" parent="Widget.AppCompat.Button">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18dp</item>
         <item name="elevation">2dp</item>
@@ -17,5 +17,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+
+
 
 </resources>
