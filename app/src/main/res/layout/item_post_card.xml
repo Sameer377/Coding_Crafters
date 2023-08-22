@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/frag_bg"
+    android:background="@color/background"
 
     android:layout_height="wrap_content">
 
@@ -9,7 +9,7 @@
         android:id="@+id/rel_1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="5dp">
 
@@ -18,15 +18,18 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
+            android:padding="5dp"
             android:src="@drawable/people_outline" />
 
         <TextView
+            android:id="@+id/txt_post_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="10dp"
             android:layout_toEndOf="@id/img_posticon"
             android:fontFamily="@font/baloo_bhai_2_medium"
+            android:maxWidth="230dp"
             android:text="Group Discussion"
             android:textColor="@color/white"
             android:textSize="18dp"
@@ -41,7 +44,7 @@
             android:fontFamily="@font/baloo_bhai_2_medium"
             android:text="Posted on : 18 / 08 / 023"
             android:textColor="#B2B1B1"
-            android:textSize="10dp"
+            android:textSize="12dp"
 
             />
     </RelativeLayout>
@@ -69,7 +72,8 @@
         android:fontFamily="@font/baloo_bhai_2_medium"
         android:justificationMode="inter_word"
         android:text="@string/benefits_of_club"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/btn_feedback_txt"
@@ -91,9 +95,10 @@
         android:layout_alignParentLeft="true"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/baloo_bhai"
         android:text="Read more"
-        android:textColor="@color/white" />
+        android:textColor="@color/teal_200" />
 
     <RelativeLayout
         android:layout_width="fill_parent"

@@ -15,11 +15,10 @@
             layout="@layout/frag_header" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/post_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/post_recycler"
-            android:layout_below="@id/title_post"
-            />
+            android:layout_below="@id/title_post" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_post"
