@@ -49,10 +49,10 @@
             />
     </RelativeLayout>
 
+
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/post_imgslider"
         android:layout_width="match_parent"
-
         android:layout_height="340dp"
         android:layout_below="@id/rel_1"
         android:layout_marginLeft="-4dp"
@@ -94,8 +94,8 @@
         android:layout_below="@id/post_description_txt"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/baloo_bhai"
         android:text="Read more"
         android:textColor="@color/teal_200" />

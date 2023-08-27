@@ -102,6 +102,7 @@ public class Post extends Fragment {
                     imgRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshotInner) {
+                            System.out.println("snapshot inner : "+snapshotInner.getClass());
                             for(DataSnapshot imgsnap:snapshotInner.getChildren()){
                                 imgurls.add(new SlideModel(imgsnap.getValue().toString(), ScaleTypes.CENTER_CROP));
                             }
