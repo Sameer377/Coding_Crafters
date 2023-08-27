@@ -16,7 +16,7 @@ public class FirebasePath {
     public static final String MEMBER = "h_Member";
     public static final String POST = "post";
     public static final String CONTENT = "content";
-    public static final String POSTIMAGE="imges";
+    public static final String POSTIMAGE="imglist";
     /* Firebase Storage */
     public static final String STORAGE_ROOT="/MemberFiles";
 //    public static final String STORAGE_MEMBER_FILES=STORAGE_ROOT+"/MemberFiles";

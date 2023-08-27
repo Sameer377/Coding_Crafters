@@ -52,5 +52,21 @@ public class PostModel {
         this.imgUri=imgUri;
     }
 
+    public String getImglist() {
+        return imglist;
+    }
+
+    public void setImglist(String imglist) {
+        this.imglist = imglist;
+    }
+
+    public String imglist;
+
+    public PostModel(String title, String description,String imglist) {
+        this.title = title;
+        this.description = description;
+        this.imglist=imglist;
+    }
+
 
 }

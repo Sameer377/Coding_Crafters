@@ -109,14 +109,23 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
 
     PostModel postModel;
 
+    public String getImgUrls() {
+        return imgUrls;
+    }
+
+    public void setImgUrls(String imgUrls) {
+        this.imgUrls = imgUrls;
+    }
+
+    public String imgUrls="";
     private void pushContent(ArrayList arrayList) {
         fileKey= new FileTime().getFileTime();
         databaseReference= FirebaseDatabase.getInstance().getReference(FirebasePath.POST).child(fileKey);
         postModel=new PostModel(edt_post_title.getText().toString().trim(),edt_post_desc.getText().toString().trim());
-        databaseReference.setValue(postModel);
+//        databaseReference.setValue(postModel);
 
         toast("entered in push : "+arrayList.size());
-
+        imgUrls="";
         for(int i=0; i<arrayList.size();i++)
         {
 
@@ -141,9 +150,15 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
                                     Log.i("TAG","File path ..............:"+getStorageReference());
                                     String tempFile=filename.replaceAll("[+-_,.*/%$#@!&^]","");
                                     toast(filename);
-                                    databaseReference= FirebaseDatabase.getInstance().getReference(FirebasePath.POST).child(fileKey).child(FirebasePath.POSTIMAGE);
-                                    databaseReference.child("img_"+new FileTime().getFileTime()).setValue(uri.toString());
-//                                    databaseReference.child(databaseReference.push().getKey()).setValue(postModel);
+                                    if(imgUrls.equals("")){
+                                        imgUrls=uri.toString();
+                                        setImgUrls(uri.toString());
+                                    }else{
+                                        setImgUrls(getImgUrls()+">>>"+uri.toString());
+
+                                    }
+                                    postModel.setImglist(imgUrls);
+                                    databaseReference.child("imglist").setValue(getImgUrls());
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -166,6 +181,9 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
 
         }
 
+
+
+        databaseReference.setValue(postModel);
 
     }
 
@@ -259,7 +277,7 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
             Cursor cursor = getContentResolver().query(filepath, null, null, null, null);
             try {
                 if (cursor != null && cursor.moveToFirst()) {
-                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                    result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME));
                 }
             } finally {
                 cursor.close();

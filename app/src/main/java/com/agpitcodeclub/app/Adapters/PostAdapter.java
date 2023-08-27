@@ -13,6 +13,8 @@ import com.agpitcodeclub.app.Models.PostModel;
 import com.agpitcodeclub.app.R;
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -64,9 +66,15 @@ public class PostAdapter extends RecyclerView.Adapter< PostAdapter.PostViewholde
            });
        }
 
+       if(model.getImglist()!=null){
+           ArrayList<SlideModel> imgurls=new ArrayList<>();
+           for (String ur: model.getImglist().split(">>>")) {
+               imgurls.add(new SlideModel(ur, ScaleTypes.CENTER_CROP));
+           }
+           holder.post_imgslider.setImageList(imgurls);
+       }
 
 
-       holder.post_imgslider.setImageList(model.getImgUri());
     }
 
 
