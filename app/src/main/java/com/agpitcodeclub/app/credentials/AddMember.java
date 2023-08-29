@@ -51,11 +51,11 @@ import java.util.List;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class AddMember extends AppCompatActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
-    private Spinner designationspinner;
+    private Spinner designationspinner,persuingyr;
     private ImageView back;
     private AppCompatEditText name,email;
     private char[] password;
-    private String designation="";
+    private String designation="",year="";
     private String userId="";
     private ImageView profileActionImg;
     private  ImageView profileImg;
@@ -84,10 +84,14 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         initui();
         initListeners();
         designationspinner();
+        yearSpinner();
         initiateFirebase();
     }
 
+
+
     private void initui() {
+        persuingyr=findViewById(R.id.persuingyr);
         designationspinner=findViewById(R.id.designation);
         back=findViewById(R.id.img_back_adduser);
         mAuth = FirebaseAuth.getInstance();
@@ -118,6 +122,28 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         mFirebaseDatabase = mFirebaseInstance.getReference(FirebasePath.COMMUNITY);
     }
 
+
+    private void yearSpinner() {
+        ArrayList<String> arrayList1 = new ArrayList<>();
+        arrayList1.add("Select designation");
+        arrayList1.add("1st year");
+        arrayList1.add("2nd year");
+        arrayList1.add("3rd year");
+        arrayList1.add("Final year");
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item, arrayList1);
+        arrayAdapter1.setDropDownViewResource(android.R.layout.select_dialog_item);
+        persuingyr.setAdapter(arrayAdapter1);
+        persuingyr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                year = parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+                Toast.makeText(AddMember.this,"Select year", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void designationspinner() {
         ArrayList<String> arrayList = new ArrayList<>();
@@ -266,7 +292,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
                             public void onSuccess(Uri uri) {
                                 tempUri=uri.toString();
                                 Log.v("profileurrrii","Above user path : "+tempUri);
-                                user[0] = new CommunityModel (_name,_email,_password,tempUri   ,"hello","des","ok");
+                                user[0] = new CommunityModel (_name,_email,_password,tempUri   ,year,"des","ok");
                                 switch (designation){
                                     case "President" :
                                         mFirebaseDatabase.child(FirebasePath.PRESIDENT).setValue(user[0]);

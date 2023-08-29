@@ -85,9 +85,11 @@ public class CommunityModel {
         this.description=description;
         this.password=password;
         this.description=designation;
+        this.persuing=persuing;
     }
 
     public CommunityModel(String name, String email, String password, String profile, String persuing, String description){
+        this.persuing=persuing;
         this.name=name;
         this.email=email;
         this.profile=profile;

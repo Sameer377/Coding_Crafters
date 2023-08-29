@@ -9,6 +9,15 @@ public class PostModel {
     public String title;
     public String description;
 
+    public String getPostuploadedon() {
+        return postuploadedon;
+    }
+
+    public void setPostuploadedon(String postuploadedon) {
+        this.postuploadedon = postuploadedon;
+    }
+
+    public String postuploadedon;
     public String getTitle() {
         return title;
     }
@@ -43,6 +52,12 @@ public class PostModel {
         this.description = description;
     }
 
+    public PostModel(String title, String description,String  postuploadedon) {
+        this.title = title;
+        this.description = description;
+        this.postuploadedon=postuploadedon;
+    }
+
 
 
 
@@ -50,6 +65,12 @@ public class PostModel {
         this.title = title;
         this.description = description;
         this.imgUri=imgUri;
+    }
+    public PostModel(String title, String description,ArrayList<SlideModel> imgUri,String postuploadedon) {
+        this.title = title;
+        this.description = description;
+        this.imgUri=imgUri;
+        this.postuploadedon=postuploadedon;
     }
 
     public String getImglist() {
@@ -62,10 +83,12 @@ public class PostModel {
 
     public String imglist;
 
-    public PostModel(String title, String description,String imglist) {
+    public PostModel(String title, String description,String imglist,String postuploadedon) {
         this.title = title;
         this.description = description;
         this.imglist=imglist;
+        this.postuploadedon=postuploadedon;
+
     }
 
 

@@ -38,6 +38,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
     private ArrayList<String> imgList;
     private MaterialButton upload_btn_post;
     private EditText edt_post_title,edt_post_desc;
-
+    private String uplodingdate;
     ArrayList arrayListFileObjects=null;
 
 
@@ -121,7 +123,19 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
     private void pushContent(ArrayList arrayList) {
         fileKey= new FileTime().getFileTime();
         databaseReference= FirebaseDatabase.getInstance().getReference(FirebasePath.POST).child(fileKey);
-        postModel=new PostModel(edt_post_title.getText().toString().trim(),edt_post_desc.getText().toString().trim());
+
+        LocalDate currentDate = LocalDate.now();
+
+        // Format the date using a DateTimeFormatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = currentDate.format(formatter);
+
+        // Extract day, month, and year
+        int day = currentDate.getDayOfMonth();
+        int month = currentDate.getMonthValue();
+        int year = currentDate.getYear();
+        uplodingdate=day+" / "+month+" / "+year;
+        postModel=new PostModel(edt_post_title.getText().toString().trim(),edt_post_desc.getText().toString().trim(),uplodingdate);
 //        databaseReference.setValue(postModel);
 
         toast("entered in push : "+arrayList.size());

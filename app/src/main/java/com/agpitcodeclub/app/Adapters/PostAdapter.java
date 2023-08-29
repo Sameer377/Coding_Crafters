@@ -44,6 +44,7 @@ public class PostAdapter extends RecyclerView.Adapter< PostAdapter.PostViewholde
         PostModel model = list.get(position);
        holder.txt_post_title.setText(model.getTitle());
        holder.post_description_txt.setText(model.getDescription());
+       holder.post_uploaded_date.setText(model.getPostuploadedon());
        if(model.getDescription().length()>100){
 
            holder.txt_read_more.setOnClickListener(new View.OnClickListener() {
@@ -88,12 +89,13 @@ public class PostAdapter extends RecyclerView.Adapter< PostAdapter.PostViewholde
     // Sub Class to create references of the views in Crad
     // view (here "CommunityModel.xml")
     public static class PostViewholder extends RecyclerView.ViewHolder {
-        TextView txt_post_title, post_description_txt,txt_read_more,btn_feedback_txt;
+        TextView txt_post_title, post_description_txt,txt_read_more,btn_feedback_txt,post_uploaded_date;
         ImageSlider post_imgslider;
 
         public PostViewholder(@NotNull View itemView)
         {
             super(itemView);
+            post_uploaded_date=itemView.findViewById(R.id.post_uploaded_date);
             txt_post_title = itemView.findViewById(R.id.txt_post_title);
             post_imgslider= itemView.findViewById(R.id.post_imgslider);
             post_description_txt = itemView.findViewById(R.id.post_description_txt);

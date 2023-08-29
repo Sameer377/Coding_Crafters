@@ -9,7 +9,6 @@
     android:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context=".credentials.AddMember">
 
-
     <RelativeLayout
         android:id="@+id/actionbar1"
         android:layout_width="match_parent"
@@ -103,12 +102,19 @@
             android:textColorHint="@color/white"
             android:textStyle="bold" />
 
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/persuingyr"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/edt_email_adduser"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/spinner_bg" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/designation"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/edt_email_adduser"
+            android:layout_below="@id/persuingyr"
             android:layout_marginTop="10dp"
             android:background="@drawable/spinner_bg" />
 
@@ -121,25 +127,7 @@
             android:layout_marginTop="30dp"
             android:text="Add" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_add_addmember"
-            android:hint="Password"
-            app:passwordToggleEnabled="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:drawablePadding="10dp"
-                android:id="@+id/tf_admin_password"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
     </RelativeLayout>
 

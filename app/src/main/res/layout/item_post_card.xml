@@ -36,6 +36,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/post_uploaded_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
