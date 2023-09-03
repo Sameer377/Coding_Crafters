@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/frag_bg"
     tools:context=".fragments.Post">
 
@@ -10,23 +11,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/title_post"
-            layout="@layout/frag_header" />
+
+        <TextView
+            android:id="@+id/frag_title2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/inputbg"
+            android:elevation="5dp"
+            android:fontFamily="@font/baloo_bhai"
+            android:padding="10dp"
+            android:text="Post"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25dp" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:layout_below="@id/frag_title2"
+            android:id="@+id/post_loading_prg"
+            app:trackThickness="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:indicatorColor="@color/teal_200"
+            android:indeterminate="true" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/title_post" />
+            android:layout_below="@id/frag_title2" />
 
-        <ProgressBar
-            android:id="@+id/post_loading_prg"
-            style="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_centerInParent="true"
-            android:maxWidth="400dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_post"

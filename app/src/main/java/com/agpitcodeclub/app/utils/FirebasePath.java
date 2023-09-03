@@ -1,4 +1,4 @@
-package com.agpitcodeclub.app;
+package com.agpitcodeclub.app.utils;
 
 public class FirebasePath {
 

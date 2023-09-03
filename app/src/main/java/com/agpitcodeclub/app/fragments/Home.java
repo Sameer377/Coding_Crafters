@@ -1,15 +1,23 @@
 package com.agpitcodeclub.app.fragments;
 
+import android.content.Intent;
+import android.graphics.text.LineBreaker;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.arch.core.executor.TaskExecutor;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
+import com.agpitcodeclub.app.Dashboard;
+import com.agpitcodeclub.app.MainActivity;
 import com.agpitcodeclub.app.R;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -26,7 +34,7 @@ import java.util.ArrayList;
  */
 public class Home extends Fragment {
     private ImageSlider imageSlider;
-
+    private TextView txt_intro;
     public Home() {
         // Required empty public constructor
     }
@@ -43,6 +51,8 @@ public class Home extends Fragment {
 
     private void initUi(View view) {
         imageSlider=view.findViewById(R.id.intro_img_slider);
+        txt_intro=view.findViewById(R.id.txt_intro);
+
     }
 
     @Override

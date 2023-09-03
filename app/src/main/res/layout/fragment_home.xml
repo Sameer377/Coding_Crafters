@@ -14,6 +14,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rel_main1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -75,38 +76,48 @@
         </RelativeLayout>
 
             <RelativeLayout
-                android:padding="20dp"
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/intro"
-                android:id="@+id/content">
+                android:padding="20dp">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/m_cd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/frag_bg"
+                    app:cardCornerRadius="10dp">
+
+                    <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/intro_img_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scrollIndicators="bottom"
+                        app:iss_auto_cycle="true"
+                        app:iss_delay="2000"
+                        app:iss_error_image="@drawable/error"
+                        app:iss_period="2500"
+                        app:iss_title_background="@drawable/gradient" />
+                </androidx.cardview.widget.CardView>
+
 
                 <TextView
                     android:id="@+id/txt_intro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/intro"
-                    android:fontFamily="@font/baloo_bhai_2_medium"
-                    android:textColor="@color/white"
-                    android:justificationMode="inter_word"
-                    android:textSize="16dp"
-                    />
-
-                <com.denzcoskun.imageslider.ImageSlider
-                    android:id="@+id/intro_img_slider"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_below="@id/txt_intro"
+                    android:layout_below="@id/m_cd"
                     android:layout_marginTop="20dp"
-                    android:scrollIndicators="bottom"
-                    app:iss_auto_cycle="true"
-                    app:iss_corner_radius="40"
-                    app:iss_delay="2000"
-                    app:iss_error_image="@drawable/error"
-                    app:iss_period="2500"
-                    app:iss_title_background="@drawable/gradient" />
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:justificationMode="inter_word"
+                    android:minHeight="200dp"
+                    android:text="@string/intro"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
 
-                <TextView
+
+                <!-- <TextView
                     android:layout_below="@id/intro_img_slider"
                     android:id="@+id/benefits"
                     android:layout_marginTop="20dp"
@@ -117,12 +128,388 @@
                     android:textColor="@color/white"
                     android:justificationMode="inter_word"
                     android:textSize="16dp"
-                    />
+                    />-->
+
+                <RelativeLayout
+                    android:id="@+id/upcomming_cd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_intro"
+                    android:layout_marginTop="20dp"
+                    android:minHeight="320dp">
+
+                    <TextView
+
+                        android:id="@+id/txt_up_t"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:gravity="center"
+                        android:text="Up Comming Event"
+                        android:textColor="#00FFE6"
+                        android:textSize="20dp" />
+
+                    <RelativeLayout
+
+                        android:id="@+id/rel_card_dec1"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_below="@id/txt_up_t"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/card_deco_line1" />
+
+                    <ImageView
+                        android:id="@+id/up_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_below="@id/rel_card_dec1"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/community_profile_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/up_img"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/baloo_bhai_2_medium"
+                        android:gravity="center"
+                        android:text="Session on Pointer And Structure"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/txt_men"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/upcomming_cd"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:text="Objective"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rel_line_teal"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/txt_men"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/teal_200" />
+
+                <RelativeLayout
+                    android:id="@+id/rel_obj_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rel_line_teal"
+                    android:layout_marginTop="20dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/rel_bg2"
+                                android:src="@drawable/il5" />
+
+                            <RelativeLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:id="@+id/p_txt1"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:fontFamily="@font/baloo_bhai_2_medium"
+                                    android:text="Structured Learning Environment"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/obj_p"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/p_txt1"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#444343" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/rel_bg2"
+                                android:padding="10dp"
+                                android:src="@drawable/il8" />
+
+                            <RelativeLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:id="@+id/p_txt2"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:fontFamily="@font/baloo_bhai_2_medium"
+                                    android:text="Hands on Experiance"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/obj_p"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/p_txt2"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#444343" />
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/rel_bg2"
+                                android:src="@drawable/il7" />
+
+                            <RelativeLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:id="@+id/p_txt3"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:fontFamily="@font/baloo_bhai_2_medium"
+                                    android:text="Peer Learning and Collaboration"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/obj_p"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/p_txt3"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#444343" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/rel_bg2"
+                                android:padding="10dp"
+                                android:src="@drawable/il2" />
+
+                            <RelativeLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:id="@+id/p_txt4"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:fontFamily="@font/baloo_bhai_2_medium"
+                                    android:text="Access to Resources"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/obj_p"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/p_txt4"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#444343" />
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/rel_bg2"
+                                android:padding="10dp"
+                                android:src="@drawable/il9" />
+
+                            <RelativeLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:id="@+id/p_txt5"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:fontFamily="@font/baloo_bhai_2_medium"
+                                    android:text="Learn Technical Skilles"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/obj_p"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/p_txt5"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#444343" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/rel_bg2"
+                                android:padding="10dp"
+                                android:src="@drawable/il3" />
+
+                            <RelativeLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:id="@+id/p_txt6"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:fontFamily="@font/baloo_bhai_2_medium"
+                                    android:text="Social Skills"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/obj_p"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/p_txt6"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#444343" />
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@id/content"
+                android:background="@color/white">
+
+                <TextView
+                    android:elevation="1dp"
+                    android:id="@+id/qt"
+                    android:layout_above="@id/gif_main"
+                    android:layout_marginBottom="-20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/architects_daughter"
+                    android:gravity="center"
+                    android:text="Let's Learn Together Grow Together"
+                    android:textColor="#000"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/gif_main"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                   android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:background="#fff"
+                    android:src="@drawable/team2" />
+
             </RelativeLayout>
 
         </RelativeLayout>
 
     </ScrollView>
-    <!-- TODO: Update blank fragment layout -->
 
 </FrameLayout>

@@ -17,6 +17,7 @@
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/edt_bg.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/edt_text_outline.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/home_filled.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/objective_rel_bg.xml" value="0.23125" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/people_outline.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/post_bg.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/post_desc_bg_input.xml" value="0.36614583333333334" />
@@ -30,9 +31,10 @@
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_upload_post.xml" value="0.32171581769436997" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/demo.xml" value="0.33" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/frag_header.xml" value="0.3391215526046987" />
-        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_community.xml" value="0.33" />
-        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_home.xml" value="0.3458333333333333" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_community.xml" value="0.18" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_home.xml" value="0.27817343946376205" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_post.xml" value="0.3458333333333333" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_scrolling.xml" value="0.3458333333333333" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/item.xml" value="0.21842105263157896" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/item_horizontal_post_img.xml" value="0.21842105263157896" />

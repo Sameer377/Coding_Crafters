@@ -16,11 +16,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import java.util.*;
 import com.agpitcodeclub.app.Adapters.PostAdapter;
-import com.agpitcodeclub.app.FirebasePath;
+import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.PostModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.credentials.UploadPost;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 public class Post extends Fragment {
 
 
-    private ProgressBar loadingprg;
+    private LinearProgressIndicator loadingprg;
     private FloatingActionButton addpost;
     private FloatingActionButton addmember;
     private RecyclerView recyclerView;
@@ -79,9 +80,7 @@ public class Post extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         list=new ArrayList<>();
-        Collections.reverse(list);
-        adapter = new PostAdapter(context,list);
-        recyclerView.setAdapter(adapter);
+
         String t="DB status";
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -93,6 +92,9 @@ public class Post extends Fragment {
                     list.add(user);
                 }
                 loadingprg.setVisibility(View.GONE);
+                Collections.reverse(list);
+                adapter = new PostAdapter(context,list);
+                recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
             }

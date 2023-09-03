@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.agpitcodeclub.app.Adapters.CommunityProfileAdapter;
-import com.agpitcodeclub.app.FirebasePath;
+import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.CommunityModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.credentials.AddMember;
@@ -26,7 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Tag;
 
 import org.jetbrains.annotations.NotNull;
 

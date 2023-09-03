@@ -13,14 +13,24 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-       <include
-           android:id="@+id/title"
-           layout="@layout/frag_header" />
+       <TextView
+           android:id="@+id/frag_title1"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:background="@color/inputbg"
+           android:elevation="5dp"
+           android:fontFamily="@font/baloo_bhai"
+           android:padding="10dp"
+           android:text="Community"
+           android:textAlignment="center"
+           android:textColor="@color/white"
+           android:textSize="25dp" />
 
        <ScrollView
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:layout_below="@id/title">
+           android:layout_below="@id/frag_title1">
 
            <RelativeLayout
                android:layout_width="match_parent"

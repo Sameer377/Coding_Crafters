@@ -11,7 +11,7 @@
     <color name="actionbar">#121212</color>
     <color name="pink_100">#C65EB6</color>
 
-    <color name="frag_bg">#2C2929</color>
+    <color name="frag_bg">#212020</color>
 
     <!--    Font Color-->
     <color name="tagline">#FFFFFF</color>
@@ -21,5 +21,7 @@
     <color name="outline_deactive">#827F7F</color>
 
     <color name="inputbg">#212121</color>
+
+    <color name="obj_p">#CBF1F5</color>
 
 </resources>

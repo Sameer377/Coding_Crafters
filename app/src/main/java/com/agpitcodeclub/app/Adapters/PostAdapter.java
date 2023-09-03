@@ -36,6 +36,18 @@ public class PostAdapter extends RecyclerView.Adapter< PostAdapter.PostViewholde
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post_card,parent,false);
         return  new PostViewholder(v);
     }
+    public static String extractWords(String text, int wordCount) {
+        String[] words = text.split(" "); // Split the string into an array of words
+        StringBuilder result = new StringBuilder(); // Create a StringBuilder to hold the desired words
+
+        for (int i = 0; i < wordCount && i < words.length; i++) {
+            result.append(words[i]).append(" "); // Add the word to the result
+        }
+
+        return result.toString().trim(); // Trim any extra whitespace and return the result
+    }
+
+
     boolean show = true;
     @Override
     public void onBindViewHolder(@NotNull PostViewholder holder, int position)
@@ -43,24 +55,38 @@ public class PostAdapter extends RecyclerView.Adapter< PostAdapter.PostViewholde
 
         PostModel model = list.get(position);
        holder.txt_post_title.setText(model.getTitle());
-       holder.post_description_txt.setText(model.getDescription());
        holder.post_uploaded_date.setText(model.getPostuploadedon());
+
+        int wordCount = 12;
+
+        String extractedWords = extractWords(model.getDescription(), wordCount);
+
+        holder.post_description_txt.setText(extractedWords+"...");
+
        if(model.getDescription().length()>100){
+
 
            holder.txt_read_more.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
 
 
+
+
                     if (show){
-                        ViewGroup.LayoutParams params = holder.post_description_txt.getLayoutParams();
-                        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                        holder.post_description_txt.setLayoutParams(params);
+//                        ViewGroup.LayoutParams params = holder.post_description_txt.getLayoutParams();
+//                        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//                        holder.post_description_txt.setLayoutParams(params);
+                        holder.post_description_txt.setText(model.getDescription());
+                        holder.txt_read_more.setText("Read less");
                         show=false;
                     }else {
-                        ViewGroup.LayoutParams params = holder.post_description_txt.getLayoutParams();
-                        params.height = 200;
-                        holder.post_description_txt.setLayoutParams(params);
+//                        ViewGroup.LayoutParams params = holder.post_description_txt.getLayoutParams();
+//                        params.height = 200;
+//                        holder.post_description_txt.setLayoutParams(params);
+                        holder.post_description_txt.setText(extractedWords+" ...");
+                        holder.txt_read_more.setText("Read more");
+
                         show=true;
                     }
                        }
