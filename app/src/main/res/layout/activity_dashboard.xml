@@ -41,6 +41,14 @@
 <!--        android:layout_below="@id/rel_frag_header" -->
 
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/dash_prg"
+        android:layout_above="@id/btm_nav_main"
+        app:trackThickness="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:indicatorColor="@color/teal_200"
+        android:indeterminate="true" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btm_nav_main"

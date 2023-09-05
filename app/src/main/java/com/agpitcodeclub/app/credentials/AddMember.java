@@ -205,7 +205,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                System.out.println("Profile path : "+uri.toString());
+                                System.out.println("Login path : "+uri.toString());
                             }
                         });
                     }
@@ -214,7 +214,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(Exception e) {
-                Toast.makeText(AddMember.this, "Profile "+e,Toast.LENGTH_LONG).show();
+                Toast.makeText(AddMember.this, "Login "+e,Toast.LENGTH_LONG).show();
 
             }
         });
@@ -284,35 +284,48 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
                                 switch (designation){
                                     case "President" :
                                         mFirebaseDatabase.child(FirebasePath.PRESIDENT).setValue(user[0]);
+                                        mFirebaseInstance.getReference(FirebasePath.MEMBER_USERTOKENS).child(userId).setValue(FirebasePath.PRESIDENT);
+
                                         break;
                                     case "Vice President" :
+                                        mFirebaseInstance.getReference(FirebasePath.MEMBER_USERTOKENS).child(userId).setValue(FirebasePath.VPRESIDENT);
                                         mFirebaseDatabase.child(FirebasePath.VPRESIDENT).setValue(user[0]); break;
                                     case "Secretary" :
+                                        mFirebaseInstance.getReference(FirebasePath.MEMBER_USERTOKENS).child(userId).setValue(FirebasePath.SECRETARY);
                                         mFirebaseDatabase.child(FirebasePath.SECRETARY).setValue(user[0]); break;
                                     case "Vice Secretary" :
+                                        mFirebaseInstance.getReference(FirebasePath.MEMBER_USERTOKENS).child(userId).setValue(FirebasePath.VSECRETARY);
                                         mFirebaseDatabase.child(FirebasePath.VSECRETARY).setValue(user[0]); break;
                                     case "Revenue Manger" :
+                                        mFirebaseInstance.getReference(FirebasePath.MEMBER_USERTOKENS).child(userId).setValue(FirebasePath.REVENUE_MANAGER);
                                         mFirebaseDatabase.child(FirebasePath.REVENUE_MANAGER).setValue(user[0]); break;
                                     case "Assistant Revenue Manger" :
+                                        mFirebaseInstance.getReference(FirebasePath.MEMBER_USERTOKENS).child(userId).setValue(FirebasePath.VREVENUE_MANAGER);
                                         mFirebaseDatabase.child(FirebasePath.VREVENUE_MANAGER).setValue(user[0]); break;
                                     case "Developer" :
+                                        mFirebaseInstance.getReference(FirebasePath.MEMBER_USERTOKENS).child(userId).setValue(FirebasePath.DEVELOPER);
                                         mFirebaseDatabase.child(FirebasePath.DEVELOPER).child(userId).setValue(user[0]);
                                         break;
                                     case "Member" :
-
+                                        mFirebaseInstance.getReference(FirebasePath.MEMBER_USERTOKENS).child(userId).setValue(FirebasePath.MEMBER);
                                         mFirebaseDatabase.child(FirebasePath.MEMBER).child(userId).setValue(user[0]);
                                         break;
                                 }
-                                System.out.println("Profile path : "+uri.toString());
+                                System.out.println("Login path : "+uri.toString());
                             }
                         });
+
+
+
+
+
                     }
 
 
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(Exception e) {
-                Toast.makeText(AddMember.this, "Profile "+e,Toast.LENGTH_LONG).show();
+                Toast.makeText(AddMember.this, "Login "+e,Toast.LENGTH_LONG).show();
 
             }
         });

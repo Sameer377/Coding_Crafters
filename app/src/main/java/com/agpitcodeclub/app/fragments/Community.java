@@ -3,6 +3,7 @@ package com.agpitcodeclub.app.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,11 +17,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.agpitcodeclub.app.Adapters.CommunityProfileAdapter;
+import com.agpitcodeclub.app.utils.Credentials;
 import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.CommunityModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.credentials.AddMember;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +42,8 @@ public class Community extends Fragment {
     private DatabaseReference databaseReference;
     private ArrayList<CommunityModel> list;
     public Context context;
+    private LinearProgressIndicator community_prg;
+
     public Community() {
         // Required empty public constructor
     }
@@ -60,6 +65,7 @@ public class Community extends Fragment {
     private void initui(View view) {
         addmember=view.findViewById(R.id.add_member);
         recyclerView=view.findViewById(R.id.community_list_profile);
+        community_prg=view.findViewById(R.id.community_prg);
         recyclerView.setLayoutFrozen(true);
         addmember.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,9 +75,24 @@ public class Community extends Fragment {
             }
         });
 
+        SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
+        String des = prefs.getString(Credentials.USER_DES, null);
+
+        if(des==null){
+            des="";
+        }
+
+        if (des.equals(FirebasePath.PRESIDENT)) {
+            addmember.setVisibility(View.VISIBLE);
+        }else {
+            addmember.setVisibility(View.GONE);
+
+        }
+
     }
 
     void loadContentInList(){
+        community_prg.setVisibility(View.VISIBLE);
         databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -79,7 +100,6 @@ public class Community extends Fragment {
         adapter = new CommunityProfileAdapter(context,list);
         recyclerView.setAdapter(adapter);
         String t="DB status";
-        Toast.makeText(context,"Entering",Toast.LENGTH_SHORT).show();
         ArrayList<CommunityModel> listinner=new ArrayList<>();
         Log.v(t,"Entering.......");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -93,8 +113,6 @@ public class Community extends Fragment {
                     Log.v(t,"Name : "+user.getName()+"\nDesignation : "+user.getDesignation());
                     System.out.println("Node1 : "+dataSnapshot.getKey().toString()+"\n"+dataSnapshot.getKey().equals(FirebasePath.DEVELOPER));
                     if (dataSnapshot.getKey().equals(FirebasePath.DEVELOPER)||dataSnapshot.getKey().equals(FirebasePath.MEMBER)){
-                        System.out.println("Entered in node2\n");
-                        Toast.makeText(context,"Entered in inner node ",Toast.LENGTH_SHORT).show();
                         DatabaseReference innerChild = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY).child(dataSnapshot.getKey());
                         innerChild.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -111,10 +129,13 @@ public class Community extends Fragment {
 
                                 }
                                 adapter.notifyDataSetChanged();
+                                community_prg.setVisibility(View.GONE);
+
                             }
 
                             @Override
                             public void onCancelled(DatabaseError error) {
+                                community_prg.setVisibility(View.GONE);
 
                             }
                         });
@@ -122,6 +143,8 @@ public class Community extends Fragment {
 
                     }else {
                         list.add(user);
+                        community_prg.setVisibility(View.GONE);
+
                     }
 
                 }
@@ -135,6 +158,7 @@ public class Community extends Fragment {
             @Override
             public void onCancelled( DatabaseError error) {
                 Toast.makeText(context,"Database error",Toast.LENGTH_SHORT).show();
+                community_prg.setVisibility(View.GONE);
             }
         });
     }

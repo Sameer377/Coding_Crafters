@@ -3,6 +3,7 @@ package com.agpitcodeclub.app.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import java.util.*;
 import com.agpitcodeclub.app.Adapters.PostAdapter;
+import com.agpitcodeclub.app.utils.Credentials;
 import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.PostModel;
 import com.agpitcodeclub.app.R;
@@ -74,6 +76,19 @@ public class Post extends Fragment {
             }
         });
 
+        SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
+        String des = prefs.getString(Credentials.USER_DES, null);
+
+            if(des==null){
+                des="";
+            }
+
+            if (des.equals(FirebasePath.PRESIDENT)) {
+                addpost.setVisibility(View.VISIBLE);
+            }else {
+                addpost.setVisibility(View.GONE);
+
+            }
     }
     void loadContentInList(){
         databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.POST);

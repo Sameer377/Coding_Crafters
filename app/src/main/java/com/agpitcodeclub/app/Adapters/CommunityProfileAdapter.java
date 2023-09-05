@@ -42,7 +42,7 @@ ArrayList<CommunityModel> list;
 
         CommunityModel model = list.get(position);
         holder.name.setText(model.getName());
-        System.out.println("Profile Address : "+model.getProfile());
+        System.out.println("Login Address : "+model.getProfile());
         Glide.with(context).load(model.getProfile()).into(holder.profileImg);
         holder.designation.setText(model.getDesignation());
 

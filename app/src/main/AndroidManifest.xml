@@ -13,15 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AGPITCodeClub">
         <activity
+            android:screenOrientation="portrait"
+
             android:name=".credentials.UploadPost"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Dashboard"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
+
             android:name=".credentials.AddMember"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
+
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

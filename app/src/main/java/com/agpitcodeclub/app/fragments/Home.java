@@ -1,7 +1,10 @@
 package com.agpitcodeclub.app.fragments;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.graphics.text.LineBreaker;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -9,11 +12,14 @@ import androidx.arch.core.executor.TaskExecutor;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.agpitcodeclub.app.Dashboard;
@@ -26,15 +32,21 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Home#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Home extends Fragment {
+public class Home extends Fragment implements View.OnClickListener,EasyPermissions.PermissionCallbacks{
     private ImageSlider imageSlider;
     private TextView txt_intro;
+    private ImageView up_img;
+    private Uri fileUrl;
+
     public Home() {
         // Required empty public constructor
     }
@@ -52,7 +64,7 @@ public class Home extends Fragment {
     private void initUi(View view) {
         imageSlider=view.findViewById(R.id.intro_img_slider);
         txt_intro=view.findViewById(R.id.txt_intro);
-
+        up_img=view.findViewById(R.id.up_img);
     }
 
     @Override
@@ -93,5 +105,59 @@ public class Home extends Fragment {
 
 
         return view;
+    }
+
+
+    public String intentType;
+
+    private void pickImage() {
+        Toast.makeText(getContext(),"w",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent,3);
+
+    }
+
+    public String tempUri="";
+
+    public String getTempUri() {
+        return tempUri;
+    }
+
+    public void setTempUri(String tempUri) {
+        this.tempUri = tempUri;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK&&data.getData()!=null){
+            Uri img=data.getData();
+            fileUrl=data.getData();
+            if(img!=null){
+                up_img.setImageURI(img);
+            }
+
+        }
+    }
+
+    boolean isPermissionGranted = false;
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        isPermissionGranted = true;
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        isPermissionGranted = false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.up_img:
+                pickImage();
+                break;
+        }
     }
 }

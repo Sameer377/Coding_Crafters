@@ -5,23 +5,32 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.agpitcodeclub.app.Models.User;
 import com.agpitcodeclub.app.fragments.Announcement;
 import com.agpitcodeclub.app.fragments.Community;
 import com.agpitcodeclub.app.fragments.Home;
+import com.agpitcodeclub.app.fragments.Login;
 import com.agpitcodeclub.app.fragments.Post;
 import com.agpitcodeclub.app.fragments.Profile;
+import com.agpitcodeclub.app.utils.Credentials;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import org.jetbrains.annotations.NotNull;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,12 +39,14 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 //    private RelativeLayout header;
     private BottomNavigationView nav;
     private FrameLayout mainframe;
+    private LinearProgressIndicator dash_prg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
         initui();
+        loginExistingUser();
 //        initListener();
         navbar();
     }
@@ -60,7 +71,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private void initui() {
         nav=findViewById(R.id.btm_nav_main);
         mainframe=findViewById(R.id.dashboardframe);
-
+        dash_prg=findViewById(R.id.dash_prg);
       /*  header=findViewById(R.id.rel_frag_header);
         title=findViewById(R.id.frag_title_txt);
         back=findViewById(R.id.frag_title_back);
@@ -85,6 +96,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
                 switch (id) {
                     case R.id.home:
+                        loginExistingUser();
 //                        header.setVisibility(View.GONE);
                         loadFragment(new Home(), false);
                         nav.setVisibility(View.VISIBLE);
@@ -108,9 +120,16 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
                         break;
                     case R.id.profile:
-//                        title.setText("Profile");
+//                        title.setText("Login");
 //                        header.setVisibility(View.VISIBLE);
-                        loadFragment(new Profile(), false);
+                        if(userLogin){
+                            loadFragment(new Profile(), false);
+
+                        }else{
+                            loadFragment(new Login(), false);
+
+                        }
+
 
                         break;
                     default:
@@ -130,4 +149,31 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 //            case R.id.frag_title_back: nav.setSelectedItemId(R.id.home); header.setVisibility(View.GONE); loadFragment(new Home(),false); break;
         }
     }
+
+    private FirebaseAuth mAuth;
+    public static boolean userLogin=false;
+
+    private void loginExistingUser(){
+        SharedPreferences prefs = getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
+        String email = prefs.getString(Credentials.USER_EMAIL, null);
+        String pass = prefs.getString(Credentials.USER_PASS, null);
+        mAuth = FirebaseAuth.getInstance();
+
+        if(email!=null){
+            mAuth.signInWithEmailAndPassword(email,pass)
+                    .addOnCompleteListener(Dashboard.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NotNull Task<AuthResult> task) {
+                            dash_prg.setVisibility(View.INVISIBLE);
+
+                        }
+                    });
+            userLogin=true;
+
+        }else {
+            dash_prg.setVisibility(View.INVISIBLE);
+        }
+    }
+
+
 }

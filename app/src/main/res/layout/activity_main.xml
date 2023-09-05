@@ -34,7 +34,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="60dp"
@@ -44,7 +44,7 @@
         android:gravity="center"
         android:lineHeight="20dp"
         android:padding="20dp"
-        android:text="By \nA. G. Patil Institute of technology"
+        android:text="By \nComputer engg. department\nA. G. Patil Institute of technology"
         android:textAlignment="center"
         android:textColor="@color/tagline"
         android:textSize="13dp"
