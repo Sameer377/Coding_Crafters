@@ -51,13 +51,13 @@
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/profile_prg"
-            android:layout_below="@id/profile_name_head"
-            android:layout_marginTop="30dp"
-            app:trackThickness="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/profile_name_head"
+            android:layout_marginTop="30dp"
+            android:indeterminate="true"
             app:indicatorColor="@color/teal_200"
-            android:indeterminate="true" />
+            app:trackThickness="2dp" />
 
     </RelativeLayout>
 

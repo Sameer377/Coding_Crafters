@@ -1,0 +1,75 @@
+package com.agpitcodeclub.app.fragments;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatButton;
+
+import com.agpitcodeclub.app.Adapters.FileTime;
+import com.agpitcodeclub.app.Models.MsgModel;
+import com.agpitcodeclub.app.R;
+import com.agpitcodeclub.app.utils.FirebasePath;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+public class SendMsgBtmSheet extends BottomSheetDialogFragment implements View.OnClickListener {
+    public static final String TAG = "ActionBottomDialog";
+    TextInputEditText tf_title_msg,tf_msg,tf_msg_loc;
+    AppCompatButton btn_sendmsg;
+    ImageView close_btm_nav;
+    public static SendMsgBtmSheet newInstance() {
+        return new SendMsgBtmSheet();
+    }
+    @Nullable @Override
+    public View onCreateView(@NotNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_send_messege, container, false);
+    }
+    @Override public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        tf_title_msg=view.findViewById(R.id.tf_title_msg);
+        tf_msg=view.findViewById(R.id.tf_msg);
+        btn_sendmsg=view.findViewById(R.id.btn_sendmsg);
+        tf_msg_loc=view.findViewById(R.id.tf_msg_loc);
+        close_btm_nav=view.findViewById(R.id.close_btm_nav);
+        close_btm_nav.setOnClickListener(this);
+        btn_sendmsg.setOnClickListener(this);
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+    @Override public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_sendmsg:
+                sendMsg();
+                break;
+            case R.id.close_btm_nav:
+                dismiss();
+                break;
+        }
+    }
+    public interface ItemClickListener {
+        void onItemClick(String item);
+    }
+    private void sendMsg() {
+        MsgModel model = new MsgModel(tf_title_msg.getText().toString().trim(),tf_msg.getText().toString().trim(),tf_msg_loc.getText().toString().trim(),"");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
+        databaseReference.child(new FileTime().getFileTime()).setValue(model);
+    }
+}

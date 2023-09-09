@@ -13,24 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AGPITCodeClub">
         <activity
-            android:screenOrientation="portrait"
-
+            android:name=".fragments.SendMessege"
+            android:exported="true" />
+        <activity
             android:name=".credentials.UploadPost"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Dashboard"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-
             android:name=".credentials.AddMember"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

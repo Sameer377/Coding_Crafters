@@ -1,66 +1,121 @@
 package com.agpitcodeclub.app.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.agpitcodeclub.app.Adapters.MsgAdapter;
+import com.agpitcodeclub.app.Adapters.PostAdapter;
+import com.agpitcodeclub.app.Models.MsgModel;
+import com.agpitcodeclub.app.Models.MsgModel;
 import com.agpitcodeclub.app.R;
+import com.agpitcodeclub.app.utils.FirebasePath;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Announcement#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Announcement extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    RecyclerView inbox_recycle;
+    FloatingActionButton fb;
     public Announcement() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Announcement.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Announcement newInstance(String param1, String param2) {
         Announcement fragment = new Announcement();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        Toast.makeText(getContext(),"Currently not available !",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_announcement, container, false);
+        View view =inflater.inflate(R.layout.fragment_announcement, container, false);
+        fb=view.findViewById(R.id.fab_send_msg);
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getContext(),SendMessege.class);
+//                startActivity(intent);
+
+                SendMsgBtmSheet addPhotoBottomDialogFragment =
+                        SendMsgBtmSheet.newInstance();
+                addPhotoBottomDialogFragment.show( getActivity().getSupportFragmentManager(),
+                        SendMsgBtmSheet.TAG);
+                Toast.makeText(getContext(),"DB Error",Toast.LENGTH_LONG).show();
+
+            }
+        });
+        initUi(view);
+        return view;
     }
+    private DatabaseReference databaseReference;
+
+    private void initUi(View view) {
+        inbox_recycle=view.findViewById(R.id.inbox_recycle);
+        databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
+        inbox_recycle.setHasFixedSize(true);
+        inbox_recycle.setLayoutManager(new LinearLayoutManager(getContext()));
+        list=new ArrayList<>();
+
+        fetchData();
+    }
+    private ArrayList<MsgModel> list;
+    private MsgAdapter adapter;
+    void fetchData() {
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onDataChange(@NotNull DataSnapshot snapshot) {
+                    try {
+
+                        list.clear();
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        MsgModel user = dataSnapshot.getValue(MsgModel.class);
+                        Toast.makeText(getContext(), user.getTitle(), Toast.LENGTH_SHORT).show();
+                        list.add(user);
+                    }
+//                loadingprg.setVisibility(View.GONE);
+                    Collections.reverse(list);
+                    adapter = new MsgAdapter(getContext(), list);
+                    inbox_recycle.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }catch(Exception e){
+                    Toast.makeText(getContext(),"Error : "+e,Toast.LENGTH_SHORT).show();
+                }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
+
+    }
+
 }

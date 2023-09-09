@@ -76,11 +76,11 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
 
     private void sliderImage() {
         ArrayList<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/page1-f073e.appspot.com/o/demo%2FBest_Principal.jpg?alt=media&token=dd7ea6a2-ea1a-4028-b3f2-93be886c3d43", ScaleTypes.FIT));
-        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/page1-f073e.appspot.com/o/demo%2Fprin.jpg?alt=media&token=2bd88912-c544-4829-a179-6a03b5ed4ac2", ScaleTypes.FIT));
-        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/page1-f073e.appspot.com/o/demo%2Finfra.jpg?alt=media&token=e4a1cbe6-a15e-44f1-a5fa-5a1d225604b9", ScaleTypes.FIT));
-        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/page1-f073e.appspot.com/o/demo%2Flab.jpg?alt=media&token=7dce08e1-aa67-4295-8a9b-fb7ab26f5ae3", ScaleTypes.FIT));
-        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/page1-f073e.appspot.com/o/demo%2Fmec.jpg?alt=media&token=0cc17984-17d4-46b3-a347-a80e752186f7", ScaleTypes.FIT));
+        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Finstitute.jpg?alt=media&token=09b12f94-6f3a-4198-9af4-36cf96995aaf", ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2FSecretaryDesk.png?alt=media&token=c77b089c-224e-4baf-8a20-b128ef7ff118", ScaleTypes.FIT));
+        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Fcampus_director_chougule_sir.jpg?alt=media&token=5c54276f-2c93-4542-93da-da1105ae5f20", ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Fvice-principal.jfif?alt=media&token=2bc47b5c-c250-4afe-aa37-4886bb7e1388", ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2FSAVE_20230905_122924%20(1).jpg?alt=media&token=c075a5ac-fca1-40d7-b1f4-56bed5c95259", ScaleTypes.CENTER_CROP));
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
     }
 
