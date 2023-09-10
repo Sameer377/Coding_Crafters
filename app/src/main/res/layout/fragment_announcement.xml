@@ -47,7 +47,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_baseline_send_24"
+            android:src="@drawable/ic_round_message_24"
             />
     </RelativeLayout>
 

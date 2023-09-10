@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/frag_bg"
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/cd_m"
         android:layout_width="match_parent"
-        android:layout_height="7dp"
-        android:background="#100F0F"/>
-    <RelativeLayout
-        android:layout_below="@id/cd_m"
+        android:layout_height="3dp"
+        android:background="#1A1919"/>
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
         android:paddingStart="20dp"
         android:paddingEnd="15dp"
-        android:paddingTop="5dp"
         android:paddingBottom="15dp">
 
 
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/title_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,7 +34,6 @@
             android:id="@+id/msg_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_msg"
             android:layout_marginTop="3dp"
             android:fontFamily="@font/baloo_bhai_2_medium"
             android:lineHeight="25dp"
@@ -43,10 +42,10 @@
             android:textSize="15dp" />
 
         <LinearLayout
+
             android:id="@+id/dec101_rel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/msg_location"
             android:layout_marginTop="7dp"
             android:gravity="center">
 
@@ -68,8 +67,8 @@
                 android:textSize="15dp" />
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 
-</RelativeLayout>
+</LinearLayout>

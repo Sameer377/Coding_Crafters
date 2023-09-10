@@ -41,7 +41,26 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgAdapterViewho
         MsgModel model = list.get(position);
         holder.msg_title.setText(model.getTitle());
         holder.msg_location.setText(model.getLocation());
-        holder.msg_content.setText(model.getMsg());
+/*
+
+        if(model.getTitle().trim().equals("")){
+//            holder.msg_title.setVisibility(View.GONE);
+            System.out.println(!model.getTitle().trim().equals(""));
+            holder.msg_title.setVisibility(View.GONE);
+        }else{
+        }
+        if(!model.getLocation().trim().equals("")){
+            holder.msg_location.setVisibility(View.GONE);
+        }else{
+            System.out.println("false");
+        }
+*/
+
+
+            holder.msg_content.setText(model.getMsg());
+
+
+
     }
 
 

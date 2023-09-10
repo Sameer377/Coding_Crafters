@@ -49,5 +49,8 @@ public class SendMessege extends AppCompatActivity implements View.OnClickListen
         MsgModel model = new MsgModel(tf_title_msg.getText().toString().trim(),tf_msg.getText().toString().trim(),tf_msg_loc.getText().toString().trim(),"");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
         databaseReference.child(new FileTime().getFileTime()).setValue(model);
+        tf_title_msg.setText("");
+        tf_msg.setText("");
+        tf_msg_loc.setText("");
     }
 }

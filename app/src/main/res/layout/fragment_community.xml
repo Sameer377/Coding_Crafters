@@ -47,7 +47,7 @@
            <RelativeLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent"
-               android:layout_below="@id/frag_title">
+               android:layout_below="@id/frag_title1">
 
                <androidx.appcompat.widget.AppCompatImageView
                    android:id="@+id/commmunity_img"

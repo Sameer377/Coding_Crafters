@@ -17,7 +17,6 @@
     <color name="tagline">#FFFFFF</color>
 
 <!--    input text outline-->
-    <color name="outline_active">#DAD8D8</color>
     <color name="outline_deactive">#827F7F</color>
 
     <color name="inputbg">#212121</color>

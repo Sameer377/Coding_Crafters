@@ -6,10 +6,9 @@
     android:background="@color/frag_bg"
     android:orientation="vertical"
     android:paddingStart="15dp"
-    android:paddingTop="10dp"
     android:paddingEnd="15dp"
     android:layout_height="wrap_content"
-    android:paddingBottom="30dp"
+    android:paddingBottom="200dp"
     tools:context=".fragments.SendMessege">
 
 <LinearLayout
@@ -22,10 +21,10 @@
     android:layout_height="wrap_content">
 
     <TextView
-
         android:id="@+id/sendmsg_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:elevation="5dp"
         android:fontFamily="@font/inter_extrabold"
         android:padding="10dp"
@@ -68,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:textColor="@color/teal_200"
-                android:textSize="18dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/baloo_bhai_2_medium"
                 android:drawablePadding="10dp"
@@ -94,7 +92,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:textSize="18dp"
                 android:textColor="@color/white"
 
                 android:textStyle="bold"
@@ -123,7 +120,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:fontFamily="@font/baloo_bhai_2_medium"

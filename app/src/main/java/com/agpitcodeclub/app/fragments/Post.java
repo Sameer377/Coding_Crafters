@@ -37,7 +37,6 @@ public class Post extends Fragment {
 
     private LinearProgressIndicator loadingprg;
     private FloatingActionButton addpost;
-    private FloatingActionButton addmember;
     private RecyclerView recyclerView;
     private PostAdapter adapter; // Create Object of the Adapter class
     private DatabaseReference databaseReference;
@@ -73,6 +72,18 @@ public class Post extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), UploadPost.class);
                 startActivity(intent);
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && addpost.getVisibility() == View.VISIBLE) {
+                    addpost.hide();
+                } else if (dy < 0 && addpost.getVisibility() !=View.VISIBLE) {
+                    addpost.show();
+                }
             }
         });
 

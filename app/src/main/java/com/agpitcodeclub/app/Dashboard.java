@@ -6,7 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 
 import com.agpitcodeclub.app.Models.User;
 import com.agpitcodeclub.app.fragments.Announcement;
+import com.agpitcodeclub.app.fragments.CheckInternet;
 import com.agpitcodeclub.app.fragments.Community;
 import com.agpitcodeclub.app.fragments.Home;
 import com.agpitcodeclub.app.fragments.Login;
@@ -78,8 +82,15 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 */
         nav.setSelectedItemId(R.id.home);
 //        header.setVisibility(View.GONE);
-        loadFragment(new Home(),true);
+        if(InternetIsConnected()){
+            loginExistingUser();
+            loadFragment(new Home(), false);
 
+        }
+        else {
+            loadFragment(new CheckInternet(), false);
+
+        }
     }
 //    private void initListener() {
 //        back.setOnClickListener(this);
@@ -96,41 +107,79 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
                 switch (id) {
                     case R.id.home:
-                        loginExistingUser();
+
 //                        header.setVisibility(View.GONE);
-                        loadFragment(new Home(), false);
-                        nav.setVisibility(View.VISIBLE);
+
+
+                        if(InternetIsConnected()){
+                            loginExistingUser();
+                            loadFragment(new Home(), false);
+
+                        }
+                        else {
+                            loadFragment(new CheckInternet(), false);
+
+                        }
+
 
                         break;
                     case R.id.community:
 //                        title.setText("Community");
 //                        header.setVisibility(View.VISIBLE);
-                        loadFragment(new Community(Dashboard.this), false);
+                        if(InternetIsConnected()){
+                            loadFragment(new Community(Dashboard.this), false);
+
+                        }
+                        else {
+                            loadFragment(new CheckInternet(), false);
+
+                        }
                         break;
                     case R.id.post:
 //                        title.setText("Post");
 //                        header.setVisibility(View.VISIBLE);
-                        loadFragment(new Post(), false);
 
+                        if(InternetIsConnected()){
+                            loadFragment(new Post(), false);
+
+                        }
+                        else {
+                            loadFragment(new CheckInternet(), false);
+
+                        }
                         break;
                     case R.id.announcement:
 //                        title.setText("Inbox");
 //                        header.setVisibility(View.VISIBLE);
-                        loadFragment(new Announcement(), false);
 
+                        if(InternetIsConnected()){
+                            loadFragment(new Announcement(), false);
+
+                        }
+                        else {
+                            loadFragment(new CheckInternet(), false);
+
+                        }
                         break;
                     case R.id.profile:
 //                        title.setText("Login");
 //                        header.setVisibility(View.VISIBLE);
-                        if(userLogin){
-                            loadFragment(new Profile(), false);
 
-                        }else{
-                            loadFragment(new Login(), false);
+
+                        if(InternetIsConnected()){
+                            if(userLogin){
+                                loadFragment(new Profile(), false);
+
+                            }else{
+                                loadFragment(new Login(), false);
+
+                            }
 
                         }
+                        else {
+                            loadFragment(new CheckInternet(), false);
 
-
+                        }
                         break;
                     default:
                         Toast.makeText(Dashboard.this, "btm", Toast.LENGTH_SHORT).show();
@@ -175,5 +224,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-
+    public boolean InternetIsConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -82,6 +82,18 @@ public class Announcement extends Fragment {
         inbox_recycle.setLayoutManager(new LinearLayoutManager(getContext()));
         list=new ArrayList<>();
 
+        inbox_recycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && fb.getVisibility() == View.VISIBLE) {
+                    fb.hide();
+                } else if (dy < 0 && fb.getVisibility() !=View.VISIBLE) {
+                    fb.show();
+                }
+            }
+        });
+
         fetchData();
     }
     private ArrayList<MsgModel> list;
@@ -97,14 +109,15 @@ public class Announcement extends Fragment {
 
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         MsgModel user = dataSnapshot.getValue(MsgModel.class);
-                        Toast.makeText(getContext(), user.getTitle(), Toast.LENGTH_SHORT).show();
                         list.add(user);
                     }
 //                loadingprg.setVisibility(View.GONE);
-                    Collections.reverse(list);
-                    adapter = new MsgAdapter(getContext(), list);
+                        Collections.reverse(list);
+                        adapter = new MsgAdapter(getContext(), list);
                     inbox_recycle.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+//                        inbox_recycle.scrollToPosition(list.size()-1);
+
+                        adapter.notifyDataSetChanged();
                 }catch(Exception e){
                     Toast.makeText(getContext(),"Error : "+e,Toast.LENGTH_SHORT).show();
                 }
