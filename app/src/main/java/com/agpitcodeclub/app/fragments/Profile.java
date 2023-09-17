@@ -90,14 +90,42 @@ public class Profile extends Fragment implements View.OnClickListener{
         btn_profile_logout.setOnClickListener(this);
 //        isMember= getArguments().getBoolean("isMember");
 
-        initiateUser();
+//        initiateUser();
+         setUsetData();
     }
+
 
     private DatabaseReference reference;
 
     private DatabaseReference databaseReference;
     private String token_des = "";
 
+    private void setUsetData() {
+        SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
+        String email = prefs.getString(Credentials.USER_EMAIL, null);
+        String pass = prefs.getString(Credentials.USER_PASS, null);
+        String name = prefs.getString(Credentials.USER_NAME, null);
+        String year = prefs.getString(Credentials.USER_YEAR, null);
+        String designation = prefs.getString(Credentials.USER_DESIGNATION, null);
+        String image = prefs.getString(Credentials.USER_PROFILE_IMG, null);
+
+        profile_prg.setVisibility(View.INVISIBLE);
+        rel_line_teal_profile.setVisibility(View.VISIBLE);
+        lin_data.setVisibility(View.VISIBLE);
+        profile_name_head.setText(name);
+        if(designation!=null){
+            tfl_yr.setVisibility(View.VISIBLE);
+            tfl_des.setVisibility(View.VISIBLE);
+            tf_designation.setText(designation.substring(2));
+            tf_year.setText(year);
+            Glide.with(getContext()).load(image).into(imgprofile_main);
+
+        }
+
+        tf_email.setText(email);
+        tf_password.setText(pass);
+    }
+/*
 
     private void initiateUser() {
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -124,9 +152,11 @@ public class Profile extends Fragment implements View.OnClickListener{
 
 
                         if (task.getResult().getValue()==null){
-                          /*  if(des!=null){
+                          */
+/*  if(des!=null){
                                 token_des=des;
-                            }else{*/
+                            }else{*//*
+
                                 Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
                                 ft.commit();
 //                            }
@@ -284,11 +314,11 @@ public class Profile extends Fragment implements View.OnClickListener{
 
 
     }
+*/
 
     private void logOut(){
         getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE).edit().clear().commit();
         userLogin=false;
-        FirebaseAuth.getInstance().signOut();
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.dashboardframe, new Login(), "NewFragmentTag");
         ft.commit();

@@ -17,6 +17,8 @@ public class FirebasePath {
     public static final String MEMBER_USERTOKENS = "communitytokens";
     public static final String POST = "post";
     public static final String INBOX = "inbox";
+    public static final String DASHBOARD="dash";
+    public static final String UPCOMMING=DASHBOARD+"upcommingevent";
 
     public static final String CONTENT = "content";
     public static final String POSTIMAGE="imglist";

@@ -78,7 +78,7 @@ public class Community extends Fragment {
 
         
         SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
-        String des = prefs.getString(Credentials.USER_DES, null);
+        String des = prefs.getString(Credentials.USER_DESIGNATION, null);
 
         if(des==null){
             des="";

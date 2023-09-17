@@ -3,37 +3,49 @@ package com.agpitcodeclub.app.fragments;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
-import android.graphics.text.LineBreaker;
+import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.arch.core.executor.TaskExecutor;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.agpitcodeclub.app.Dashboard;
-import com.agpitcodeclub.app.MainActivity;
+import com.agpitcodeclub.app.Models.UpCommingModel;
 import com.agpitcodeclub.app.R;
+import com.agpitcodeclub.app.utils.Credentials;
+import com.agpitcodeclub.app.utils.FirebasePath;
+import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -44,7 +56,10 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class Home extends Fragment implements View.OnClickListener,EasyPermissions.PermissionCallbacks{
     private ImageSlider imageSlider;
     private TextView txt_intro;
-    private ImageView up_img;
+    private ImageView btn_pickimg;
+    private AppCompatButton btn_upload_up_img;
+    private GifImageView up_img;
+    private EditText edt_des_up_img;
     private Uri fileUrl;
 
     public Home() {
@@ -65,6 +80,28 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         imageSlider=view.findViewById(R.id.intro_img_slider);
         txt_intro=view.findViewById(R.id.txt_intro);
         up_img=view.findViewById(R.id.up_img);
+        btn_upload_up_img=view.findViewById(R.id.btn_upload_up_img);
+        btn_pickimg=view.findViewById(R.id.btn_pickimg);
+        edt_des_up_img=view.findViewById(R.id.edt_des_up_img);
+        btn_pickimg.setOnClickListener(this);
+        btn_upload_up_img.setOnClickListener(this);
+        setImageDetails();
+
+        SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
+        String des = prefs.getString(Credentials.USER_DESIGNATION, null);
+
+        if(des==null){
+            des="";
+        }
+
+        if (des.equals(FirebasePath.PRESIDENT)) {
+            btn_upload_up_img.setVisibility(View.VISIBLE);
+            btn_pickimg.setVisibility(View.VISIBLE);
+        }else {
+            btn_upload_up_img.setVisibility(View.GONE);
+            btn_pickimg.setVisibility(View.GONE);
+            edt_des_up_img.setEnabled(false);
+        }
     }
 
     @Override
@@ -82,6 +119,8 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Fvice-principal.jfif?alt=media&token=2bc47b5c-c250-4afe-aa37-4886bb7e1388", ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2FSAVE_20230905_122924%20(1).jpg?alt=media&token=c075a5ac-fca1-40d7-b1f4-56bed5c95259", ScaleTypes.CENTER_CROP));
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
+
+
     }
 
     @Override
@@ -111,7 +150,6 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     public String intentType;
 
     private void pickImage() {
-        Toast.makeText(getContext(),"w",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent,3);
 
@@ -136,7 +174,6 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
             if(img!=null){
                 up_img.setImageURI(img);
             }
-
         }
     }
 
@@ -155,9 +192,79 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.up_img:
+            case R.id.btn_pickimg:
                 pickImage();
                 break;
+
+            case R.id.btn_upload_up_img:
+                if(!edt_des_up_img.getText().toString().trim().equals(null)){
+                    uploadUpComming();
+                }else {
+                    edt_des_up_img.setError("Cannot be Empty");
+                }
+                break;
+
         }
     }
+
+    private void uploadUpComming() {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(FirebasePath.DASHBOARD).child("upcommingimg");
+        if (fileUrl!=null) {
+            storageReference.putFile(fileUrl)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String imgUri = uri.toString();
+                                    UpCommingModel upcommingModel = new UpCommingModel(imgUri, edt_des_up_img.getText().toString().trim());
+                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.UPCOMMING);
+                                    databaseReference.setValue(upcommingModel);
+                                    Toast.makeText(getContext(), " Uploaded" , Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+                        }
+
+
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(Exception e) {
+                    Toast.makeText(getContext(), " Error" + e, Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }else {
+            Toast.makeText(getContext(),"Select image",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public void setImageDetails(){
+        DatabaseReference reference;
+        reference=FirebaseDatabase.getInstance().getReference(FirebasePath.UPCOMMING);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (getActivity() == null) {
+                    return;
+                }
+                UpCommingModel upcommingModel = snapshot.getValue(UpCommingModel.class);
+                if (upcommingModel != null) {
+                    Glide.with(getContext()).load(upcommingModel.getImage()).into(up_img);
+                    edt_des_up_img.setText(upcommingModel.getDescription());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+
 }

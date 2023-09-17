@@ -24,6 +24,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="80dp"
             android:background="@drawable/profilebg"
+            android:src="@drawable/person_filled"
             android:scaleType="fitXY"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
@@ -120,6 +121,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tfl_des"
+            android:visibility="gone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,12 +130,15 @@
             android:textColorHint="@color/white"
             app:boxStrokeColor="@color/white"
             app:hintTextColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -154,15 +159,17 @@
             android:layout_marginTop="10dp"
             android:hint="Email"
             android:textColorHint="@color/white"
-
             app:boxStrokeColor="@color/white"
             app:hintTextColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -177,6 +184,8 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:visibility="gone"
+
             android:id="@+id/tfl_yr"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -186,12 +195,15 @@
             android:textColorHint="@color/white"
             app:boxStrokeColor="@color/white"
             app:hintTextColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -215,12 +227,15 @@
             android:textColorHint="@color/white"
             app:boxStrokeColor="@color/white"
             app:hintTextColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

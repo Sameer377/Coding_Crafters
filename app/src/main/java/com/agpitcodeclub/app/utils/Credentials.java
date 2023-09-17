@@ -6,5 +6,8 @@ public class Credentials {
     public static final String USER_DATA="usercredentials";
     public static final String USER_EMAIL="useremail";
     public static final String USER_PASS="userpass";
-    public static final String USER_DES="userdes";
+    public static final String USER_NAME="username";
+    public static final String USER_YEAR="useryear";
+    public static final String USER_DESIGNATION="userdes";
+    public static final String USER_PROFILE_IMG="userprofileimg";
 }

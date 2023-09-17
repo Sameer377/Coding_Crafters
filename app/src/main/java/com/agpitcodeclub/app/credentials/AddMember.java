@@ -1,9 +1,12 @@
 package com.agpitcodeclub.app.credentials;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.CommunityModel;
@@ -41,7 +46,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class AddMember extends AppCompatActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
     private Spinner designationspinner,persuingyr;
     private ImageView back;
-    private AppCompatEditText name,email;
+    private AppCompatEditText name,email,edt_phone_adduser;
     private char[] password;
     private String designation="",year="";
     private String userId="";
@@ -54,6 +59,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
     private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mFirebaseDatabase;
     private StorageReference storageReference;
+    private String phoneNo="8999596143",message;
 
     public String getProfilePath() {
         return profilePath;
@@ -80,6 +86,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
 
     private void initui() {
         persuingyr=findViewById(R.id.persuingyr);
+        edt_phone_adduser=findViewById(R.id.edt_phone_adduser);
         designationspinner=findViewById(R.id.designation);
         back=findViewById(R.id.img_back_adduser);
         mAuth = FirebaseAuth.getInstance();
@@ -190,7 +197,6 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
 
         }
 
-
     }
 
 
@@ -243,6 +249,8 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
                                 Log.d("status : ", "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 adddetailstoDB();
+//                                sendSMSMessage();
+
                                 Toast.makeText(AddMember.this, "User Added",
                                         Toast.LENGTH_SHORT).show();
                             } else {
@@ -396,6 +404,50 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
     }
 
 
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
+    protected void sendSMSMessage() {
+        phoneNo ="8999596143";
+//        phoneNo =edt_phone_adduser.getText().toString().trim();
+        message ="ok";/*"Dear "+_name+",\n" +
+                "\n" +
+                "I am delighted to inform you that you have been selected as the President of the Coding Crafters club. \n"+"Here are your login credentials to access the club's resources:\n" +
+                "\n" +
+                "Username: "+_email +
+                "Password: "+_password+"\n\n         -PRESIDENT";*/
+        Toast.makeText(getBaseContext(), "working", Toast.LENGTH_SHORT).show();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.SEND_SMS)) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.SEND_SMS},
+                        MY_PERMISSIONS_REQUEST_SEND_SMS);
+            }
+        }
+    }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_SEND_SMS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(phoneNo, null, message, null, null);
+                    Toast.makeText(getApplicationContext(), "SMS sent.",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "SMS faild, please try again.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+        }
+
+    }
 
 }

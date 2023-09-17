@@ -158,22 +158,46 @@
                         android:layout_marginTop="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <ImageView
-                            android:id="@+id/up_img"
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:src="@drawable/banner_and"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/community_profile_card" />
+                            android:layout_height="200dp">
+
+                            <pl.droidsonroids.gif.GifImageView
+                                android:id="@+id/up_img"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/community_profile_card"
+                                android:scaleType="centerCrop"
+                                 />
+
+                            <ImageView
+                                android:id="@+id/btn_pickimg"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/img_edit_btn_bg"
+                                android:elevation="5dp"
+                                android:padding="12dp"
+                                android:src="@drawable/edit_img_profile" />
+                        </RelativeLayout>
+
+
+
                     </androidx.cardview.widget.CardView>
 
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/edt_des_up_img"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/up_img_cd"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
+                        android:background="@android:color/transparent"
                         android:fontFamily="@font/baloo_bhai_2_medium"
                         android:gravity="center"
                         android:text="Launch of Coding Crafters Application \n at 2 pm android lab"
@@ -181,6 +205,19 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_upload_up_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_below="@id/edt_des_up_img"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/std_btn"
+                        android:capitalize="none"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:text="Upload"
+                        android:textSize="10dp" />
 
                 </RelativeLayout>
 

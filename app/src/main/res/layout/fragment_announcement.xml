@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/frag_bg"
     android:layout_height="match_parent"
     tools:context=".fragments.Announcement">
@@ -27,6 +28,14 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="25dp" />
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+
+            android:id="@+id/ann_prg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:indicatorColor="@color/teal_200"
+            app:trackThickness="2dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -49,6 +58,7 @@
             android:layout_marginBottom="20dp"
             android:src="@drawable/ic_round_message_24"
             />
+
     </RelativeLayout>
 
 </FrameLayout>

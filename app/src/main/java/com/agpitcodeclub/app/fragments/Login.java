@@ -2,6 +2,8 @@ package com.agpitcodeclub.app.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static com.agpitcodeclub.app.Dashboard.userLogin;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,10 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.agpitcodeclub.app.Dashboard;
+import com.agpitcodeclub.app.Models.CommunityModel;
 import com.agpitcodeclub.app.utils.Credentials;
 import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.User;
 import com.agpitcodeclub.app.R;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -34,8 +38,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -162,18 +168,18 @@ public class Login extends Fragment implements View.OnClickListener {
                             }
 
                             if (task.isSuccessful()) {
-                                storeUserData(email,password);
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("status : ", "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 User user1=new User(name,email,password);
                                 mFirebaseDatabase       .child(userId).setValue(user1);
                                 signup_status_prg.setVisibility(View.GONE);
-
+                                userLogin=true;
+                                storeUserData(email,password,name,null,null, null);
                                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                                 ft.replace(R.id.dashboardframe, new Profile(), "NewFragmentTag");
-//                                ft.add(R.id.dashboardframe, ldf);
                                 ft.commit();
+
                                 Toast.makeText(getContext(), "User Added",
                                         Toast.LENGTH_SHORT).show();
                             } else {
@@ -245,13 +251,9 @@ public class Login extends Fragment implements View.OnClickListener {
                     public void onComplete(@NotNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            signup_status_prg.setVisibility(View.GONE);
-                            storeUserData(email,password);
+                           UserID= FirebaseAuth.getInstance().getCurrentUser().getUid();
                             isMember=checkbox_mem.isChecked();
-
-                            final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                            ft.replace(R.id.dashboardframe, new Profile(), "NewFragmentTag");
-                            ft.commit();
+                            checkDataInDatabase();
 
                         } else {
                             signup_status_prg.setVisibility(View.GONE);
@@ -263,29 +265,170 @@ public class Login extends Fragment implements View.OnClickListener {
                 });
     }
 
+    private String UserID;
+    private String token_des = "";
+    private DatabaseReference reference;
 
 
-
-    private void storeUserData(String email,String pass){
-        SharedPreferences.Editor editor = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE).edit();
-        editor.putString(Credentials.USER_EMAIL, email);
-        editor.putString(Credentials.USER_PASS, pass);
-        if(checkbox_mem.isChecked()) {
+    public void checkDataInDatabase(){
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.dashboardframe, new Profile(), "NewFragmentTag");
+        if(isMember){
             databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.MEMBER_USERTOKENS);
-            databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+            databaseReference.child(UserID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
-                public void onComplete(Task<DataSnapshot> task) {
+                public void onComplete(@NotNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
                         Log.e("firebase", "Error getting data", task.getException());
                     } else {
-//                        Toast.makeText(getContext(),"des "+task.getResult().getValue().toString(),Toast.LENGTH_SHORT).show();
+                        if (task.getResult().getValue()==null){
+                            Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
 
-//                        editor.putString(Credentials.USER_DES, FirebasePath.DEVELOPER);
+                        }else{
+                            token_des = task.getResult().getValue().toString();
+                        }
+
+                        reference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY);
+
+
+
+                        if(!token_des.equals(FirebasePath.DEVELOPER)&& !token_des.equals(FirebasePath.MEMBER)) {
+
+                            reference.child(token_des).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    CommunityModel user = snapshot.getValue(CommunityModel.class);
+                                    if (user != null) {
+                                        userLogin=true;
+
+                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
+                                        ft.commit();
+
+                                    }else {
+                                        Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                        else if(token_des.equals(FirebasePath.DEVELOPER)) {
+                            reference.child(token_des).child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    CommunityModel user = snapshot.getValue(CommunityModel.class);
+                                    if (user != null) {
+                                        userLogin=true;
+
+                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
+
+                                        ft.commit();
+
+                                    }else {
+                                        Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }else if(token_des.equals(FirebasePath.MEMBER)) {
+                            reference.child(token_des).child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    CommunityModel user = snapshot.getValue(CommunityModel.class);
+                                    if (user != null) {
+                                        userLogin=true;
+
+                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
+                                        ft.commit();
+
+                                    }else {
+                                        Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                        Log.d("firebase", String.valueOf(task.getResult().getValue()));
                     }
                 }
             });
+        }else{
+
+            databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.USERS);
+
+
+            databaseReference.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    CommunityModel user = snapshot.getValue(CommunityModel.class);
+                    if (user != null) {
+                        userLogin=true;
+                        storeUserData(user.getemail(),user.getPassword(),user.getName(),null,FirebasePath.USERS,user.getProfile());
+                        ft.commit();
+
+                    }else{
+                        Toast.makeText(getContext(),"User not found !",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+
         }
+        signup_status_prg.setVisibility(View.GONE);
+
+    }
+
+
+    private void storeUserData(String email,String pass,String name,String year,String designation,String imgAddress){
+        SharedPreferences.Editor editor = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE).edit();
+        editor.putString(Credentials.USER_EMAIL, email);
+        editor.putString(Credentials.USER_PASS, pass);
+        editor.putString(Credentials.USER_NAME,name);
+
+
+
+
+
+           if(designation!=FirebasePath.USERS&&designation!=null){
+               editor.putString(Credentials.USER_PROFILE_IMG,imgAddress);
+               editor.putString(Credentials.USER_YEAR,year);
+               editor.putString(Credentials.USER_DESIGNATION,designation);
+           }else {
+               editor.putString(Credentials.USER_PROFILE_IMG,null);
+               editor.putString(Credentials.USER_YEAR,null);
+               editor.putString(Credentials.USER_DESIGNATION,null);
+
+           }
+
+
+
         editor.apply();
+
+
 
     }
 }
