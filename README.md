@@ -5,7 +5,26 @@ This native Android application serves as a dynamic platform for fostering engag
 
 [👉🏻 Download APK](https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Fapp-release.apk?alt=media&token=fac46048-6bb3-4745-bf5b-91e741ab1217)
 
+#### Project Screenshots
 
+<table>
+
+  <tr>
+   <td><img src="./screenshorts/splashsc.jpeg" height=450></td>
+     <td><img src="./screenshorts/dashboard.jpeg" height=450></td>
+   <td><img src="./screenshorts/dashboard1.jpeg" height=450></td>
+  </tr>
+
+  <tr>
+   <td><img src="./screenshorts/community.jpeg" height=450></td>
+     <td><img src="./screenshorts/post.jpeg" height=450></td>
+   <td><img src="./screenshorts/profile.jpeg" height=450></td>
+  </tr>
+
+</table>
+
+## 
+<br/>
 
 ## Features
 * **Seamless User Experience :** Effortlessly navigate through the application with a user-friendly login and signup feature.
