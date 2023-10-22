@@ -242,7 +242,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private DatabaseReference mDatabase;
 // ...
 
-    public static final float APPLICATION_VERSION_CODE=(float) 1.1;
+    public static final float APPLICATION_VERSION_CODE=(float) 1.2;
     void checkUpdates(){
         mDatabase   = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("update").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -253,7 +253,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                   SweetAlertDialog sweetAlertDialog= new SweetAlertDialog(
                            Dashboard.this, SweetAlertDialog.NORMAL_TYPE);
                    sweetAlertDialog.setTitleText("Update app");
-                   sweetAlertDialog .setContentText("Update available please download to version "+APPLICATION_VERSION_CODE+".");
+                   sweetAlertDialog .setContentText("Update available please download to version "+updates.getVersion()+".");
                    sweetAlertDialog .setConfirmButton("Download", new SweetAlertDialog.OnSweetClickListener() {
                                @Override
                                public void onClick(SweetAlertDialog sweetAlertDialog) {

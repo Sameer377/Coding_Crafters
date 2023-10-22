@@ -1,8 +1,6 @@
 package com.agpitcodeclub.app.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -17,16 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.agpitcodeclub.app.Adapters.MsgAdapter;
-import com.agpitcodeclub.app.Adapters.PostAdapter;
-import com.agpitcodeclub.app.MainActivity;
-import com.agpitcodeclub.app.Models.MsgModel;
 import com.agpitcodeclub.app.Models.MsgModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.utils.Credentials;
 import com.agpitcodeclub.app.utils.FirebasePath;
-import com.agpitcodeclub.app.utils.MySingleton;
 import com.android.volley.AuthFailureError;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -40,7 +33,6 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -50,7 +42,6 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class Announcement extends Fragment {
     //notification

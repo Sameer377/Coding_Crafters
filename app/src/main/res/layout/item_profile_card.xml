@@ -7,7 +7,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/per_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -63,7 +62,6 @@
             android:textSize="15dp" />
 
         <TextView
-            android:id="@+id/community_profile_selected_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/community_profile_year_txt"
@@ -78,7 +76,6 @@
     </RelativeLayout>
 
    <RelativeLayout
-       android:id="@+id/rel_img_profile"
        android:layout_centerHorizontal="true"
        android:layout_width="150dp"
        android:layout_height="150dp"

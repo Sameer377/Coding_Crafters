@@ -21,10 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.agpitcodeclub.app.MainActivity;
 import com.agpitcodeclub.app.Models.UpCommingModel;
 import com.agpitcodeclub.app.R;
+import com.agpitcodeclub.app.utils.ApiUtilities;
 import com.agpitcodeclub.app.utils.Credentials;
 import com.agpitcodeclub.app.utils.FirebasePath;
+import com.agpitcodeclub.app.utils.NotificationData;
+import com.agpitcodeclub.app.utils.PushNotification;
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -36,9 +40,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -47,6 +53,9 @@ import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -108,6 +117,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            FirebaseMessaging.getInstance().subscribeToTopic(FCM_TOPIC);
         }
     }
 
@@ -221,6 +231,12 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
                                     UpCommingModel upcommingModel = new UpCommingModel(imgUri, edt_des_up_img.getText().toString().trim());
                                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.UPCOMMING);
                                     databaseReference.setValue(upcommingModel);
+
+                                    //Push nnotification
+                                    PushNotification notification = new PushNotification(new NotificationData("UpcommingEvent",edt_des_up_img.getText().toString().trim()),FCM_TOPIC);
+                                    sendNotification(notification);
+
+
                                     Toast.makeText(getContext(), " Uploaded" , Toast.LENGTH_LONG).show();
 
                                 }
@@ -238,6 +254,21 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         }else {
             Toast.makeText(getContext(),"Select image",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void sendNotification(PushNotification notification) {
+        ApiUtilities.getClient().sendNotification (notification).enqueue (new Callback<PushNotification>() {
+            @Override
+            public void onResponse (Call<PushNotification> call, Response<PushNotification> response) {
+                if (response.isSuccessful())
+                    Toast.makeText(  getContext(),  "success", Toast.LENGTH_SHORT).show();
+                else
+                Toast.makeText( getContext(),  "error", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure (Call<PushNotification> call, Throwable t) {
+                Toast.makeText( getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }});
     }
 
 

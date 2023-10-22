@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.Reciever"/>
 
     <application
         android:allowBackup="true"
@@ -54,31 +54,17 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service
-            android:name=".utils.FCMNotificationService"
-            android:exported="false">
+
+
+        <service android:name=".services.NotificationService"
+            android:permission="com.google.android.c2dm.permission.Send"
+            android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.android.c2dm.internet.recieve"/>
             </intent-filter>
         </service>
 
-        <service android:name=".MyFirebaseInstanceIDService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT">
-                </action></intent-filter>
-        </service>
-
-
-        <service android:name=".utils.MyFirebaseMessagingService"
-
-            android:permission="com.google.android.c2dm.permission.SEND"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT">
-                    <action android:name="com.google.android.c2dm.intent.RECEIVE">
-                    </action></action></intent-filter>
-        </service>
     </application>
 
 </manifest>
