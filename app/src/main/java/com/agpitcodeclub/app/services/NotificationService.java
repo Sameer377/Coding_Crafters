@@ -1,6 +1,5 @@
 package com.agpitcodeclub.app.services;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -10,11 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Message;
 
 import androidx.core.app.NotificationCompat;
 
-import com.agpitcodeclub.app.MainActivity;
+import com.agpitcodeclub.app.Dashboard;
 import com.agpitcodeclub.app.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -29,7 +27,7 @@ public class NotificationService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NotNull RemoteMessage remoteMessage) {
         super.onMessageReceived (remoteMessage);
-        Intent intent = new Intent (this, MainActivity.class);
+        Intent intent = new Intent (this, Dashboard.class);
         NotificationManager manager = (NotificationManager) getSystemService (Context.NOTIFICATION_SERVICE);
         int notificationId = new Random().nextInt();
         createNotificationChannel(manager);
@@ -38,7 +36,7 @@ public class NotificationService extends FirebaseMessagingService {
         Notification notification ;
                 notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(remoteMessage.getData().get("title"))
-                        .setContentText(remoteMessage.getData().get("message"))
+                        .setContentText(remoteMessage.getData().get("messege"))
                         .setSmallIcon(R.drawable.logo)
                         .setAutoCancel(true)
                         .setContentIntent(intent1)
@@ -46,15 +44,16 @@ public class NotificationService extends FirebaseMessagingService {
             manager.notify(notificationId, notification);
     }
 
-    @SuppressLint("NewApi")
+
+    @TargetApi(Build.VERSION_CODES.O)
     private void createNotificationChannel(NotificationManager manager) {
         NotificationChannel channel = null;
-            channel = new NotificationChannel(CHANNEL_ID, "channelName", NotificationManager.IMPORTANCE_HIGH);
 
+            channel = new NotificationChannel(CHANNEL_ID, "channelName", NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription("My descrition");
             channel.enableLights(true);
-            channel.setLightColor(R.color.frag_bg);
+            channel.setLightColor(Color.WHITE);
 
-        manager.createNotificationChannel(channel);
+            manager.createNotificationChannel(channel);
     }
 }

@@ -1,15 +1,12 @@
 package com.agpitcodeclub.app.fragments;
 
 import static android.app.Activity.RESULT_OK;
+import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -17,11 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 
-import com.agpitcodeclub.app.MainActivity;
 import com.agpitcodeclub.app.Models.UpCommingModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.utils.ApiUtilities;
@@ -44,7 +43,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -70,7 +68,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     private GifImageView up_img;
     private EditText edt_des_up_img;
     private Uri fileUrl;
-
+    private ProgressBar upcomming_btn_prg;
     public Home() {
         // Required empty public constructor
     }
@@ -94,6 +92,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         edt_des_up_img=view.findViewById(R.id.edt_des_up_img);
         btn_pickimg.setOnClickListener(this);
         btn_upload_up_img.setOnClickListener(this);
+        upcomming_btn_prg=view.findViewById(R.id.upcomming_btn_prg);
         setImageDetails();
 
         SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
@@ -117,8 +116,9 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            FirebaseMessaging.getInstance().subscribeToTopic(FCM_TOPIC);
+
         }
+        FirebaseMessaging.getInstance().subscribeToTopic(FCM_TOPIC);
     }
 
     private void sliderImage() {
@@ -218,6 +218,8 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     }
 
     private void uploadUpComming() {
+        upcomming_btn_prg.setVisibility(View.VISIBLE);
+        btn_upload_up_img.setVisibility(View.GONE);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(FirebasePath.DASHBOARD).child("upcommingimg");
         if (fileUrl!=null) {
             storageReference.putFile(fileUrl)
@@ -236,6 +238,8 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
                                     PushNotification notification = new PushNotification(new NotificationData("UpcommingEvent",edt_des_up_img.getText().toString().trim()),FCM_TOPIC);
                                     sendNotification(notification);
 
+                                    upcomming_btn_prg.setVisibility(View.GONE);
+                                    btn_upload_up_img.setVisibility(View.VISIBLE);
 
                                     Toast.makeText(getContext(), " Uploaded" , Toast.LENGTH_LONG).show();
 
@@ -248,10 +252,15 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
                 @Override
                 public void onFailure(Exception e) {
                     Toast.makeText(getContext(), " Error" + e, Toast.LENGTH_LONG).show();
+                    upcomming_btn_prg.setVisibility(View.GONE);
+                    btn_upload_up_img.setVisibility(View.VISIBLE);
 
                 }
             });
         }else {
+            btn_upload_up_img.setVisibility(View.VISIBLE);
+
+            upcomming_btn_prg.setVisibility(View.GONE);
             Toast.makeText(getContext(),"Select image",Toast.LENGTH_SHORT).show();
         }
     }

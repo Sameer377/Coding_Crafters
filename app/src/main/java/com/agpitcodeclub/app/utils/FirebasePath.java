@@ -1,7 +1,5 @@
 package com.agpitcodeclub.app.utils;
 
-import java.sql.Statement;
-
 public class FirebasePath {
 
     /* Realtime database  */
@@ -33,5 +31,5 @@ public class FirebasePath {
     public static final String FCM_BASE_URL="https://fcm.googleapis.com";
     public static final String FCM_SERVER_KEY="AAAALRvzS04:APA91bH3O9LTYW7FNOWlSF2_4vY3jfUQ0qEVFYDg5kcwwK6CMW6wM6AyxHcu8JDzX1jmkfSIyz635qfjSXgU95KCffBzQCe3-ezeDDDSdzMQNih0CV1WYsyeo3o5ZyTOS8szxnKuswAr";
     public static final String FCM_CONTENT_TYPE="application/json";
-    public static final String FCM_TOPIC="/topic/Announcement";
+    public static final String FCM_TOPIC="/topics/Announcement";
 }

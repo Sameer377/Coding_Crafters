@@ -204,6 +204,18 @@
                         android:textStyle="bold" />
 
 
+                    <ProgressBar
+                        android:id="@+id/upcomming_btn_prg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_below="@id/edt_des_up_img"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:progressBackgroundTint="@color/teal_200"
+                        android:elevation="2dp"
+                        />
+
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_upload_up_img"
                         android:layout_width="wrap_content"
@@ -215,7 +227,8 @@
                         android:capitalize="none"
                         android:fontFamily="@font/inter_extrabold"
                         android:text="Upload"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                         />
 
                 </RelativeLayout>
 

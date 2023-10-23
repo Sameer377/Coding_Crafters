@@ -3,24 +3,20 @@ package com.agpitcodeclub.app.fragments;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.agpitcodeclub.app.Adapters.MsgAdapter;
 import com.agpitcodeclub.app.Models.MsgModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.utils.Credentials;
 import com.agpitcodeclub.app.utils.FirebasePath;
-import com.android.volley.AuthFailureError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.database.DataSnapshot;
@@ -30,13 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -71,9 +64,9 @@ public class Announcement extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+/*
         TOPIC = "/topics/userABC"; //topic must match with what the receiver subscribed to
-        NOTIFICATION_TITLE = "Demo Titile"
+        NOTIFICATION_TITLE = "Demo Titile";
         NOTIFICATION_MESSAGE = "Demo messege";
 
         JSONObject notification = new JSONObject();
@@ -86,9 +79,10 @@ public class Announcement extends Fragment {
         } catch (JSONException e) {
             Log.e(TAG, "onCreate: " + e.getMessage() );
         }
-        sendNotification(notification);
+        sendNotification(notification);*/
     }
 
+/*
 
 
     private void sendNotification(JSONObject notification) {
@@ -104,6 +98,7 @@ public class Announcement extends Fragment {
         };
         MySingleton.getInstance(getContext()).addToRequestQueue( jsonObjectRequest);
     }
+*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,7 +116,6 @@ public class Announcement extends Fragment {
                         SendMsgBtmSheet.newInstance();
                 addPhotoBottomDialogFragment.show( getActivity().getSupportFragmentManager(),
                         SendMsgBtmSheet.TAG);
-                Toast.makeText(getContext(),"DB Error",Toast.LENGTH_LONG).show();
 
             }
         });
