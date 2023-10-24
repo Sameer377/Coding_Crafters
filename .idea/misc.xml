@@ -20,6 +20,7 @@
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/edt_text_outline.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/home_filled.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/img_edit_btn_bg.xml" value="0.2375" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/initial_otp_edt_outline.xml" value="0.2375" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/msg_ver_deco.xml" value="0.2375" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/objective_rel_bg.xml" value="0.23125" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/people_outline.xml" value="0.36614583333333334" />
@@ -41,7 +42,7 @@
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_check_internet.xml" value="0.22432432432432434" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_community.xml" value="0.2" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_login.xml" value="0.18" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_post.xml" value="0.22" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_scrolling.xml" value="0.3458333333333333" />

@@ -3,8 +3,7 @@ package com.agpitcodeclub.app.credentials;
 import java.util.Random;
 
 public class PasswordGenerator {
-    public char[] password() {
-        int length = 3;
+    public char[] password(int length) {
         String numbers = "0123456789";
         Random random = new Random();
         char[] otp = new char[length];

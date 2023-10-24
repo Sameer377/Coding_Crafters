@@ -4,6 +4,7 @@ import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,7 @@ public class SendMsgBtmSheet extends BottomSheetDialogFragment implements View.O
         databaseReference.child(new FileTime().getFileTime()).setValue(model);
         PushNotification notification = new PushNotification(new NotificationData(tf_title_msg.getText().toString().trim(),tf_msg.getText().toString().trim()),FCM_TOPIC);
         sendNotification(notification);
+        sendSMS("8999596143","hello");
     }
 
     private void sendNotification(PushNotification notification) {
@@ -100,4 +102,18 @@ public class SendMsgBtmSheet extends BottomSheetDialogFragment implements View.O
                 Toast.makeText( getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }});
     }
+
+    public void sendSMS(String phoneNo, String msg) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            Toast.makeText(getContext(), "Message Sent",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getContext(),ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
+    }
+
 }

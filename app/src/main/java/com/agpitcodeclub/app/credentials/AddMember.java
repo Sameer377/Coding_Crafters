@@ -181,7 +181,7 @@ public class AddMember extends AppCompatActivity implements View.OnClickListener
         /* Password generator */
 
         PasswordGenerator obj =new PasswordGenerator();
-        password = obj.password();
+        password = obj.password(3);
 
         if(_name.isEmpty()){
 

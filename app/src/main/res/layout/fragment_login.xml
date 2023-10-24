@@ -17,64 +17,174 @@
             android:layout_centerInParent="true"
             android:padding="20dp">
 
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/otp_ic"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_twotone_lock_person_24" />
+
             <TextView
                 android:id="@+id/l_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/otp_ic"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/baloo_bhai"
+                android:gravity="center"
                 android:text="Sign Up"
                 android:textColor="@color/teal_200"
                 android:textSize="40dp" />
 
-
-            <EditText
-                android:id="@+id/cre_name"
+            <LinearLayout
+                android:minHeight="200dp"
+                android:id="@+id/lin_edt1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/l_txt"
                 android:layout_marginTop="50dp"
-                android:fontFamily="@font/baloo_bhai_2_medium"
-                android:hint="Enter Name"
-                android:paddingStart="20dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="20dp"
-                android:visibility="visible" />
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/cre_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cre_name"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/baloo_bhai_2_medium"
-                android:hint="Enter Email"
-                android:inputType="textEmailAddress"
-                android:paddingStart="20dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="20dp" />
+                <EditText
+                    android:id="@+id/cre_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:hint="Enter Name"
+                    android:paddingStart="20dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="20dp"
+                    android:visibility="visible" />
 
-            <EditText
-                android:id="@+id/cre_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cre_email"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/baloo_bhai_2_medium"
-                android:hint="Enter Password"
-                android:inputType="textPassword"
-                android:paddingStart="20dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="20dp" />
+                <EditText
+                    android:id="@+id/cre_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:hint="Enter Email"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="20dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="20dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rel_otp_4edt"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <LinearLayout
+                        android:id="@+id/lin_otp_edt"
+                        android:layout_width="230dp"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="20dp"
+                        android:elevation="5dp"
+                        android:weightSum="4">
+
+                        <EditText
+                            android:id="@+id/otp_edt_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/initial_otp_edt_outline"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/otp_edt_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/initial_otp_edt_outline"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/otp_edt_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/initial_otp_edt_outline"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/otp_edt_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/initial_otp_edt_outline"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/cre_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:hint="Enter Password"
+                    android:inputType="textPassword"
+                    android:paddingStart="20dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="20dp" />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/cre_edt_otp"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:drawableEnd="@drawable/ic_twotone_lock_person_24"-->
+<!--                    android:fontFamily="@font/baloo_bhai_2_medium"-->
+<!--                    android:hint="Enter otp"-->
+<!--                    android:inputType="numberDecimal"-->
+<!--                    android:maxLength="4"-->
+<!--                    android:paddingStart="20dp"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textColorHint="@color/white"-->
+<!--                    android:textSize="20dp"-->
+<!--                    android:visibility="gone" />-->
+
+
+
+            </LinearLayout>
+
 
             <CheckBox
                 android:id="@+id/checkbox_mem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cre_password"
+                android:layout_below="@id/lin_edt1"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/baloo_bhai_2_medium"
@@ -88,14 +198,15 @@
                 android:id="@+id/login_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cre_password"
+                android:layout_below="@id/lin_edt1"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/std_btn"
                 android:fontFamily="@font/inter_extrabold"
                 android:paddingStart="40dp"
                 android:paddingEnd="40dp"
-                android:text="sign up" />
+                android:text="sign up"
+                android:textAllCaps="false" />
 
 
             <LinearLayout

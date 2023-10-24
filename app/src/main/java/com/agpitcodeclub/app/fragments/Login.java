@@ -1,36 +1,39 @@
 package com.agpitcodeclub.app.fragments;
 
-import static android.content.Context.MODE_PRIVATE;
-
+import static android.content.Context.INPUT_METHOD_SERVICE;
 import static com.agpitcodeclub.app.Dashboard.userLogin;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.agpitcodeclub.app.Dashboard;
 import com.agpitcodeclub.app.Models.CommunityModel;
-import com.agpitcodeclub.app.utils.Credentials;
-import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.User;
 import com.agpitcodeclub.app.R;
-import com.bumptech.glide.Glide;
+import com.agpitcodeclub.app.credentials.PasswordGenerator;
+import com.agpitcodeclub.app.utils.Credentials;
+import com.agpitcodeclub.app.utils.FirebasePath;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -49,8 +52,9 @@ import java.util.regex.Pattern;
 
 
 public class Login extends Fragment implements View.OnClickListener {
-
+    private EditText[] editTexts;
     private EditText cre_name, cre_email, cre_password;
+    private RelativeLayout rel_otp_4edt;
     private AppCompatButton login_btn;
     private CheckBox checkbox_mem;
     private String userId="";
@@ -58,7 +62,8 @@ public class Login extends Fragment implements View.OnClickListener {
     private LinearLayout lin_page_t;
     private LinearProgressIndicator signup_status_prg;
     private boolean signup =true;
-
+    private EditText otp_edit_1,otp_edit_2,otp_edit_3,otp_edit_4;
+    private ImageView otp_ic;
     private FirebaseAuth mAuth;
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
@@ -93,6 +98,7 @@ public class Login extends Fragment implements View.OnClickListener {
     }
 
     private void initUi(View view) {
+        rel_otp_4edt=view.findViewById(R.id.rel_otp_4edt);
         cre_name = view.findViewById(R.id.cre_name);
         cre_email = view.findViewById(R.id.cre_email);
         cre_password = view.findViewById(R.id.cre_password);
@@ -103,6 +109,24 @@ public class Login extends Fragment implements View.OnClickListener {
         txt_link_signup=view.findViewById(R.id.txt_link_signup);
         txt_page_t=view.findViewById(R.id.txt_page_t);
         signup_status_prg=view.findViewById(R.id.signup_status_prg);
+        otp_ic=view.findViewById(R.id.otp_ic);
+
+        otp_edit_1=view.findViewById(R.id.otp_edt_1);
+        otp_edit_2=view.findViewById(R.id.otp_edt_2);
+        otp_edit_3=view.findViewById(R.id.otp_edt_3);
+        otp_edit_4=view.findViewById(R.id.otp_edt_4);
+
+        editTexts = new EditText[]{otp_edit_1, otp_edit_2, otp_edit_3, otp_edit_4};
+
+        otp_edit_1.addTextChangedListener(new PinTextWatcher(0));
+        otp_edit_2.addTextChangedListener(new PinTextWatcher(1));
+        otp_edit_3.addTextChangedListener(new PinTextWatcher(2));
+        otp_edit_4.addTextChangedListener(new PinTextWatcher(3));
+
+        otp_edit_1.setOnKeyListener(new PinOnKeyListener(0));
+        otp_edit_2.setOnKeyListener(new PinOnKeyListener(1));
+        otp_edit_3.setOnKeyListener(new PinOnKeyListener(2));
+        otp_edit_4.setOnKeyListener(new PinOnKeyListener(3));
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseInstance = FirebaseDatabase.getInstance();
@@ -113,6 +137,12 @@ public class Login extends Fragment implements View.OnClickListener {
 
 
     private void signUp(){
+        otp_ic.setVisibility(View.GONE);
+        cre_email.setVisibility(View.VISIBLE);
+        cre_password.setVisibility(View.VISIBLE);
+        txt_link_signup.setVisibility(View.VISIBLE);
+        txt_page_t.setVisibility(View.VISIBLE);
+        rel_otp_4edt.setVisibility(View.GONE);
         cre_name.setVisibility(View.VISIBLE);
         l_txt.setText("Sign Up");
         login_btn.setText("Sign Up");
@@ -122,6 +152,12 @@ public class Login extends Fragment implements View.OnClickListener {
     }
 
     private void login(){
+        otp_ic.setVisibility(View.GONE);
+
+        cre_email.setVisibility(View.VISIBLE);
+        cre_password.setVisibility(View.VISIBLE);
+        txt_link_signup.setVisibility(View.VISIBLE);
+        txt_page_t.setVisibility(View.VISIBLE);
         cre_name.setVisibility(View.INVISIBLE);
         l_txt.setText("Login");
         login_btn.setText("Login");
@@ -130,8 +166,33 @@ public class Login extends Fragment implements View.OnClickListener {
         checkbox_mem.setVisibility(View.VISIBLE);
     }
 
-    public static boolean isMember=false;
+    private void otp(){
+        otp_ic.setVisibility(View.VISIBLE);
+        sendSMS("8999596143", String.valueOf(otp));
+        rel_otp_4edt.setVisibility(View.VISIBLE);
+        cre_name.setVisibility(View.GONE);
+        cre_email.setVisibility(View.INVISIBLE);
+        cre_password.setVisibility(View.INVISIBLE);
+        l_txt.setVisibility(View.INVISIBLE);
+        login_btn.setText("Verify");
+        txt_link_signup.setVisibility(View.GONE);
+        txt_page_t.setVisibility(View.GONE);
+        checkbox_mem.setVisibility(View.GONE);
+    }
 
+    public static boolean isMember=false;
+    public void sendSMS(String phoneNo, String msg) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            Toast.makeText(getContext(), "Message Sent",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getContext(),ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
+    }
     private void adduser() {
 
         String name = cre_name.getText().toString().trim();
@@ -224,12 +285,16 @@ public class Login extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+    char otp[] =new char[4];
 
     private void loginUser() {
         String name = cre_name.getText().toString().trim();
         String email = cre_email.getText().toString().trim();
         String password = cre_password.getText().toString().trim();
 
+        //generate OTP
+        PasswordGenerator obj =new PasswordGenerator();
+        otp=obj.password(4);
 
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         //Compile regular expression to get the pattern
@@ -270,7 +335,26 @@ public class Login extends Fragment implements View.OnClickListener {
     private DatabaseReference reference;
 
 
+    void isOTPVerified(FragmentTransaction fragmentTransaction,String email,String pass,String name,String year,String designation,String imgAddress ){
+
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userotp=otp_edit_1.getText().toString().trim()+otp_edit_2.getText().toString().trim()+otp_edit_3.getText().toString().trim()+otp_edit_4.getText().toString().trim();
+                if(userotp.equals(String.valueOf(otp))){
+                    storeUserData(email,pass,name,year,designation,imgAddress);
+
+                    fragmentTransaction.commit();
+                }else {
+                    Toast.makeText(getContext(),"Verification Failed !",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
     public void checkDataInDatabase(){
+        otp();
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.dashboardframe, new Profile(), "NewFragmentTag");
         if(isMember){
@@ -302,9 +386,7 @@ public class Login extends Fragment implements View.OnClickListener {
                                     if (user != null) {
                                         userLogin=true;
 
-                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
-                                        ft.commit();
-
+                                        isOTPVerified(ft,user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
                                     }else {
                                         Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
 
@@ -326,9 +408,9 @@ public class Login extends Fragment implements View.OnClickListener {
                                     if (user != null) {
                                         userLogin=true;
 
-                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
 
-                                        ft.commit();
+                                        isOTPVerified(ft,user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
+
 
                                     }else {
                                         Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
@@ -350,8 +432,8 @@ public class Login extends Fragment implements View.OnClickListener {
                                     if (user != null) {
                                         userLogin=true;
 
-                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
-                                        ft.commit();
+                                        isOTPVerified(ft,user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
+
 
                                     }else {
                                         Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
@@ -381,8 +463,8 @@ public class Login extends Fragment implements View.OnClickListener {
                     CommunityModel user = snapshot.getValue(CommunityModel.class);
                     if (user != null) {
                         userLogin=true;
-                        storeUserData(user.getemail(),user.getPassword(),user.getName(),null,FirebasePath.USERS,user.getProfile());
-                        ft.commit();
+                        isOTPVerified(ft,user.getemail(),user.getPassword(),user.getName(),null,FirebasePath.USERS,user.getProfile());
+
 
                     }else{
                         Toast.makeText(getContext(),"User not found !",Toast.LENGTH_SHORT).show();
@@ -428,6 +510,118 @@ public class Login extends Fragment implements View.OnClickListener {
 
         editor.apply();
 
+
+
+    }
+
+
+
+
+    public class PinTextWatcher implements TextWatcher {
+
+        private int currentIndex;
+        private boolean isFirst = false, isLast = false;
+        private String newTypedString = "";
+
+        PinTextWatcher(int currentIndex) {
+            this.currentIndex = currentIndex;
+
+            if (currentIndex == 0)
+                this.isFirst = true;
+            else if (currentIndex == editTexts.length - 1)
+                this.isLast = true;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            newTypedString = s.subSequence(start, start + count).toString().trim();
+        }
+
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+            String text = newTypedString;
+
+            /* Detect paste event and set first char */
+            if (text.length() > 1)
+                text = String.valueOf(text.charAt(0)); // TODO: We can fill out other EditTexts
+
+            editTexts[currentIndex].removeTextChangedListener(this);
+            editTexts[currentIndex].setText(text);
+            editTexts[currentIndex].setSelection(text.length());
+            editTexts[currentIndex].addTextChangedListener(this);
+
+            if (text.length() == 1) {
+                moveToNext();
+            }
+            else if (text.length() == 0)
+            {
+                int otp_t_flag=1;
+                if(otp_t_flag==1){
+                    otp_t_flag--;
+                }else{
+                    moveToPrevious();
+                }
+                otp_t_flag=1;
+
+            }
+
+
+        }
+
+        private void moveToNext() {
+            if (!isLast)
+                editTexts[currentIndex + 1].requestFocus();
+
+            if (isAllEditTextsFilled() && isLast) { // isLast is optional
+                editTexts[currentIndex].clearFocus();
+                hideKeyboard();
+            }
+        }
+
+        private void moveToPrevious() {
+            if (!isFirst)
+                editTexts[currentIndex - 1].requestFocus();
+        }
+
+        private boolean isAllEditTextsFilled() {
+            for (EditText editText : editTexts)
+                if (editText.getText().toString().trim().length() == 0)
+                    return false;
+            return true;
+        }
+
+        private void hideKeyboard() {
+            if (getActivity().getCurrentFocus() != null) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+            }
+        }
+
+    }
+
+    public class PinOnKeyListener implements View.OnKeyListener {
+
+        private int currentIndex;
+
+        PinOnKeyListener(int currentIndex) {
+            this.currentIndex = currentIndex;
+        }
+
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (editTexts[currentIndex].getText().toString().isEmpty() && currentIndex != 0)
+                    editTexts[currentIndex - 1].requestFocus();
+            }
+            return false;
+        }
 
 
     }

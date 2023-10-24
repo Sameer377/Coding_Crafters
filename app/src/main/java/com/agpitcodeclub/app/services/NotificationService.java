@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.telephony.SmsManager;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
@@ -56,4 +58,5 @@ public class NotificationService extends FirebaseMessagingService {
 
             manager.createNotificationChannel(channel);
     }
+
 }
