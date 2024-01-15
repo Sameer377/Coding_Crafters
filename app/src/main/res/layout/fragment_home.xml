@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/frag_bg"
+    android:background="@color/background"
     tools:context=".fragments.Home">
 
 
@@ -17,61 +17,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/intro"
-            android:background="@drawable/dash_welcome_banner"
-            android:layout_marginTop="-2dp"
-            android:layout_width="match_parent"
-            android:layout_marginRight="-2dp"
-            android:layout_marginLeft="-2dp"
-            android:layout_height="wrap_content"
-            android:paddingBottom="30dp"
-            >
-
-            <ImageView
-                android:id="@+id/rel_logo"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/logo" />
-
-            <TextView
-                android:id="@+id/welcome"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/intro"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rel_logo"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/baloo_bhai"
-                android:text="Welcome"
-                android:textColor="@color/white"
-                android:textSize="30dp" />
+                android:layout_marginLeft="-2dp"
+                android:layout_marginTop="-2dp"
+                android:layout_marginRight="-2dp"
+                android:background="@drawable/dash_welcome_banner"
+                android:elevation="7dp"
+                android:outlineAmbientShadowColor="@color/pink_100"
+                android:outlineSpotShadowColor="@color/pink_100"
+                android:paddingBottom="30dp">
 
-            <TextView
+                <ImageView
+                    android:id="@+id/rel_logo"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/logo" />
 
-                android:id="@+id/to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/welcome"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/baloo_bhai"
-                android:text="to"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rel_logo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/baloo_bhai"
+                    android:text="Welcome"
+                    android:textColor="@color/white"
+                    android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/to"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/baloo_bhai"
-                android:labelFor="@id/to"
-                android:text="Coding Crafters"
-                android:textColor="@color/white"
-                android:textSize="32dp" />
+                <TextView
 
-        </RelativeLayout>
+                    android:id="@+id/to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/welcome"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/baloo_bhai"
+                    android:text="to"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/txt_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/to"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="60dp"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:gravity="center"
+                    android:textColor="@color/tagline"
+                    android:textSize="30dp"
+                    tools:ignore="MissingConstraints" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/content"
@@ -85,7 +91,7 @@
                     android:id="@+id/m_cd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/frag_bg"
+                    app:cardBackgroundColor="@color/card_main"
                     app:cardCornerRadius="10dp">
 
                     <com.denzcoskun.imageslider.ImageSlider
@@ -142,7 +148,7 @@
 
                         android:id="@+id/rel_card_dec1"
                         android:layout_width="match_parent"
-                        android:layout_height="3dp"
+                        android:layout_height="1dp"
                         android:layout_below="@id/txt_up_t"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
@@ -166,8 +172,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/community_profile_card"
-                                android:scaleType="centerCrop"
-                                 />
+                                android:scaleType="centerCrop" />
 
                             <ImageView
                                 android:id="@+id/btn_pickimg"

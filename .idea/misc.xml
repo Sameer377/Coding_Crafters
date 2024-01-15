@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/samee/.gradle/caches/transforms-3/28af514c2ab578a800481e4d41a4ff7f/transformed/jetified-ImageSlideshow-0.1.0/res/drawable/gradient.xml" value="0.24425675675675676" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/add_member.xml" value="0.2361111111111111" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/add_post.xml" value="0.1" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/drawable/announce_filled.xml" value="0.36614583333333334" />
@@ -32,7 +33,7 @@
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/font/baloo_bhai_2_medium.xml" value="0.271875" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_add_member.xml" value="0.33" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_dashboard.xml" value="0.33" />
-        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_send_messege.xml" value="0.25" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/activity_upload_post.xml" value="0.32171581769436997" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/demo.xml" value="0.33" />
@@ -40,7 +41,7 @@
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_announcement.xml" value="0.22432432432432434" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_check_internet.xml" value="0.22432432432432434" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_community.xml" value="0.2" />
-        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_home.xml" value="0.24441388793399793" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_login.xml" value="0.18" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_post.xml" value="0.22" />
         <entry key="..\:/Users/samee/OneDrive/Desktop/club/AGPITCodeClub/app/src/main/res/layout/fragment_profile.xml" value="0.33" />

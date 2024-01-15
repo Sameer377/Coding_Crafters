@@ -5,9 +5,14 @@ import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +68,7 @@ import retrofit2.Response;
 public class Home extends Fragment implements View.OnClickListener,EasyPermissions.PermissionCallbacks{
     private ImageSlider imageSlider;
     private TextView txt_intro;
+    private TextView txt_logo;
     private ImageView btn_pickimg;
     private AppCompatButton btn_upload_up_img;
     private GifImageView up_img;
@@ -84,6 +90,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     }
 
     private void initUi(View view) {
+        txt_logo=view.findViewById(R.id.txt_logo);
         imageSlider=view.findViewById(R.id.intro_img_slider);
         txt_intro=view.findViewById(R.id.txt_intro);
         up_img=view.findViewById(R.id.up_img);
@@ -151,9 +158,54 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         }
         
         // Inflate the layout for this fragment
-
+        displayTag();
 
         return view;
+    }
+
+
+
+    private void displayTag() {
+        String tag = "Coding Crafters";
+        final SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+
+        for (int i = 0, delay = 300; i < 15; i++, delay += 100) {
+            char c = tag.charAt(i);
+
+
+            final int finalI = i; // Need to use final variable inside the inner class
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (finalI >= 6) {
+                        spannableStringBuilder.append(c);
+                        spannableStringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.soft_red)),
+                                spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
+                        spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL),
+                                spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
+
+                    } else {
+
+                        spannableStringBuilder.append(c);
+                        spannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD),
+                                spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
+
+                    }
+
+                    txt_logo.setText(spannableStringBuilder); // Update the TextView with colored text
+                }
+            }, delay);
+
+
+
+
+            if (i == 14) {
+            }
+        }
+
+
+
     }
 
 

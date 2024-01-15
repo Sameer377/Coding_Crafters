@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/frag_bg"
+    android:background="@color/background"
     tools:context=".fragments.Community">
 
 
@@ -18,7 +18,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_centerHorizontal="true"
-           android:background="@color/inputbg"
+           android:background="@color/background"
            android:elevation="5dp"
            android:fontFamily="@font/baloo_bhai"
            android:padding="10dp"

@@ -4,6 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <solid android:color="@color/inputbg"/>
+    <solid android:color="@color/background"/>
     <corners android:topLeftRadius="10dp" android:topRightRadius="10dp"/>
 </shape>

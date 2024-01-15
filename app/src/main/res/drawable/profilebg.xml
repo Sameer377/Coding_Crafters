@@ -2,9 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval"
     >
-    <stroke android:width="2dp" android:color="@color/outline_deactive"/>
+    <stroke android:width="2dp" android:color="@color/background"/>
     <solid
-        android:color="@color/inputbg"/>
+        android:color="@color/cardbg"/>
     <size
         android:width="120dp"
         android:height="120dp"/>

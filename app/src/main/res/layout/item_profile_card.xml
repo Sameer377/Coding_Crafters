@@ -87,7 +87,7 @@
            android:id="@+id/item_card_profile_img"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:background="@drawable/profilebg"
+           android:background="@color/cardbg"
            android:scaleType="fitXY"
            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 

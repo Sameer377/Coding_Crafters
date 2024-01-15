@@ -3,7 +3,7 @@
     <style name="Theme.AGPITCodeClub" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/background</item>
-        <item name="colorPrimaryDark">@color/actionbar</item>
+        <item name="colorPrimaryDark">@color/background</item>
         <item name="colorAccent">@color/teal_200</item>
         <!-- Customize your theme here. -->
     </style>
