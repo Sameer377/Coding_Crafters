@@ -163,18 +163,18 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         return view;
     }
 
-
+    boolean pause=true;
 
     private void displayTag() {
         String tag = "Coding Crafters";
         final SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
 
-        for (int i = 0, delay = 300; i < 15; i++, delay += 100) {
+        for (int i = 0, delay = 300; i < 15 && pause; i++, delay += 100) {
             char c = tag.charAt(i);
 
 
             final int finalI = i; // Need to use final variable inside the inner class
-            new Handler().postDelayed(new Runnable() {
+          new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
 
@@ -358,5 +358,9 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     }
 
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        pause=false;
+    }
 }
