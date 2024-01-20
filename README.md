@@ -3,6 +3,10 @@
 
 This native Android application serves as a dynamic platform for fostering engaging discussions among club members and soliciting valuable feedback for upcoming events. It empowers students by facilitating the exchange of thoughts and ideas, which in turn fuels innovation in project development.
 
+[👉🏻 Figma Prototype](https://lnkd.in/gBCWEchX)
+
+[👉🏻 Figma Design](https://lnkd.in/gHQwFpPp)
+
 [👉🏻 Download APK](https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Fapp-release.apk?alt=media&token=fac46048-6bb3-4745-bf5b-91e741ab1217)
 
 #### Project Screenshots
