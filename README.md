@@ -38,7 +38,7 @@ This native Android application serves as a dynamic platform for fostering engag
 * **Account Management :**   Easily manage your personal profile and account settings to customize your experience.
 ## Technologies Used 
 
-- **Language: Java** 
+- **Language: Java , XML** 
 - **Database : Firebase Realtime , Firebase Storage, Firebase Authentication , FCM**
 - **Additional Libraries :  [Glide image Loader](https://https://github.com/bumptech/glide) ,[Denzcoskun image Slider](https://github.com/denzcoskun/ImageSlideshow)**
 
