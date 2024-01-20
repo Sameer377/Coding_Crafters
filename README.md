@@ -36,6 +36,11 @@ This native Android application serves as a dynamic platform for fostering engag
 * **Community Directory :**  Access a comprehensive list of all community members' profiles, fostering connections and collaboration.
 * **Announcements Hub :**  Receive timely announcements about club events and other important updates directly, ensuring you're always in the loop.
 * **Account Management :**   Easily manage your personal profile and account settings to customize your experience.
+#### **Upcoming Features**
+* **Payment Integration :**  Useful for collecting event fees and other payments through a single platform .
+
+* **App Gallary :**  Android applications developed by the students are deployed here, making them easily available to everyone.
+
 ## Technologies Used 
 
 - **Language: Java , XML** 
