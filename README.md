@@ -5,7 +5,7 @@ This native Android application serves as a dynamic platform for fostering engag
 
 [👉🏻 Figma Prototype](https://lnkd.in/gBCWEchX)
 
-[👉🏻 Figma Design](https://lnkd.in/gHQwFpPp)
+[👉🏻 Figma Design](https://www.figma.com/file/tUhDIMuZXwQflFZeUBunrj/Code-Club-APP?type=design&node-id=0%3A1&mode=design&t=k0zKieJSHMTMGSVm-1)
 
 [👉🏻 Download APK](https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Fapp-release.apk?alt=media&token=fac46048-6bb3-4745-bf5b-91e741ab1217)
 
