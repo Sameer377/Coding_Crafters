@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         initUi();
 
 
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
    private void displayTag() {
+
        String tag = "Coding Crafters";
        final SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
 
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
                @Override
                public void run() {
 
+
+
                    if (finalI >= 6) {
                        spannableStringBuilder.append(c);
                        spannableStringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.soft_red)),
@@ -56,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                                spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
 
                    } else {
-
                        spannableStringBuilder.append(c);
                        spannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD),
                                spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);

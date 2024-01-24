@@ -29,12 +29,12 @@
 
         <RelativeLayout
             android:id="@+id/rel_card_deco_line"
-            android:layout_width="250dp"
+            android:layout_width="270dp"
             android:layout_height="3dp"
             android:layout_below="@id/community_profile_designation_txt"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
-            android:background="@drawable/card_deco_line1" />
+            android:background="@drawable/card_deco_red_line" />
 
         <TextView
             android:id="@+id/community_profile_name_txt"
