@@ -21,8 +21,6 @@ import com.agpitcodeclub.app.utils.Credentials;
 import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
@@ -30,8 +28,8 @@ public class Profile extends Fragment implements View.OnClickListener{
 
     private FirebaseUser user;
     private String UserID;
-    private TextView profile_name_head;
-    private TextInputLayout tfl_des,tfl_yr;
+    private TextView name_profile;
+//    private TextInputLayout tfl_des,tfl_yr;
     private LinearLayout lin_data;
     private LinearProgressIndicator profile_prg;
     private RelativeLayout rel_line_teal_profile;
@@ -48,29 +46,32 @@ public class Profile extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_1, container, false);
         initUit(view);
         return view;
     }
 
-//    private TextInputEditText tf_designation,tf_email,tf_year,tf_password;
+//    private TextInputEditText tf_designation,tf_email,persuing_profile,tf_password;
+    private TextView designation_profile,email_profile,persuing_profile,phone, tf_password;
     private ShapeableImageView imgprofile_main;
 //    private boolean isMember=false;
 
 
+    
     private void initUit(View view) {
-        profile_name_head=view.findViewById(R.id.profile_name_head);
-        tf_designation=view.findViewById(R.id.tf_designation);
-        tf_email=view.findViewById(R.id.tf_email);
-        tf_year=view.findViewById(R.id.tf_year);
-        tf_password=view.findViewById(R.id.tf_password);
+        name_profile=view.findViewById(R.id.name_profile);
+        phone=view.findViewById(R.id.phone_profile);
+        designation_profile=view.findViewById(R.id.designation_profile);
+        email_profile=view.findViewById(R.id.email_profile);
+        persuing_profile=view.findViewById(R.id.persuing_profile);
+        tf_password=view.findViewById(R.id.password_profile);
         imgprofile_main=view.findViewById(R.id.imgprofile_main);
-        tfl_des=view.findViewById(R.id.tfl_des);
-        tfl_yr=view.findViewById(R.id.tfl_yr);
-        lin_data=view.findViewById(R.id.lin_data);
-        profile_prg=view.findViewById(R.id.profile_prg);
-        rel_line_teal_profile=view.findViewById(R.id.rel_line_teal_profile);
-        btn_profile_logout=view.findViewById(R.id.btn_profile_logout);
+//        tfl_des=view.findViewById(R.id.tfl_des);
+//        tfl_yr=view.findViewById(R.id.tfl_yr);
+//        lin_data=view.findViewById(R.id.lin_data);
+//        profile_prg=view.findViewById(R.id.profile_prg);
+//        rel_line_teal_profile=view.findViewById(R.id.rel_line_teal_profile);
+        btn_profile_logout=view.findViewById(R.id.logout_profile);
         btn_profile_logout.setOnClickListener(this);
 //        isMember= getArguments().getBoolean("isMember");
 
@@ -83,7 +84,7 @@ public class Profile extends Fragment implements View.OnClickListener{
         profile_name_head=view.findViewById(R.id.profile_name_head);
         tf_designation=view.findViewById(R.id.tf_designation);
         tf_email=view.findViewById(R.id.tf_email);
-        tf_year=view.findViewById(R.id.tf_year);
+        persuing_profile=view.findViewById(R.id.persuing_profile);
         tf_password=view.findViewById(R.id.tf_password);
         imgprofile_main=view.findViewById(R.id.imgprofile_main);
         tfl_des=view.findViewById(R.id.tfl_des);
@@ -113,21 +114,23 @@ public class Profile extends Fragment implements View.OnClickListener{
         String year = prefs.getString(Credentials.USER_YEAR, null);
         String designation = prefs.getString(Credentials.USER_DESIGNATION, null);
         String image = prefs.getString(Credentials.USER_PROFILE_IMG, null);
-
-        profile_prg.setVisibility(View.INVISIBLE);
-        rel_line_teal_profile.setVisibility(View.VISIBLE);
-        lin_data.setVisibility(View.VISIBLE);
-        profile_name_head.setText(name);
+        String phone_str="8999596143";
+        
+        phone.setText(phone_str);
+//        profile_prg.setVisibility(View.INVISIBLE);
+//        rel_line_teal_profile.setVisibility(View.VISIBLE);
+//        lin_data.setVisibility(View.VISIBLE);
+        name_profile.setText(name);
         if(designation!=null){
-            tfl_yr.setVisibility(View.VISIBLE);
-            tfl_des.setVisibility(View.VISIBLE);
-            tf_designation.setText(designation.substring(2));
-            tf_year.setText(year);
+//            tfl_yr.setVisibility(View.VISIBLE);
+//            tfl_des.setVisibility(View.VISIBLE);
+            designation_profile.setText(designation.substring(2));
+            persuing_profile.setText(year);
             Glide.with(getContext()).load(image).into(imgprofile_main);
 
         }
 
-        tf_email.setText(email);
+        email_profile.setText(email);
         tf_password.setText(pass);
     }
 
@@ -144,7 +147,7 @@ public class Profile extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_profile_logout:
+            case R.id.logout_profile:
                 logOut();
                 break;
         }
