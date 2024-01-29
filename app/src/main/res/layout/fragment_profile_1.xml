@@ -8,7 +8,7 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="200dp"
     android:layout_marginLeft="-2dp"
     android:layout_marginTop="-1dp"
     android:layout_marginRight="-1dp"
@@ -261,13 +261,13 @@
 
          <androidx.appcompat.widget.AppCompatButton
              android:layout_width="100dp"
-             android:layout_height="40dp"
+             android:layout_height="35dp"
              android:text="Logout"
              android:textAllCaps="false"
              android:background="@drawable/red_logout_btn_bg"
              android:textColor="#101010"
-             android:fontFamily="@font/inter_extrabold"
-            android:letterSpacing="0.05"
+             android:fontFamily="@font/baloo_bhai_2_medium"
+             android:textStyle="bold"
              android:layout_gravity="right"
              android:layout_marginTop="20dp"
              />
