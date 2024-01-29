@@ -3,6 +3,10 @@
 
 This native Android application serves as a dynamic platform for fostering engaging discussions among club members and soliciting valuable feedback for upcoming events. It empowers students by facilitating the exchange of thoughts and ideas, which in turn fuels innovation in project development.
 
+[👉🏻 Figma Prototype](https://lnkd.in/gBCWEchX)
+
+[👉🏻 Figma Design](https://www.figma.com/file/tUhDIMuZXwQflFZeUBunrj/Code-Club-APP?type=design&node-id=0%3A1&mode=design&t=k0zKieJSHMTMGSVm-1)
+
 [👉🏻 Download APK](https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Fapp-release.apk?alt=media&token=fac46048-6bb3-4745-bf5b-91e741ab1217)
 
 #### Project Screenshots
@@ -32,9 +36,14 @@ This native Android application serves as a dynamic platform for fostering engag
 * **Community Directory :**  Access a comprehensive list of all community members' profiles, fostering connections and collaboration.
 * **Announcements Hub :**  Receive timely announcements about club events and other important updates directly, ensuring you're always in the loop.
 * **Account Management :**   Easily manage your personal profile and account settings to customize your experience.
+#### **Upcoming Features**
+* **Payment Integration :**  Useful for collecting event fees and other payments through a single platform .
+
+* **App Gallary :**  Android applications developed by the students are deployed here, making them easily available to everyone.
+
 ## Technologies Used 
 
-- **Language: Java** 
+- **Language: Java , XML** 
 - **Database : Firebase Realtime , Firebase Storage, Firebase Authentication , FCM**
 - **Additional Libraries :  [Glide image Loader](https://https://github.com/bumptech/glide) ,[Denzcoskun image Slider](https://github.com/denzcoskun/ImageSlideshow)**
 
