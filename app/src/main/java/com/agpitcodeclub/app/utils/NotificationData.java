@@ -1,8 +1,13 @@
 package com.agpitcodeclub.app.utils;
 
+
+import java.net.URL;
+
 public class NotificationData {
     private String title;
     private String messege;
+    private URL imgURL=null;
+
 
     public String getTitle() {
         return title;
@@ -23,5 +28,16 @@ public class NotificationData {
     public NotificationData(String title, String messege) {
         this.title = title;
         this.messege = messege;
+    }
+
+
+    public NotificationData(String title, String messege, URL imgURL) {
+        this.title = title;
+        this.messege = messege;
+        this.imgURL = imgURL;
+    }
+
+    public URL getImgURL() {
+        return imgURL;
     }
 }

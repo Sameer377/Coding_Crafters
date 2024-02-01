@@ -4,18 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.agpitcodeclub.app.Models.PostModel;
 import com.agpitcodeclub.app.R;
-import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -71,19 +66,11 @@ public class PostAdapter extends RecyclerView.Adapter< PostAdapter.PostViewholde
                public void onClick(View view) {
 
 
-
-
                     if (show){
-//                        ViewGroup.LayoutParams params = holder.post_description_txt.getLayoutParams();
-//                        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-//                        holder.post_description_txt.setLayoutParams(params);
                         holder.post_description_txt.setText(model.getDescription());
                         holder.txt_read_more.setText("Read less");
                         show=false;
                     }else {
-//                        ViewGroup.LayoutParams params = holder.post_description_txt.getLayoutParams();
-//                        params.height = 200;
-//                        holder.post_description_txt.setLayoutParams(params);
                         holder.post_description_txt.setText(extractedWords+" ...");
                         holder.txt_read_more.setText("Read more");
 

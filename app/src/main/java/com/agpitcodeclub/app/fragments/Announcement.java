@@ -156,10 +156,6 @@ public class Announcement extends Fragment {
             fb.setVisibility(View.GONE);
         }
 
-
-
-
-
         fetchData();
     }
     private ArrayList<MsgModel> list;

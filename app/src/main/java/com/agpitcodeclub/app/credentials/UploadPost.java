@@ -1,6 +1,6 @@
 package com.agpitcodeclub.app.credentials;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import android.Manifest;
 import android.content.Intent;
@@ -14,10 +14,15 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.agpitcodeclub.app.Adapters.FileTime;
-import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.PostModel;
 import com.agpitcodeclub.app.R;
+import com.agpitcodeclub.app.utils.ApiUtilities;
+import com.agpitcodeclub.app.utils.FirebasePath;
+import com.agpitcodeclub.app.utils.NotificationData;
+import com.agpitcodeclub.app.utils.PushNotification;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -35,12 +40,17 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UploadPost extends AppCompatActivity  implements View.OnClickListener, EasyPermissions.PermissionCallbacks{
     private RelativeLayout rel_upload_post_btn;
@@ -116,26 +126,40 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
         this.imgUrls = imgUrls;
     }
 
+
     public String imgUrls="";
     private void pushContent(ArrayList arrayList) {
         fileKey= new FileTime().getFileTime();
         databaseReference= FirebaseDatabase.getInstance().getReference(FirebasePath.POST).child(fileKey);
 
-        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDate = LocalDate.now();
+        }
 
         // Format the date using a DateTimeFormatter
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedDate = currentDate.format(formatter);
+        DateTimeFormatter formatter = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String formattedDate = currentDate.format(formatter);
+        }
 
         // Extract day, month, and year
-        int day = currentDate.getDayOfMonth();
-        int month = currentDate.getMonthValue();
-        int year = currentDate.getYear();
+        int day = 0;
+        int month=0;
+        int year=0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            day = currentDate.getDayOfMonth();
+       month = currentDate.getMonthValue();
+       year = currentDate.getYear();
+        }
+
         uplodingdate=day+" / "+month+" / "+year;
         postModel=new PostModel(edt_post_title.getText().toString().trim(),edt_post_desc.getText().toString().trim(),uplodingdate);
 //        databaseReference.setValue(postModel);
 
-        toast("entered in push : "+arrayList.size());
         imgUrls="";
         for(int i=0; i<arrayList.size();i++)
         {
@@ -149,6 +173,7 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
             setStorageReference(storageReference);
             StorageReference st=storageReference;
             toast("Executing");
+            int finalI = i;
             storageReference.putFile(fileuri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -163,6 +188,9 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
                                     toast(filename);
                                     if(imgUrls.equals("")){
                                         imgUrls=uri.toString();
+                                        if(finalI ==0) {
+                                            sendNotification(edt_post_title.getText().toString().trim(),edt_post_desc.getText().toString().trim(),imgUrls);
+                                        }
                                         setImgUrls(uri.toString());
                                     }else{
                                         setImgUrls(getImgUrls()+">>>"+uri.toString());
@@ -304,6 +332,28 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
         return result;
     }
 
+    /*Notification */
 
 
+    private void sendNotification(String title, String des,String imageUri) {
+
+        PushNotification notification = null;
+        try {
+            notification = new PushNotification(new NotificationData("New Post ",title,new URL(imageUri)),FCM_TOPIC);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        ApiUtilities.getClient().sendNotification (notification).enqueue (new Callback<PushNotification>() {
+            @Override
+            public void onResponse (Call<PushNotification> call, Response<PushNotification> response) {
+                if (response.isSuccessful())
+                    Toast.makeText(  getApplicationContext(),  "success", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getApplicationContext(),  "error", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure (Call<PushNotification> call, Throwable t) {
+                Toast.makeText( getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }});
+    }
 }

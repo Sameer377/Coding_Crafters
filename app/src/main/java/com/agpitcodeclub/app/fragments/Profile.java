@@ -66,39 +66,12 @@ public class Profile extends Fragment implements View.OnClickListener{
         persuing_profile=view.findViewById(R.id.persuing_profile);
         tf_password=view.findViewById(R.id.password_profile);
         imgprofile_main=view.findViewById(R.id.imgprofile_main);
-//        tfl_des=view.findViewById(R.id.tfl_des);
-//        tfl_yr=view.findViewById(R.id.tfl_yr);
-//        lin_data=view.findViewById(R.id.lin_data);
-//        profile_prg=view.findViewById(R.id.profile_prg);
-//        rel_line_teal_profile=view.findViewById(R.id.rel_line_teal_profile);
         btn_profile_logout=view.findViewById(R.id.logout_profile);
         btn_profile_logout.setOnClickListener(this);
-//        isMember= getArguments().getBoolean("isMember");
-
-//        initiateUser();
         setUsetData();
     }
 
 
-    /*private void initUit(View view) {
-        profile_name_head=view.findViewById(R.id.profile_name_head);
-        tf_designation=view.findViewById(R.id.tf_designation);
-        tf_email=view.findViewById(R.id.tf_email);
-        persuing_profile=view.findViewById(R.id.persuing_profile);
-        tf_password=view.findViewById(R.id.tf_password);
-        imgprofile_main=view.findViewById(R.id.imgprofile_main);
-        tfl_des=view.findViewById(R.id.tfl_des);
-        tfl_yr=view.findViewById(R.id.tfl_yr);
-        lin_data=view.findViewById(R.id.lin_data);
-        profile_prg=view.findViewById(R.id.profile_prg);
-        rel_line_teal_profile=view.findViewById(R.id.rel_line_teal_profile);
-        btn_profile_logout=view.findViewById(R.id.btn_profile_logout);
-        btn_profile_logout.setOnClickListener(this);
-//        isMember= getArguments().getBoolean("isMember");
-
-//        initiateUser();
-         setUsetData();
-    }*/
 
 
     private DatabaseReference reference;
@@ -117,13 +90,8 @@ public class Profile extends Fragment implements View.OnClickListener{
         String phone_str="8999596143";
         
         phone.setText(phone_str);
-//        profile_prg.setVisibility(View.INVISIBLE);
-//        rel_line_teal_profile.setVisibility(View.VISIBLE);
-//        lin_data.setVisibility(View.VISIBLE);
         name_profile.setText(name);
         if(designation!=null){
-//            tfl_yr.setVisibility(View.VISIBLE);
-//            tfl_des.setVisibility(View.VISIBLE);
             designation_profile.setText(designation.substring(2));
             persuing_profile.setText(year);
             Glide.with(getContext()).load(image).into(imgprofile_main);

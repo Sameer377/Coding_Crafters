@@ -4,6 +4,7 @@ public class PushNotification {
     private  NotificationData data;
     private String to;
 
+
     public NotificationData getData() {
         return data;
     }
@@ -24,4 +25,6 @@ public class PushNotification {
         this.data = data;
         this.to = to;
     }
+
+
 }

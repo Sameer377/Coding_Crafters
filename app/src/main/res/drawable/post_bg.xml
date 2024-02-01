@@ -3,6 +3,6 @@
     android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <stroke android:width="2px" android:color="#5E5D5D"/>
-    <solid android:color="@color/inputbg"/>
+    <stroke android:width="2px" android:color="@color/card_outline"/>
+    <solid android:color="@color/card_main"/>
 </shape>

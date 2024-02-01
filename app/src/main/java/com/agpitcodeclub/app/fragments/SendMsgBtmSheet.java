@@ -82,7 +82,7 @@ public class SendMsgBtmSheet extends BottomSheetDialogFragment implements View.O
         MsgModel model = new MsgModel(tf_title_msg.getText().toString().trim(),tf_msg.getText().toString().trim(),tf_msg_loc.getText().toString().trim(),"");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
         databaseReference.child(new FileTime().getFileTime()).setValue(model);
-        PushNotification notification = new PushNotification(new NotificationData(tf_title_msg.getText().toString().trim(),tf_msg.getText().toString().trim()),FCM_TOPIC);
+        PushNotification notification = new PushNotification(new NotificationData("Announcement",tf_title_msg.getText().toString().trim()+" : "+tf_msg.getText().toString().trim(),null),FCM_TOPIC);
         sendNotification(notification);
     }
 
