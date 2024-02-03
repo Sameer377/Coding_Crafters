@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/frag_bg"
+    android:background="@color/background"
     android:layout_height="match_parent"
     tools:context=".fragments.Announcement">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -13,23 +17,21 @@
         android:layout_height="match_parent">
 
     <LinearLayout
+        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@color/inputbg"
             android:elevation="5dp"
-            android:fontFamily="@font/baloo_bhai"
-            android:padding="10dp"
-            android:text="Annnouncement"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="Connect to"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="25dp" />
+            android:textColor="@color/teal_200"
+            android:textSize="23dp" />
         <com.google.android.material.progressindicator.LinearProgressIndicator
-
+            android:visibility="gone"
             android:id="@+id/ann_prg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,9 +39,25 @@
             app:indicatorColor="@color/teal_200"
             app:trackThickness="2dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="150dp">
+
+        </HorizontalScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="Announcement"
+            android:textAlignment="center"
+            android:textColor="@color/teal_200"
+            android:textSize="23dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
             android:id="@+id/inbox_recycle"
 
             />
@@ -48,17 +66,17 @@
 
     </LinearLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_send_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_round_message_24"
-            />
+
 
     </RelativeLayout>
-
-</FrameLayout>
+</ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_send_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_round_message_24" />
+</RelativeLayout>

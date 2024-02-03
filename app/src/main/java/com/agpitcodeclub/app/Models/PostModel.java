@@ -9,6 +9,7 @@ public class PostModel {
     public String title;
     public String description;
 
+
     public String getPostuploadedon() {
         return postuploadedon;
     }

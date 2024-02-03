@@ -51,6 +51,8 @@ import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -287,9 +289,9 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
                                     databaseReference.setValue(upcommingModel);
 
                                     //Push nnotification
-                                    PushNotification notification = new PushNotification(new NotificationData("UpcommingEvent",edt_des_up_img.getText().toString().trim()),FCM_TOPIC);
-                                    sendNotification(notification);
-
+                                 /*   PushNotification notification = new PushNotification(new NotificationData("UpcommingEvent",edt_des_up_img.getText().toString().trim()),FCM_TOPIC);
+                                    sendNotification(notification);*/
+                                    sendNotification( "UpcommingEvent",edt_des_up_img.getText().toString().trim(),imgUri);
                                     upcomming_btn_prg.setVisibility(View.GONE);
                                     btn_upload_up_img.setVisibility(View.VISIBLE);
 
@@ -315,6 +317,28 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
             upcomming_btn_prg.setVisibility(View.GONE);
             Toast.makeText(getContext(),"Select image",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void sendNotification(String title, String des,String imageUri) {
+
+        PushNotification notification = null;
+        try {
+            notification = new PushNotification(new NotificationData("Upcomming Even",title,new URL(imageUri)),FCM_TOPIC);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        ApiUtilities.getClient().sendNotification (notification).enqueue (new Callback<PushNotification>() {
+            @Override
+            public void onResponse (Call<PushNotification> call, Response<PushNotification> response) {
+                if (response.isSuccessful())
+                    Toast.makeText(getContext(),  "success", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getContext(),  "error", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure (Call<PushNotification> call, Throwable t) {
+                Toast.makeText( getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }});
     }
 
     private void sendNotification(PushNotification notification) {

@@ -5,7 +5,12 @@ import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 import android.Manifest;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -40,6 +45,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -167,7 +174,11 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
             Uri fileuri=(Uri)arrayList.get(i);
             String filename=getfilenamefromuri(fileuri);
 
-
+            try {
+                rotateImageIfRequired(fileuri, BitmapFactory.decodeFile(fileuri.getPath()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             storageReference = FirebaseStorage.getInstance().getReference(FirebasePath.POST+"/"+fileKey+"/"+filename);
             setStorageReference(storageReference);
@@ -356,4 +367,47 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
                 Toast.makeText( getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }});
     }
+
+
+/*Image Rotation Code*/
+
+    private Bitmap rotateImageIfRequired(Uri uri, Bitmap bitmap) throws IOException {
+        InputStream input = getContentResolver().openInputStream(uri);
+
+        if (bitmap == null) {
+            bitmap = BitmapFactory.decodeStream(input);
+        }
+
+        ExifInterface ei;
+        if (Build.VERSION.SDK_INT > 23) {
+            ei = new ExifInterface(input);
+        } else {
+            ei = new ExifInterface(uri.getPath());
+        }
+
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return rotateImage(bitmap, 90);
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return rotateImage(bitmap, 180);
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return rotateImage(bitmap, 270);
+            default:
+                return bitmap;
+        }
+    }
+
+    private Bitmap rotateImage(Bitmap source, float angle) {
+        if (source == null) {
+            return null;
+        }
+
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
+
+
 }
