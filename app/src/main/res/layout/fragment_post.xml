@@ -43,8 +43,6 @@
             android:layout_below="@id/frag_title2" />
 
 
-
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_post"
             android:visibility="gone"

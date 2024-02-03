@@ -9,8 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import com.agpitcodeclub.app.Adapters.FileTime;
-import com.agpitcodeclub.app.Models.MsgModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.utils.ApiUtilities;
 import com.agpitcodeclub.app.utils.FirebasePath;
@@ -26,7 +24,7 @@ import retrofit2.Response;
 
 public class SendMessege extends AppCompatActivity implements View.OnClickListener {
 
-    TextInputEditText tf_title_msg,tf_msg,tf_msg_loc;
+    TextInputEditText tf_msg;
     AppCompatButton btn_sendmsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +36,8 @@ public class SendMessege extends AppCompatActivity implements View.OnClickListen
     }
 
     private void initUi() {
-        tf_title_msg=findViewById(R.id.tf_title_msg);
         tf_msg=findViewById(R.id.tf_msg);
         btn_sendmsg=findViewById(R.id.btn_sendmsg);
-        tf_msg_loc=findViewById(R.id.tf_msg_loc);
     }
 
     private void initListener() {
@@ -58,14 +54,14 @@ public class SendMessege extends AppCompatActivity implements View.OnClickListen
     }
     private void sendMsg() {
         Toast.makeText(SendMessege.this,"", Toast.LENGTH_SHORT).show();
-        MsgModel model = new MsgModel(tf_title_msg.getText().toString().trim(),tf_msg.getText().toString().trim(),tf_msg_loc.getText().toString().trim(),"");
+//        MsgModel model = new MsgModel(tf_title_msg.getText().toString().trim(),tf_msg.getText().toString().trim(),tf_msg_loc.getText().toString().trim(),"");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
-        databaseReference.child(new FileTime().getFileTime()).setValue(model);
+//        databaseReference.child(new FileTime().getFileTime()).setValue(model);
 
 
-        tf_title_msg.setText("");
-        tf_msg.setText("");
-        tf_msg_loc.setText("");
+//        tf_title_msg.setText("");
+//        tf_msg.setText("");
+//        tf_msg_loc.setText("");
     }
 
 

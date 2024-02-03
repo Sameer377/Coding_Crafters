@@ -340,7 +340,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
                 Toast.makeText( getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }});
     }
-
+/*
     private void sendNotification(PushNotification notification) {
         ApiUtilities.getClient().sendNotification (notification).enqueue (new Callback<PushNotification>() {
             @Override
@@ -354,7 +354,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
             public void onFailure (Call<PushNotification> call, Throwable t) {
                 Toast.makeText( getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }});
-    }
+    }*/
 
 
     public void setImageDetails(){

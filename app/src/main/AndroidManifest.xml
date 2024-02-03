@@ -36,6 +36,10 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".fragments.SendMsgActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".credentials.AddMember"
             android:exported="true"
             android:screenOrientation="portrait" />

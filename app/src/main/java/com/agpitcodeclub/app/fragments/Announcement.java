@@ -1,6 +1,7 @@
 package com.agpitcodeclub.app.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -112,10 +113,10 @@ public class Announcement extends Fragment {
 //                Intent intent = new Intent(getContext(),SendMessege.class);
 //                startActivity(intent);
 
-                SendMsgBtmSheet addPhotoBottomDialogFragment =
-                        SendMsgBtmSheet.newInstance();
-                addPhotoBottomDialogFragment.show( getActivity().getSupportFragmentManager(),
-                        SendMsgBtmSheet.TAG);
+                Intent intent = new Intent(getContext(), SendMsgActivity.class);
+                getActivity().startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_up, R.anim.no_animation); // Apply the animation
+
 
             }
         });
@@ -136,11 +137,11 @@ public class Announcement extends Fragment {
         SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
         String des = prefs.getString(Credentials.USER_DESIGNATION, null);
 
-        if(des==null){
+       /* if(des==null){
             des="";
-        }
+        }*/
 
-        if (des.equals(FirebasePath.PRESIDENT)) {
+//        if (des.equals(FirebasePath.PRESIDENT)) {
             inbox_recycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -152,9 +153,9 @@ public class Announcement extends Fragment {
                     }
                 }
             });
-        }else {
+       /* }else {
             fb.setVisibility(View.GONE);
-        }
+        }*/
 
         fetchData();
     }

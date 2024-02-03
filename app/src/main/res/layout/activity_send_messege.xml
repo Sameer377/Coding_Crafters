@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/frag_bg"
+    android:background="@color/background"
     android:orientation="vertical"
     android:paddingStart="15dp"
     android:paddingEnd="15dp"
-    android:paddingBottom="400dp"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".fragments.SendMessege">
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -42,90 +37,81 @@
 </RelativeLayout>
 
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Attach image"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_extrabold"
+            />
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/send_msg_img"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:background="@color/background"
+                        android:id="@+id/up_img_sendmsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:id="@+id/btn_pickimg_sendmsg"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/img_edit_btn_bg"
+                        android:elevation="5dp"
+                        android:padding="12dp"
+                        android:src="@drawable/baseline_upload_file_24" />
+                </RelativeLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:gravity="top"
+            android:padding="10dp"
+            android:textSize="16dp"
+            android:hint="Type here"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:fontFamily="@font/baloo_bhai_2_medium"
+            android:inputType="textMultiLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
-            android:textColorHint="@color/white"
-            app:boxStrokeColor="@color/white"
-            app:hintTextColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/teal_200"
-                android:textStyle="bold"
-                android:fontFamily="@font/baloo_bhai_2_medium"
-                android:drawablePadding="10dp"
-                android:id="@+id/tf_title_msg" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Time and location"
-            android:layout_marginTop="10dp"
-            android:textColorHint="@color/white"
-            app:boxStrokeColor="@color/white"
-            app:hintTextColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:textColor="@color/white"
-
-                android:textStyle="bold"
-                android:fontFamily="@font/baloo_bhai_2_medium"
-                android:drawablePadding="10dp"
-                android:id="@+id/tf_msg_loc" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Messege"
-            android:layout_marginTop="10dp"
-            android:textColorHint="@color/white"
-            app:boxStrokeColor="@color/white"
-            app:hintTextColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:maxHeight="300dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:fontFamily="@font/baloo_bhai_2_medium"
-                android:drawablePadding="10dp"
-                android:id="@+id/tf_msg" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:minHeight="200dp"
+            android:id="@+id/tf_msg"
+            android:background="@drawable/community_profile_card"/>
 
 <RelativeLayout
     android:layout_marginTop="20dp"
@@ -143,7 +129,7 @@
 
     </LinearLayout>
 
+
+    </ScrollView>
+
 </LinearLayout>
-
-
-</ScrollView>
