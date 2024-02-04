@@ -238,11 +238,25 @@
                 </RelativeLayout>
 
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/paymentbtn"
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/upcomming_cd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Payment"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:background="@drawable/community_profile_card"
+                    />
+
+
                 <TextView
                     android:id="@+id/txt_men"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/upcomming_cd"
+                    android:layout_below="@id/paymentbtn"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/inter_extrabold"
                     android:gravity="center"

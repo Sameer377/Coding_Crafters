@@ -3,6 +3,7 @@ package com.agpitcodeclub.app.fragments;
 import static android.app.Activity.RESULT_OK;
 import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -68,7 +69,9 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class Home extends Fragment implements View.OnClickListener,EasyPermissions.PermissionCallbacks{
+    public static final int UPI_PAYMENT_REQUEST_CODE = 101;
     private ImageSlider imageSlider;
+    private AppCompatButton paymentbtn;
     private TextView txt_intro;
     private TextView txt_logo;
     private ImageView btn_pickimg;
@@ -77,6 +80,9 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     private EditText edt_des_up_img;
     private Uri fileUrl;
     private ProgressBar upcomming_btn_prg;
+
+
+
     public Home() {
         // Required empty public constructor
     }
@@ -96,12 +102,14 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         imageSlider=view.findViewById(R.id.intro_img_slider);
         txt_intro=view.findViewById(R.id.txt_intro);
         up_img=view.findViewById(R.id.up_img);
+        paymentbtn=view.findViewById(R.id.paymentbtn);
         btn_upload_up_img=view.findViewById(R.id.btn_upload_up_img);
         btn_pickimg=view.findViewById(R.id.btn_pickimg);
         edt_des_up_img=view.findViewById(R.id.edt_des_up_img);
         btn_pickimg.setOnClickListener(this);
         btn_upload_up_img.setOnClickListener(this);
         upcomming_btn_prg=view.findViewById(R.id.upcomming_btn_prg);
+        paymentbtn.setOnClickListener(this);
         setImageDetails();
 
         SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
@@ -229,17 +237,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         this.tempUri = tempUri;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK&&data.getData()!=null){
-            Uri img=data.getData();
-            fileUrl=data.getData();
-            if(img!=null){
-                up_img.setImageURI(img);
-            }
-        }
-    }
+
 
     boolean isPermissionGranted = false;
 
@@ -266,6 +264,10 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
                 }else {
                     edt_des_up_img.setError("Cannot be Empty");
                 }
+                break;
+
+            case R.id.paymentbtn:
+                makePayment();
                 break;
 
         }
@@ -318,6 +320,74 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
             Toast.makeText(getContext(),"Select image",Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void makePayment() {
+        // Your existing code for initiating the UPI payment
+        String upiId = "solapurevivek2003@okhdfcbank";
+        String amount = "1.00";
+        String transactionNote = "Payment for XYZ";
+        String currencyCode = "INR";
+
+        // Create UPI payment URI
+     /*   EasyUpiPayment.Builder builder = new EasyUpiPayment.Builder(getActivity())
+                .with(PaymentApp.ALL)
+                .setPayeeVpa(payeeVpa)
+                .setPayeeName(payeeName)
+                .setTransactionId(transactionId)
+                .setTransactionRefId(transactionRefId)
+                .setPayeeMerchantCode(payeeMerchantCode)
+                .setDescription(description)
+                .setAmount(amount);
+        // END INITIALIZATION
+
+        try {
+            // Build instance
+            easyUpiPayment = builder.build();
+
+            // Register Listener for Events
+            easyUpiPayment.setPaymentStatusListener(this);
+
+            // Start payment / transaction
+            easyUpiPayment.startPayment();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            toast("Error: " + exception.getMessage());
+        }*/
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode==RESULT_OK&&data.getData()!=null){
+            Uri img=data.getData();
+            fileUrl=data.getData();
+            if(img!=null){
+                up_img.setImageURI(img);
+            }
+        }
+
+        if (requestCode == UPI_PAYMENT_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                // Payment successful
+                String response = data.getStringExtra("response");
+                // Handle the payment response as needed
+                Toast.makeText(getContext(), "Payment successful", Toast.LENGTH_SHORT).show();
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                // Payment was canceled by the user
+                Toast.makeText(getContext(), "Payment canceled", Toast.LENGTH_SHORT).show();
+            } else {
+                // Payment failed
+                String response = data.getStringExtra("response");
+                // Handle the payment failure
+                Toast.makeText(getContext(), "Payment failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
 
     private void sendNotification(String title, String des,String imageUri) {
 

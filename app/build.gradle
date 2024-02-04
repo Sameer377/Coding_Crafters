@@ -50,6 +50,8 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     //noinspection GradleCompatible
 
+    //Payment
+
     // browsing multiple files
     implementation 'com.karumi:dexter:6.2.1'
     implementation 'pub.devrel:easypermissions:0.2.0'

@@ -5,23 +5,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.agpitcodeclub.app.Adapters.CommunityProfileAdapter;
-import com.agpitcodeclub.app.utils.Credentials;
-import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.CommunityModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.credentials.AddMember;
+import com.agpitcodeclub.app.utils.Credentials;
+import com.agpitcodeclub.app.utils.FirebasePath;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.database.DataSnapshot;
@@ -114,7 +113,7 @@ public class Community extends Fragment {
                     user.setDesignation(dataSnapshot.getKey().substring(2));
                     Log.v(t,"Name : "+user.getName()+"\nDesignation : "+user.getDesignation());
                     System.out.println("Node1 : "+dataSnapshot.getKey().toString()+"\n"+dataSnapshot.getKey().equals(FirebasePath.DEVELOPER));
-                    if (dataSnapshot.getKey().equals(FirebasePath.DEVELOPER)||dataSnapshot.getKey().equals(FirebasePath.MEMBER)){
+                    if (dataSnapshot.getKey().equals(FirebasePath.DEVELOPER)){
                         DatabaseReference innerChild = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY).child(dataSnapshot.getKey());
                         innerChild.addValueEventListener(new ValueEventListener() {
                             @Override

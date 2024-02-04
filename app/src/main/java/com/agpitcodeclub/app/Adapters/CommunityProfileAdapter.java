@@ -1,13 +1,14 @@
 package com.agpitcodeclub.app.Adapters;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +48,33 @@ ArrayList<CommunityModel> list;
         holder.designation.setText(model.getDesignation());
 
         holder.persuingyr.setText("Persuing : "+model.getPersuing());
+
+
+        holder.rel_info_cd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.social_lin.getVisibility()==View.GONE){
+                    holder.social_lin.setVisibility(View.VISIBLE);
+
+                    ObjectAnimator slideDown = ObjectAnimator.ofFloat(holder.social_lin, "translationY", -40, 0);
+                    slideDown.setDuration(500); // Adjust the duration as needed
+
+                    // Start the animation
+                    slideDown.start();
+
+                } else {
+
+
+                    ObjectAnimator slideDown = ObjectAnimator.ofFloat(holder.social_lin, "translationY", 40, 0);
+                    slideDown.setDuration(500); // Adjust the duration as needed
+
+                    // Start the animation
+                    slideDown.start();
+                    holder.social_lin.setVisibility(View.GONE);
+                }
+            }
+        });
+
     }
 
 
@@ -62,11 +90,17 @@ ArrayList<CommunityModel> list;
     public static class CommunityProfileViewholder extends RecyclerView.ViewHolder {
         TextView name, designation, persuingyr;
         ImageView profileImg;
+
+        RelativeLayout rel_info_cd,rel_main_comm;
+        LinearLayout social_lin;
         public CommunityProfileViewholder(@NotNull View itemView)
         {
             super(itemView);
             name = itemView.findViewById(R.id.community_profile_name_txt);
             designation= itemView.findViewById(R.id.community_profile_designation_txt);
+            rel_info_cd= itemView.findViewById(R.id.rel_info_cd);
+            rel_main_comm= itemView.findViewById(R.id.rel_main_comm);
+            social_lin= itemView.findViewById(R.id.social_lin);
             persuingyr = itemView.findViewById(R.id.community_profile_year_txt);
             profileImg=itemView.findViewById(R.id.item_card_profile_img);
         }

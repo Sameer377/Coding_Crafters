@@ -17,11 +17,13 @@
         android:layout_height="match_parent">
 
     <LinearLayout
-        android:padding="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
+            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="5dp"
@@ -39,12 +41,17 @@
             app:indicatorColor="@color/teal_200"
             app:trackThickness="2dp" />
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
 
-        </HorizontalScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/recycle_connect_to"
+
+                />
+
         <TextView
+            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="5dp"
@@ -54,6 +61,8 @@
             android:textColor="@color/teal_200"
             android:textSize="23dp" />
         <androidx.recyclerview.widget.RecyclerView
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"

@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="5dp"
+    android:id="@+id/rel_main_comm"
     android:layout_height="wrap_content">
 
 
     <RelativeLayout
+        android:id="@+id/rel_info_cd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -74,6 +76,67 @@
 
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/social_lin"
+        android:visibility="gone"
+        android:layout_below="@id/rel_info_cd"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/twitter_logo" />
+        </RelativeLayout>
+      <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+          <ImageView
+              android:layout_width="35dp"
+              android:layout_height="35dp"
+              android:layout_centerInParent="true"
+              android:src="@drawable/linkedin_logo" />
+        </RelativeLayout>
+      <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+          <ImageView
+              android:layout_width="35dp"
+              android:layout_height="35dp"
+              android:layout_centerInParent="true"
+              android:src="@drawable/instagram_logo" />
+        </RelativeLayout>
+      <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/github_logo_bg"
+                android:src="@drawable/github_logo"
+                android:padding="5dp"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
 
    <RelativeLayout
        android:layout_centerHorizontal="true"

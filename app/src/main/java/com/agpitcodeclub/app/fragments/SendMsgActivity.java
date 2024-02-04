@@ -139,48 +139,55 @@ public class SendMsgActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void sendMsg() {
-       String uploadtime= new FileTime().getFileTime().toString();
-        SharedPreferences prefs = getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
-        String designation = prefs.getString(Credentials.USER_DESIGNATION, null).substring(2);
-        String image = prefs.getString(Credentials.USER_PROFILE_IMG, null);
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(FirebasePath.INBOX).child(uploadtime);
-        if (fileUrl!=null) {
-            storageReference.putFile(fileUrl)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    String imgUri = uri.toString();
-                                    MsgModel model = new MsgModel(designation, tf_msg.getText().toString().trim(), image,imgUri, currentDate, currentTime);
 
-                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
-                                    databaseReference.child(uploadtime).setValue(model);
-                                    sendNotification( designation,tf_msg.getText().toString().trim(),imgUri);
-
-                                    Toast.makeText(getApplicationContext(), " Uploaded" , Toast.LENGTH_LONG).show();
-
-                                }
-                            });
-                        }
-
-
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(Exception e) {
-                            Toast.makeText(getApplicationContext(), " Error" + e, Toast.LENGTH_LONG).show();
-
-                        }
-                    });
+        if(tf_msg.getText().toString().trim().isEmpty()){
+            tf_msg.setError("empty msg cannot be send !");
+            tf_msg.requestFocus();
+            return;
         }else {
-            MsgModel model = new MsgModel(designation, tf_msg.getText().toString().trim(), image,null, currentDate, currentTime);
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
-            databaseReference.child(uploadtime).setValue(model);
-            PushNotification notification = new PushNotification(new NotificationData(designation, tf_msg.getText().toString().trim(), null), FCM_TOPIC);
-            sendNotification(notification);
-        }
 
+            String uploadtime = new FileTime().getFileTime().toString();
+            SharedPreferences prefs = getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
+            String designation = prefs.getString(Credentials.USER_DESIGNATION, null).substring(2);
+            String image = prefs.getString(Credentials.USER_PROFILE_IMG, null);
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference(FirebasePath.INBOX).child(uploadtime);
+            if (fileUrl != null) {
+                storageReference.putFile(fileUrl)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        String imgUri = uri.toString();
+                                        MsgModel model = new MsgModel(designation, tf_msg.getText().toString().trim(), image, imgUri, currentDate, currentTime);
+
+                                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
+                                        databaseReference.child(uploadtime).setValue(model);
+                                        sendNotification(designation, tf_msg.getText().toString().trim(), imgUri);
+
+                                        Toast.makeText(getApplicationContext(), " Uploaded", Toast.LENGTH_LONG).show();
+
+                                    }
+                                });
+                            }
+
+
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(Exception e) {
+                                Toast.makeText(getApplicationContext(), " Error" + e, Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+            } else {
+                MsgModel model = new MsgModel(designation, tf_msg.getText().toString().trim(), image, null, currentDate, currentTime);
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
+                databaseReference.child(uploadtime).setValue(model);
+                PushNotification notification = new PushNotification(new NotificationData(designation, tf_msg.getText().toString().trim(), null), FCM_TOPIC);
+                sendNotification(notification);
+            }
+        }
 
 
 

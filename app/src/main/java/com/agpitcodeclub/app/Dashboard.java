@@ -1,11 +1,7 @@
 package com.agpitcodeclub.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import static com.agpitcodeclub.app.fragments.Home.UPI_PAYMENT_REQUEST_CODE;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,11 +13,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import com.agpitcodeclub.app.Models.UpCommingModel;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.agpitcodeclub.app.Models.Updates;
-import com.agpitcodeclub.app.Models.User;
 import com.agpitcodeclub.app.fragments.Announcement;
 import com.agpitcodeclub.app.fragments.CheckInternet;
 import com.agpitcodeclub.app.fragments.Community;
@@ -30,23 +28,15 @@ import com.agpitcodeclub.app.fragments.Login;
 import com.agpitcodeclub.app.fragments.Post;
 import com.agpitcodeclub.app.fragments.Profile;
 import com.agpitcodeclub.app.utils.Credentials;
-import com.agpitcodeclub.app.utils.FirebasePath;
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import org.jetbrains.annotations.NotNull;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -275,6 +265,25 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         });
 
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == UPI_PAYMENT_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // Payment successful
+                String response = data.getStringExtra("response");
+                // Handle the payment response as needed
+            } else if (resultCode == RESULT_CANCELED) {
+                // Payment was canceled by the user
+            } else {
+                // Payment failed
+                String response = data.getStringExtra("response");
+                // Handle the payment failure
+            }
+        }
     }
 
     void getFCMToken(){
