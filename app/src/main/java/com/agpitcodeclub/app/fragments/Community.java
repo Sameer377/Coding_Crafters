@@ -113,7 +113,7 @@ public class Community extends Fragment {
                     user.setDesignation(dataSnapshot.getKey().substring(2));
                     Log.v(t,"Name : "+user.getName()+"\nDesignation : "+user.getDesignation());
                     System.out.println("Node1 : "+dataSnapshot.getKey().toString()+"\n"+dataSnapshot.getKey().equals(FirebasePath.DEVELOPER));
-                    if (dataSnapshot.getKey().equals(FirebasePath.DEVELOPER)){
+                    if (dataSnapshot.getKey().equals(FirebasePath.DEVELOPER)||dataSnapshot.getKey().equals(FirebasePath.MEMBER)){
                         DatabaseReference innerChild = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY).child(dataSnapshot.getKey());
                         innerChild.addValueEventListener(new ValueEventListener() {
                             @Override

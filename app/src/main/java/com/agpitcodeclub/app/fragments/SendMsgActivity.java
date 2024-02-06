@@ -123,8 +123,6 @@ public class SendMsgActivity extends AppCompatActivity implements View.OnClickLi
                                 }
                             });
                         }
-
-
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(Exception e) {
@@ -165,9 +163,7 @@ public class SendMsgActivity extends AppCompatActivity implements View.OnClickLi
                                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.INBOX);
                                         databaseReference.child(uploadtime).setValue(model);
                                         sendNotification(designation, tf_msg.getText().toString().trim(), imgUri);
-
                                         Toast.makeText(getApplicationContext(), " Uploaded", Toast.LENGTH_LONG).show();
-
                                     }
                                 });
                             }
@@ -188,12 +184,7 @@ public class SendMsgActivity extends AppCompatActivity implements View.OnClickLi
                 sendNotification(notification);
             }
         }
-
-
-
     }
-
-
 
     private void sendNotification(String title, String des,String imageUri) {
 

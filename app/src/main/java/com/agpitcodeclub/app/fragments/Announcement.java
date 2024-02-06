@@ -114,7 +114,8 @@ public class Announcement extends Fragment {
         recyclerView=view.findViewById(R.id.recycle_connect_to);
 
         SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
-        String des = prefs.getString(Credentials.USER_DESIGNATION, null);
+        String des = null;
+        des = prefs.getString(Credentials.USER_DESIGNATION, null);
 
           if(des==null || des.equals("h_Member") ){
             des="";
@@ -123,6 +124,26 @@ public class Announcement extends Fragment {
               fb.show();
           }
 
+          /*
+            soap services
+          * rest API services
+          * authentication process for web services
+          * mongo db connectivity
+          * oracle database connectivity
+          * unit test junit test cases
+          * servlets
+            diff templates of jdbc
+            design patterns (projects)
+
+
+            spring and spring but
+            restful apis
+            ssl authentication
+
+
+          *
+          /
+           */
 
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,7 +292,6 @@ public class Announcement extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter1);
-        ArrayList<CommunityModel> listinner=new ArrayList<>();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -310,13 +330,16 @@ public class Announcement extends Fragment {
 
                     }else if(!dataSnapshot.getKey().equals(FirebasePath.MEMBER)){
 
-
                             list1.add(user);
 
                     }
 
                 }
-                adapter.notifyDataSetChanged();
+
+                try {
+                    adapter.notifyDataSetChanged();
+                }catch (Exception e){
+                }
                 System.out.println("\n.............................................\n");
                 for (CommunityModel l:list1) {
                     System.out.println("Names : "+l.getName()+"\n");

@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -174,45 +175,54 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     }
 
 
-
+    Handler handler;
     private void displayTag() {
         String tag = "Coding Crafters";
         final SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
 
-        for (int i = 0, delay = 300; i < 15; i++, delay += 100) {
-            char c = tag.charAt(i);
 
 
-            final int finalI = i; // Need to use final variable inside the inner class
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+            for (int i = 0, delay = 300; i < 15; i++, delay += 100) {
+                char c = tag.charAt(i);
 
-                    if (finalI >= 6) {
-                        spannableStringBuilder.append(c);
-                        spannableStringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.soft_red)),
-                                spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
-                        spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL),
-                                spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
 
-                    } else {
+                final int finalI = i; // Need to use final variable inside the inner class
 
-                        spannableStringBuilder.append(c);
-                        spannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD),
-                                spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
+                handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
+                        if (finalI >= 6) {
+                            try {
+                            spannableStringBuilder.append(c);
+                            spannableStringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.soft_red)),
+                                    spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
+                            spannableStringBuilder.setSpan(new StyleSpan(Typeface.NORMAL),
+                                    spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
+                            }catch (Exception e){
+                                Log.v("anim",""+e);
+                            }
+                        } else {
+                            try {
+                            spannableStringBuilder.append(c);
+                            spannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD),
+                                    spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
+                            }catch (Exception e){
+                                Log.v("anim",""+e);
+                            }
+
+
+                        }
+
+                        txt_logo.setText(spannableStringBuilder); // Update the TextView with colored text
                     }
+                }, delay);
 
-                    txt_logo.setText(spannableStringBuilder); // Update the TextView with colored text
+
+                if (i == 14) {
                 }
-            }, delay);
-
-
-
-
-            if (i == 14) {
             }
-        }
 
 
 
@@ -451,6 +461,8 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         });
     }
 
-
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

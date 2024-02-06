@@ -30,7 +30,7 @@ public class Profile extends Fragment implements View.OnClickListener{
     private String UserID;
     private TextView name_profile;
 //    private TextInputLayout tfl_des,tfl_yr;
-    private LinearLayout lin_data;
+    private LinearLayout lin_data,social_frame_lin;
     private LinearProgressIndicator profile_prg;
     private RelativeLayout rel_line_teal_profile;
     private AppCompatButton btn_profile_logout;
@@ -60,6 +60,7 @@ public class Profile extends Fragment implements View.OnClickListener{
     
     private void initUit(View view) {
         name_profile=view.findViewById(R.id.name_profile);
+        social_frame_lin=view.findViewById(R.id.social_frame_lin);
         phone=view.findViewById(R.id.phone_profile);
         designation_profile=view.findViewById(R.id.designation_profile);
         email_profile=view.findViewById(R.id.email_profile);
@@ -88,7 +89,6 @@ public class Profile extends Fragment implements View.OnClickListener{
         String designation = prefs.getString(Credentials.USER_DESIGNATION, null);
         String image = prefs.getString(Credentials.USER_PROFILE_IMG, null);
         String phone_str="8999596143";
-        
         phone.setText(phone_str);
         name_profile.setText(name);
         if(designation!=null){
@@ -100,6 +100,9 @@ public class Profile extends Fragment implements View.OnClickListener{
 
         email_profile.setText(email);
         tf_password.setText(pass);
+        if(designation!=null ){
+            social_frame_lin.setVisibility(View.VISIBLE);
+        }
     }
 
     private void logOut(){

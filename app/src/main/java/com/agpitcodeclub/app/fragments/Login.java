@@ -1,19 +1,11 @@
 package com.agpitcodeclub.app.fragments;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import static com.agpitcodeclub.app.Dashboard.userLogin;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.agpitcodeclub.app.Dashboard;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.agpitcodeclub.app.Models.CommunityModel;
-import com.agpitcodeclub.app.utils.Credentials;
-import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.Models.User;
 import com.agpitcodeclub.app.R;
-import com.bumptech.glide.Glide;
+import com.agpitcodeclub.app.utils.Credentials;
+import com.agpitcodeclub.app.utils.FirebasePath;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -113,6 +107,9 @@ public class Login extends Fragment implements View.OnClickListener {
 
 
     private void signUp(){
+        cre_email.setText("");
+        cre_password.setText("");
+        cre_name.setText("");
         cre_name.setVisibility(View.VISIBLE);
         l_txt.setText("Sign Up");
         login_btn.setText("Sign Up");
@@ -122,6 +119,9 @@ public class Login extends Fragment implements View.OnClickListener {
     }
 
     private void login(){
+        cre_email.setText("");
+        cre_password.setText("");
+        cre_name.setText("");
         cre_name.setVisibility(View.INVISIBLE);
         l_txt.setText("Login");
         login_btn.setText("Login");
@@ -266,7 +266,7 @@ public class Login extends Fragment implements View.OnClickListener {
     }
 
     private String UserID;
-    private String token_des = "";
+    private String token_des = null;
     private DatabaseReference reference;
 
 
@@ -283,7 +283,9 @@ public class Login extends Fragment implements View.OnClickListener {
                         Log.e("firebase", "Error getting data", task.getException());
                     } else {
                         if (task.getResult().getValue()==null){
-                            Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
+
+
+                            Toast.makeText(getContext(),"1 User not found ! ",Toast.LENGTH_SHORT).show();
 
                         }else{
                             token_des = task.getResult().getValue().toString();
@@ -293,7 +295,7 @@ public class Login extends Fragment implements View.OnClickListener {
 
 
 
-                        if(!token_des.equals(FirebasePath.DEVELOPER)&& !token_des.equals(FirebasePath.MEMBER)) {
+                        if(token_des!=FirebasePath.DEVELOPER&& token_des!=FirebasePath.MEMBER && token_des!=null) {
 
                             reference.child(token_des).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -301,12 +303,13 @@ public class Login extends Fragment implements View.OnClickListener {
                                     CommunityModel user = snapshot.getValue(CommunityModel.class);
                                     if (user != null) {
                                         userLogin=true;
+                                        Toast.makeText(getContext(),"Ex",Toast.LENGTH_SHORT).show();
 
                                         storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile());
                                         ft.commit();
 
                                     }else {
-                                        Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(),"2 User not found ! ",Toast.LENGTH_SHORT).show();
 
                                     }
                                 }
@@ -318,7 +321,7 @@ public class Login extends Fragment implements View.OnClickListener {
                                 }
                             });
                         }
-                        else if(token_des.equals(FirebasePath.DEVELOPER)) {
+                        else if(token_des==FirebasePath.DEVELOPER) {
                             reference.child(token_des).child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
@@ -331,7 +334,7 @@ public class Login extends Fragment implements View.OnClickListener {
                                         ft.commit();
 
                                     }else {
-                                        Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(),"3 User not found ! ",Toast.LENGTH_SHORT).show();
 
                                     }
                                 }
@@ -342,7 +345,7 @@ public class Login extends Fragment implements View.OnClickListener {
 
                                 }
                             });
-                        }else if(token_des.equals(FirebasePath.MEMBER)) {
+                        }else if(token_des==FirebasePath.MEMBER) {
                             reference.child(token_des).child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
@@ -354,7 +357,7 @@ public class Login extends Fragment implements View.OnClickListener {
                                         ft.commit();
 
                                     }else {
-                                        Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(),"4 User not found ! ",Toast.LENGTH_SHORT).show();
 
                                     }
                                 }
@@ -385,7 +388,7 @@ public class Login extends Fragment implements View.OnClickListener {
                         ft.commit();
 
                     }else{
-                        Toast.makeText(getContext(),"User not found !",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"5 User not found !",Toast.LENGTH_SHORT).show();
                     }
                 }
 
