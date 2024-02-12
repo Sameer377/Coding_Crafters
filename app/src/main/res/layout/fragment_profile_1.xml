@@ -238,12 +238,15 @@
                      android:orientation="horizontal">
 
                      <ImageView
+                         android:id="@+id/pro_twitter_logo"
                          android:padding="3dp"
                          android:layout_width="50dp"
                          android:layout_height="50dp"
                          android:src="@drawable/twitter_logo"
                          />
                      <ImageView
+                         android:id="@+id/pro_linkedin_logo"
+
                          android:layout_width="50dp"
                          android:padding="5dp"
                          android:layout_height="50dp"
@@ -251,6 +254,8 @@
                          android:src="@drawable/linkedin_logo"
                          />
                      <ImageView
+                         android:id="@+id/pro_instagram_logo"
+
                          android:layout_width="50dp"
                          android:padding="5dp"
                          android:layout_height="50dp"
@@ -258,6 +263,7 @@
                          android:src="@drawable/instagram_logo"
                          />
                      <ImageView
+                         android:id="@+id/pro_github_logo"
                          android:padding="4dp"
                          android:layout_width="45dp"
                          android:layout_height="45dp"

@@ -10,4 +10,5 @@ public class Credentials {
     public static final String USER_YEAR="useryear";
     public static final String USER_DESIGNATION="userdes";
     public static final String USER_PROFILE_IMG="userprofileimg";
+    public static final String USER_ID="userid";
 }

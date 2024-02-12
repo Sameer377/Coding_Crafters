@@ -53,23 +53,30 @@ ArrayList<CommunityModel> list;
         holder.rel_info_cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (holder.social_lin.getVisibility()==View.GONE){
                     holder.social_lin.setVisibility(View.VISIBLE);
+                    try {
+                        ObjectAnimator slideDown = ObjectAnimator.ofFloat(holder.social_lin, "translationY", -40, 0);
+                        slideDown.setDuration(500); // Adjust the duration as needed
+                        slideDown.start();
 
-                    ObjectAnimator slideDown = ObjectAnimator.ofFloat(holder.social_lin, "translationY", -40, 0);
-                    slideDown.setDuration(500); // Adjust the duration as needed
+                    }catch (Exception e){
 
+                    }
                     // Start the animation
-                    slideDown.start();
 
                 } else {
 
+                    try {
+                        ObjectAnimator slideDown = ObjectAnimator.ofFloat(holder.social_lin, "translationY", 40, 0);
+                        slideDown.setDuration(500); // Adjust the duration as needed
 
-                    ObjectAnimator slideDown = ObjectAnimator.ofFloat(holder.social_lin, "translationY", 40, 0);
-                    slideDown.setDuration(500); // Adjust the duration as needed
+                        // Start the animation
+                        slideDown.start();
+                    }catch(Exception e){
 
-                    // Start the animation
-                    slideDown.start();
+                    }
                     holder.social_lin.setVisibility(View.GONE);
                 }
             }

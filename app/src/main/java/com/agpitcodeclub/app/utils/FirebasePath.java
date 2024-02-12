@@ -13,6 +13,7 @@ public class FirebasePath {
     public static final String VREVENUE_MANAGER="f_Assistant Revenue Manger";
     public static final String DEVELOPER="g_Developer";
     public static final String COMMUNITY="community";
+    public static final String CONNECT_TO_CHATS="chats";
     public static final String MEMBER = "h_Member";
     public static final String MEMBER_USERTOKENS = "communitytokens";
     public static final String POST = "post";

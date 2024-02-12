@@ -1,5 +1,7 @@
 package com.agpitcodeclub.app.fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,6 +49,8 @@ public class Announcement extends Fragment {
     final private String serverKey = "key=" + "AAAALRvzS04:APA91bH3O9LTYW7FNOWlSF2_4vY3jfUQ0qEVFYDg5kcwwK6CMW6wM6AyxHcu8JDzX1jmkfSIyz635qfjSXgU95KCffBzQCe3-ezeDDDSdzMQNih0CV1WYsyeo3o5ZyTOS8szxnKuswAr";
     final private String contentType = "application/json";
     final String TAG = "NOTIFICATION TAG";
+
+    String Userid=null;
 
     String NOTIFICATION_TITLE;
     String NOTIFICATION_MESSAGE;
@@ -124,26 +128,6 @@ public class Announcement extends Fragment {
               fb.show();
           }
 
-          /*
-            soap services
-          * rest API services
-          * authentication process for web services
-          * mongo db connectivity
-          * oracle database connectivity
-          * unit test junit test cases
-          * servlets
-            diff templates of jdbc
-            design patterns (projects)
-
-
-            spring and spring but
-            restful apis
-            ssl authentication
-
-
-          *
-          /
-           */
 
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,9 +177,14 @@ public class Announcement extends Fragment {
        /* }else {
             fb.setVisibility(View.GONE);
         }*/
-
+        SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
+        Userid = prefs.getString(Credentials.USER_ID, null);
         fetchData();
         loadContentInList();
+
+
+
+         Toast.makeText(getContext(),Userid,Toast.LENGTH_LONG).show();
 
     }
     private ArrayList<MsgModel> list;
@@ -288,7 +277,7 @@ public class Announcement extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         list1=new ArrayList<>();
-        adapter1 = new ConnectToAdapter(getContext(),list1);
+        adapter1 = new ConnectToAdapter(getContext(),list1,Userid);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter1);
@@ -299,7 +288,7 @@ public class Announcement extends Fragment {
                 list1.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     CommunityModel user = dataSnapshot.getValue(CommunityModel.class);
-                    user.setDesignation(dataSnapshot.getKey().substring(2));
+                    user.setDesignation(dataSnapshot.getKey().toString());
                     System.out.println("Node1 : "+dataSnapshot.getKey().toString()+"\n"+dataSnapshot.getKey().equals(FirebasePath.DEVELOPER));
                     Log.v("tag","Name : "+user.getName()+"\nDesignation : "+user.getDesignation());
                     if (dataSnapshot.getKey().equals(FirebasePath.DEVELOPER)){
@@ -310,7 +299,7 @@ public class Announcement extends Fragment {
 
                                 for (DataSnapshot dataSnapshot1 : snapshot1.getChildren()){
                                     CommunityModel user1 = dataSnapshot1.getValue(CommunityModel.class);
-                                    user1.setDesignation(dataSnapshot.getKey().substring(2));
+                                    user1.setDesignation(dataSnapshot.getKey().toString());
 //                                    System.out.println("Name : "+user1.getName());
 //                                    System.out.println("des2 : "+user1.getDesignation());
                                         System.out.println("1 Names : "+user1.getName()+"\n");
