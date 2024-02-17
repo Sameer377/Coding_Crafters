@@ -1,8 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <style name="Theme.AGPITCodeClub" parent="Base.Theme.AGPITCodeClub">
-    <!-- Transparent system bars for edge-to-edge. -->
-    <item name="android:navigationBarColor">@android:color/transparent</item>
-    <item name="android:statusBarColor">@android:color/transparent</item>
-    <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+  <!-- Base application theme. -->
+  <style name="Theme.AGPITCodeClub" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <!-- Primary brand color. -->
+    <item name="colorPrimary">@color/background</item>
+    <item name="colorPrimaryDark">@color/background</item>
+    <item name="colorAccent">@color/teal_200</item>
+    <!-- Customize your theme here. -->
   </style>
+  <!-- Base application theme. -->
+  <style name="Base.Theme.AGPITCodeClub" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Customize your light theme here. -->
+    <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+  </style>
+
 </resources>

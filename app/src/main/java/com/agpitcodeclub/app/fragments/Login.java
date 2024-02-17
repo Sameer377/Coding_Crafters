@@ -254,6 +254,7 @@ public class Login extends Fragment implements View.OnClickListener {
                            UserID= FirebaseAuth.getInstance().getCurrentUser().getUid();
                             isMember=checkbox_mem.isChecked();
                             checkDataInDatabase();
+                            Log.v("User data ....... "," user found ");
 
                         } else {
                             signup_status_prg.setVisibility(View.GONE);
@@ -293,89 +294,92 @@ public class Login extends Fragment implements View.OnClickListener {
 
                         reference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY);
 
+                        Toast.makeText(getContext(),"Designation : "+token_des,Toast.LENGTH_LONG).show();
+                        token_des=token_des.trim();
+                        Toast.makeText(getContext(),(token_des!=FirebasePath.DEVELOPER&& token_des!=FirebasePath.MEMBER) +"",Toast.LENGTH_LONG).show();
+                        try {
+                            if (!token_des.equals(FirebasePath.DEVELOPER) && !token_des.equals(FirebasePath.MEMBER)) {
 
+                                reference.child(token_des).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot snapshot) {
+                                        CommunityModel user = snapshot.getValue(CommunityModel.class);
+                                        if (user != null) {
+                                            userLogin = true;
 
-                        if(token_des!=FirebasePath.DEVELOPER&& token_des!=FirebasePath.MEMBER && token_des!=null) {
+                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID);
+                                            ft.commit();
 
-                            reference.child(token_des).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot snapshot) {
-                                    CommunityModel user = snapshot.getValue(CommunityModel.class);
-                                    if (user != null) {
-                                        userLogin=true;
-                                        Toast.makeText(getContext(),"Ex",Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getContext(), "User not found ! ", Toast.LENGTH_SHORT).show();
 
-                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile(),UserID);
-                                        ft.commit();
+                                        }
+                                    }
 
-                                    }else {
-                                        Toast.makeText(getContext(),"2 User not found ! ",Toast.LENGTH_SHORT).show();
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {
+                                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
 
                                     }
-                                }
+                                });
+                            } else if (token_des.equals(FirebasePath.DEVELOPER)) {
+                                reference.child(token_des).child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot snapshot) {
+                                        CommunityModel user = snapshot.getValue(CommunityModel.class);
+                                        if (user != null) {
+                                            userLogin = true;
 
-                                @Override
-                                public void onCancelled(DatabaseError error) {
-                                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
+                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID);
 
-                                }
-                            });
+                                            ft.commit();
+
+                                        } else {
+                                            Toast.makeText(getContext(), "User not found ! ", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {
+                                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                            } else if (token_des.equals(FirebasePath.MEMBER)) {
+                                reference.child(token_des).child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot snapshot) {
+                                        CommunityModel user = snapshot.getValue(CommunityModel.class);
+                                        if (user != null) {
+                                            userLogin = true;
+
+                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID);
+                                            ft.commit();
+
+                                        } else {
+                                            Toast.makeText(getContext(), "User not found ! ", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {
+                                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                            }
+                        }catch (Exception e){
+
                         }
-                        else if(token_des==FirebasePath.DEVELOPER) {
-                            reference.child(token_des).child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot snapshot) {
-                                    CommunityModel user = snapshot.getValue(CommunityModel.class);
-                                    if (user != null) {
-                                        userLogin=true;
-
-                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile(),UserID);
-
-                                        ft.commit();
-
-                                    }else {
-                                        Toast.makeText(getContext(),"3 User not found ! ",Toast.LENGTH_SHORT).show();
-
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError error) {
-                                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-                        }else if(token_des==FirebasePath.MEMBER) {
-                            reference.child(token_des).child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot snapshot) {
-                                    CommunityModel user = snapshot.getValue(CommunityModel.class);
-                                    if (user != null) {
-                                        userLogin=true;
-
-                                        storeUserData(user.getemail(),user.getPassword(),user.getName(),user.getPersuing(),token_des,user.getProfile(),UserID);
-                                        ft.commit();
-
-                                    }else {
-                                        Toast.makeText(getContext(),"4 User not found ! ",Toast.LENGTH_SHORT).show();
-
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError error) {
-                                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-                        }
-                        Log.d("firebase", String.valueOf(task.getResult().getValue()));
                     }
                 }
             });
         }else{
 
             databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.USERS);
+            Toast.makeText(getContext()," hello "+token_des,Toast.LENGTH_LONG).show();
 
 
             databaseReference.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {

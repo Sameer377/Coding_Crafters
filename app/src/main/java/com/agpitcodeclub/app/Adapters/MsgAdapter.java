@@ -44,16 +44,18 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgAdapterViewho
 
         MsgModel model = list.get(position);
         String extractedWords = extractWords(model.getMsg(), 12);
-
-        if(model.getMsg_imguri()!=null){
-            Glide.with(context).load(model.getMsg_imguri()).into(holder.msg_attached_img);
-            holder.img_cd.setVisibility(View.VISIBLE);
-        }
-
         Glide.with(context).load(model.getProfileimg()).into(holder.msg_profile_img);
         holder.msg_date.setText(model.getDate());
         holder.msg_time.setText(model.getTime());
         holder.designation.setText(model.getDesignation());
+        String contentSUrl=model.getMsg_imguri();
+            if(contentSUrl!=null && !contentSUrl.isEmpty()){
+                Glide.with(context).load(model.getMsg_imguri()).into(holder.msg_attached_img);
+                holder.img_cd.setVisibility(View.VISIBLE);
+            }
+
+
+
         if(model.getMsg().length()>100){
             holder.msg_content.setText(extractedWords+" ...");
             holder.msg_content.setOnClickListener(new View.OnClickListener() {

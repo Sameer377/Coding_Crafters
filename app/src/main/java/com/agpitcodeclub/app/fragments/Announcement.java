@@ -35,7 +35,6 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -184,7 +183,7 @@ public class Announcement extends Fragment {
 
 
 
-         Toast.makeText(getContext(),Userid,Toast.LENGTH_LONG).show();
+         Toast.makeText(getContext(),Userid+"",Toast.LENGTH_LONG).show();
 
     }
     private ArrayList<MsgModel> list;
@@ -192,24 +191,33 @@ public class Announcement extends Fragment {
     private ConnectToAdapter adapter1;
     void fetchData() {
             databaseReference.addValueEventListener(new ValueEventListener() {
-                @SuppressLint("NotifyDataSetChanged")
+                @SuppressLint({"NotifyDataSetChanged"})
                 @Override
                 public void onDataChange(@NotNull DataSnapshot snapshot) {
                     try {
 
                         list.clear();
-
+                        adapter = new MsgAdapter(getContext(), list);
+                        inbox_recycle.setAdapter(adapter);
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        MsgModel user = dataSnapshot.getValue(MsgModel.class);
-                        list.add(user);
+                        try {
+
+
+                                MsgModel user = dataSnapshot.getValue(MsgModel.class);
+                                list.add(0,user);
+                                adapter.notifyItemInserted(0);
+
+                        }catch (Exception e){
+                        }
+
                     }
 //                loadingprg.setVisibility(View.GONE);
-                        Collections.reverse(list);
-                        adapter = new MsgAdapter(getContext(), list);
-                    inbox_recycle.setAdapter(adapter);
+//                        Collections.reverse(list);
+
+
 //                        inbox_recycle.scrollToPosition(list.size()-1);
 
-                        adapter.notifyDataSetChanged();
+//                        adapter.notifyDataSetChanged();
                         ann_prg.setVisibility(View.GONE);
                 }catch(Exception e){
                     Toast.makeText(getContext(),"Error : "+e,Toast.LENGTH_SHORT).show();
