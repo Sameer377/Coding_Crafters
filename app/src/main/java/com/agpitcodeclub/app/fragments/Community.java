@@ -154,6 +154,7 @@ public class Community extends Fragment {
                 for (CommunityModel l:list) {
                     System.out.println("Names : "+l.getName()+"\n");
                 }
+
             }
 
             @Override

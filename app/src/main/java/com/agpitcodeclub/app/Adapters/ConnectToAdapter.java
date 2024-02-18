@@ -68,6 +68,7 @@ public class ConnectToAdapter extends RecyclerView.Adapter< ConnectToAdapter.Com
                 Intent intent = new Intent(context, ConnectToMsg.class);
                 intent.putExtra("ImageUrl",model.getProfile());
                 intent.putExtra("username",model.getName());
+                intent.putExtra("User_Des",model.getDesignation());
                 context.startActivity(intent);
 
                 Toast.makeText(context,Userid,Toast.LENGTH_LONG).show();

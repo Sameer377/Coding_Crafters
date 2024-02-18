@@ -205,19 +205,11 @@ public class Announcement extends Fragment {
 
                                 MsgModel user = dataSnapshot.getValue(MsgModel.class);
                                 list.add(0,user);
-                                adapter.notifyItemInserted(0);
-
                         }catch (Exception e){
                         }
 
                     }
-//                loadingprg.setVisibility(View.GONE);
-//                        Collections.reverse(list);
-
-
-//                        inbox_recycle.scrollToPosition(list.size()-1);
-
-//                        adapter.notifyDataSetChanged();
+                    adapter.notifyAll();
                         ann_prg.setVisibility(View.GONE);
                 }catch(Exception e){
                     Toast.makeText(getContext(),"Error : "+e,Toast.LENGTH_SHORT).show();

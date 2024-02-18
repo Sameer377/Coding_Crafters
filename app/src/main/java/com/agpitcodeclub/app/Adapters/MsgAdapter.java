@@ -41,15 +41,14 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgAdapterViewho
     @Override
     public void onBindViewHolder(@NotNull MsgAdapterViewholder holder, int position)
     {
-
         MsgModel model = list.get(position);
         String extractedWords = extractWords(model.getMsg(), 12);
         Glide.with(context).load(model.getProfileimg()).into(holder.msg_profile_img);
         holder.msg_date.setText(model.getDate());
         holder.msg_time.setText(model.getTime());
         holder.designation.setText(model.getDesignation());
-        String contentSUrl=model.getMsg_imguri();
-            if(contentSUrl!=null && !contentSUrl.isEmpty()){
+
+            if( model.getMsg_imguri()!=null ){
                 Glide.with(context).load(model.getMsg_imguri()).into(holder.msg_attached_img);
                 holder.img_cd.setVisibility(View.VISIBLE);
             }
