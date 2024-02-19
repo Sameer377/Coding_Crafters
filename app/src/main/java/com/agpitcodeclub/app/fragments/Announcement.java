@@ -32,28 +32,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 
 public class Announcement extends Fragment {
     //notification
 
-    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
-    final private String serverKey = "key=" + "AAAALRvzS04:APA91bH3O9LTYW7FNOWlSF2_4vY3jfUQ0qEVFYDg5kcwwK6CMW6wM6AyxHcu8JDzX1jmkfSIyz635qfjSXgU95KCffBzQCe3-ezeDDDSdzMQNih0CV1WYsyeo3o5ZyTOS8szxnKuswAr";
-    final private String contentType = "application/json";
-    final String TAG = "NOTIFICATION TAG";
-
+  
     String Userid=null;
 
-    String NOTIFICATION_TITLE;
-    String NOTIFICATION_MESSAGE;
-    String TOPIC;
 
 
     private LinearProgressIndicator ann_prg;
@@ -62,50 +49,13 @@ public class Announcement extends Fragment {
     public Announcement() {
     }
 
-    public static Announcement newInstance(String param1, String param2) {
-        Announcement fragment = new Announcement();
-        Bundle args = new Bundle();
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-/*
-        TOPIC = "/topics/userABC"; //topic must match with what the receiver subscribed to
-        NOTIFICATION_TITLE = "Demo Titile";
-        NOTIFICATION_MESSAGE = "Demo messege";
-
-        JSONObject notification = new JSONObject();
-        JSONObject notifcationBody = new JSONObject();
-        try {
-            notifcationBody.put("title", NOTIFICATION_TITLE);
-            notifcationBody.put("message", NOTIFICATION_MESSAGE);
-            notification.put("to", TOPIC);
-            notification.put("data", notifcationBody);
-        } catch (JSONException e) {
-            Log.e(TAG, "onCreate: " + e.getMessage() );
-        }
-        sendNotification(notification);*/
     }
 
-/*
-
-
-    private void sendNotification(JSONObject notification) {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
-                Listener      ){
-            @Override
-            public Map getHeaders() throws AuthFailureError {
-                Map params = new HashMap<>();
-                params.put("Authorization", serverKey);
-                params.put("Content-Type", contentType);
-                return params;
-            }
-        };
-        MySingleton.getInstance(getContext()).addToRequestQueue( jsonObjectRequest);
-    }
-*/
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -131,8 +81,6 @@ public class Announcement extends Fragment {
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getContext(),SendMessege.class);
-//                startActivity(intent);
 
                 Intent intent = new Intent(getContext(), SendMsgActivity.class);
                 getActivity().startActivity(intent);
@@ -156,30 +104,10 @@ public class Announcement extends Fragment {
         list=new ArrayList<>();
 
 
-
-       /* if(des==null){
-            des="";
-        }*/
-
-//        if (des.equals(FirebasePath.PRESIDENT)) {
-//            inbox_recycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//                @Override
-//                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                    super.onScrolled(recyclerView, dx, dy);
-//                    if (dy > 0 && fb.getVisibility() == View.VISIBLE) {
-//                        fb.hide();
-//                    } else if (dy < 0 && fb.getVisibility() !=View.VISIBLE) {
-//                        fb.show();
-//                    }
-//                }
-//            });
-       /* }else {
-            fb.setVisibility(View.GONE);
-        }*/
         SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
         Userid = prefs.getString(Credentials.USER_ID, null);
         fetchData();
-        loadContentInList();
+        loadConnectToInList ();
 
 
 
@@ -227,51 +155,11 @@ public class Announcement extends Fragment {
 
     }
 
-    public void sendNotification(String messege){
-
-        try{
-            JSONObject jsonObject = new JSONObject();
-            JSONObject notificationObj = new JSONObject();
-            notificationObj.put("title","Announcement");
-            notificationObj.put("body","Hello first notification");
-
-            JSONObject dataObj = new JSONObject();
-            dataObj.put("UserId","hello1");
-            jsonObject.put("notification",notificationObj);
-            jsonObject.put("data",dataObj);
-//            jsonObject.put("to",otherUser.getFCMToken());
-        }catch (Exception e){
-
-        }
-
-    }
-
-
-
-    private void callApi(JSONObject jsonObject){
-         MediaType JSON
-                = MediaType.get("application/json; charset=utf-8");
-
-        OkHttpClient client = new OkHttpClient();
-        String url ="https://fcm.googleapis.com/fcm/send";
-        RequestBody body = RequestBody.create(jsonObject.toString(),JSON);
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .header("Authorization","Bearer AAAALRvzS04:APA91bH3O9LTYW7FNOWlSF2_4vY3jfUQ0qEVFYDg5kcwwK6CMW6wM6AyxHcu8JDzX1jmkfSIyz635qfjSXgU95KCffBzQCe3-ezeDDDSdzMQNih0CV1WYsyeo3o5ZyTOS8szxnKuswAr")
-                .build();
-
-        client.newCall(request);
-
-    }
-
-
-//    ConnectTo
 
     private ArrayList<CommunityModel> list1;
 
     private RecyclerView recyclerView;
-    void loadContentInList(){
+    void loadConnectToInList (){
 
         databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY);
         recyclerView.setHasFixedSize(true);
@@ -299,9 +187,8 @@ public class Announcement extends Fragment {
 
                                 for (DataSnapshot dataSnapshot1 : snapshot1.getChildren()){
                                     CommunityModel user1 = dataSnapshot1.getValue(CommunityModel.class);
+                                    user1.setUserid(dataSnapshot1.getKey().toString());
                                     user1.setDesignation(dataSnapshot.getKey().toString());
-//                                    System.out.println("Name : "+user1.getName());
-//                                    System.out.println("des2 : "+user1.getDesignation());
                                         System.out.println("1 Names : "+user1.getName()+"\n");
                                         list1.add(user1);
 

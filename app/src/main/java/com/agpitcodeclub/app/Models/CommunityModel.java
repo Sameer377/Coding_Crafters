@@ -78,6 +78,30 @@ public class CommunityModel {
     public CommunityModel(){
 
     }
+
+
+    public CommunityModel(String name, String email, String password, String username, String profile, String description, String persuing, String designation, String userid) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.profile = profile;
+        this.description = description;
+        this.persuing = persuing;
+        this.designation = designation;
+        this.userid = userid;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String userid;
+
     public CommunityModel(String name, String email, String password, String profile, String persuing, String description, String designation){
         this.name=name;
         this.email=email;

@@ -51,6 +51,8 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgAdapterViewho
             if( model.getMsg_imguri()!=null ){
                 Glide.with(context).load(model.getMsg_imguri()).into(holder.msg_attached_img);
                 holder.img_cd.setVisibility(View.VISIBLE);
+            }else{
+                holder.img_cd.setVisibility(View.GONE);
             }
 
 
