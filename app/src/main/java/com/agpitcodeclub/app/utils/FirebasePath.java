@@ -33,4 +33,12 @@ public class FirebasePath {
     public static final String FCM_SERVER_KEY="AAAALRvzS04:APA91bH3O9LTYW7FNOWlSF2_4vY3jfUQ0qEVFYDg5kcwwK6CMW6wM6AyxHcu8JDzX1jmkfSIyz635qfjSXgU95KCffBzQCe3-ezeDDDSdzMQNih0CV1WYsyeo3o5ZyTOS8szxnKuswAr";
     public static final String FCM_CONTENT_TYPE="application/json";
     public static final String FCM_TOPIC="/topics/Announcement";
+
+    //Social Networks
+    public static final String SOCIAL = "socials";
+    public static final String USER_INSTAGRAM="instagram";
+    public static final String USER_TWITTER="twitter";
+    public static final String USER_GITHUB="github";
+    public static final String USER_LINKEDIN="linkedin";
+
 }

@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Announcement extends Fragment {
     //notification
@@ -130,7 +131,6 @@ public class Announcement extends Fragment {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         try {
 
-
                                 MsgModel user = dataSnapshot.getValue(MsgModel.class);
                                 list.add(0,user);
                         }catch (Exception e){
@@ -140,7 +140,6 @@ public class Announcement extends Fragment {
                     adapter.notifyAll();
                         ann_prg.setVisibility(View.GONE);
                 }catch(Exception e){
-                    Toast.makeText(getContext(),"Error : "+e,Toast.LENGTH_SHORT).show();
                         ann_prg.setVisibility(View.GONE);
 
                     }
@@ -179,6 +178,7 @@ public class Announcement extends Fragment {
                     user.setDesignation(dataSnapshot.getKey().toString());
                     System.out.println("Node1 : "+dataSnapshot.getKey().toString()+"\n"+dataSnapshot.getKey().equals(FirebasePath.DEVELOPER));
                     Log.v("tag","Name : "+user.getName()+"\nDesignation : "+user.getDesignation());
+
                     if (dataSnapshot.getKey().equals(FirebasePath.DEVELOPER)){
                         DatabaseReference innerChild = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY).child(dataSnapshot.getKey());
                         innerChild.addValueEventListener(new ValueEventListener() {

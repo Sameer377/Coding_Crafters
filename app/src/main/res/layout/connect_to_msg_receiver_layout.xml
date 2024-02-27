@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="left"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:linksClickable="true"
+        android:autoLink="web"
+        android:textColorLink="#0040FF"
+        android:maxWidth="320dp"
+        android:id="@+id/msg_txt"
+        android:minWidth="110dp"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        android:padding="10dp"
+        android:text="Hi "
+        android:background="@drawable/connect_to_reciever_msg"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/msg_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="04:26 pm	19 Feb 2024"
+        android:textColor="@color/white"
+        android:textSize="9dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/baloo_bhai_2_medium"/>
+</LinearLayout>

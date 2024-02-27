@@ -19,7 +19,6 @@ import com.agpitcodeclub.app.Models.ConnectToMsgModel;
 import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.utils.Credentials;
 import com.agpitcodeclub.app.utils.FirebasePath;
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class ConnectToMsg extends AppCompatActivity {
+public class ProfileSendMessageActivity  extends AppCompatActivity {
 
     private EditText msg_edt;
     private RecyclerView connectto_recycle;
@@ -44,11 +43,11 @@ public class ConnectToMsg extends AppCompatActivity {
     }
     TextView username,User_Des,guide_txt;
     String chatpath;
-    String uname;
     private void initUi(Intent intent) {
 
         SharedPreferences prefs = getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
-        uname = prefs.getString(Credentials.USER_NAME,null);
+        String user_des = prefs.getString(Credentials.USER_DESIGNATION,null);
+        String uid = prefs.getString(Credentials.USER_ID,null);
 
         username = findViewById(R.id.username_connecttomsg);
         User_Des = findViewById(R.id.User_Des);
@@ -56,13 +55,19 @@ public class ConnectToMsg extends AppCompatActivity {
         connectto_recycle=findViewById(R.id.connectto_recycle);
         guide_txt=findViewById(R.id.guide_txt);
 
-        String gt="Hey \uD83D\uDC4B\uD83C\uDFFB this is "+ intent.getExtras().get("username").toString().split(" ")[0]+" ask me anything i will guide you :) ";
+        ImageView imageView = findViewById(R.id.imgprofile_main);
+        imageView.setVisibility(View.GONE);
+        String sender = intent.getExtras().get("sender").toString();
+        username.setText(sender.split("___")[1]);
+        User_Des.setVisibility(View.GONE);
+        guide_txt.setVisibility(View.GONE);
 
-        Glide.with(getApplicationContext()).load(intent.getExtras().get("ImageUrl")).into((ImageView) findViewById(R.id.imgprofile_main));
-        username.setText(intent.getExtras().get("username").toString());
-        User_Des.setText(intent.getExtras().get("User_Des").toString().substring(2));
-        guide_txt.setText(gt);
-         chatpath =intent.getExtras().get("chatpath").toString();
+        chatpath = user_des+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+sender;
+        if(user_des==FirebasePath.DEVELOPER){
+            chatpath = user_des+"/"+uid+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+sender;
+        }
+
+
         findViewById(R.id.send_imgbtn).setOnClickListener((view -> {
             sendMessage(chatpath);
         }));
@@ -76,10 +81,10 @@ public class ConnectToMsg extends AppCompatActivity {
     private void loadChats() {
         ArrayList<ConnectToMsgModel> dataList = new ArrayList<ConnectToMsgModel>();
         ConnectToChatsAdapter connectToChatsAdapter = new ConnectToChatsAdapter(getApplicationContext());
-        connectToChatsAdapter.setINTENT_ID(0);
+        connectToChatsAdapter.setINTENT_ID(1);
         final boolean[] v = {true};
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY).child(chatpath+"___"+uname);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY).child(chatpath);
         Log.v("Chat Path : ",chatpath);
 // Add a ValueEventListener to retrieve data
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -141,8 +146,8 @@ public class ConnectToMsg extends AppCompatActivity {
         intimsg.put("msg",msg);
         intimsg.put("date", timeFormat.format(new Date())+"\t"+dateFormat.format(new Date()));
 
-        mDatabase =  FirebaseDatabase.getInstance().getReference().child(FirebasePath.COMMUNITY).child(chatpath+"___"+uname);
-        mDatabase.child(mDatabase.getRef().push().getKey()+"___sender").setValue(intimsg);
+        mDatabase =  FirebaseDatabase.getInstance().getReference().child(FirebasePath.COMMUNITY).child(chatpath);
+        mDatabase.child(mDatabase.getRef().push().getKey()+"___receiver").setValue(intimsg);
 
         msg_edt.setText("");
 //        chatpath = FirebasePath.DEVELOPER+"/"+model.getUserid()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;

@@ -2,6 +2,8 @@ package com.agpitcodeclub.app.Adapters;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agpitcodeclub.app.Models.CommunityModel;
 import com.agpitcodeclub.app.R;
+import com.agpitcodeclub.app.utils.FirebasePath;
 import com.bumptech.glide.Glide;
 
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +53,47 @@ ArrayList<CommunityModel> list;
 
         holder.persuingyr.setText("Persuing : "+model.getPersuing());
 
+        holder.com_pro_twitter.setOnClickListener((view ->
+        {
+            String u = model.getSocialurls().get(FirebasePath.USER_TWITTER);
+            if(u!=null){
+                Uri url=Uri.parse(u);
+                context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+            }else{
+                Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
+            }
+
+        }));
+        holder.com_pro_instagram.setOnClickListener((view ->
+        {
+            String u = model.getSocialurls().get(FirebasePath.USER_INSTAGRAM);
+            if(u!=null){
+                Uri url=Uri.parse(u);
+                context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+            }else{
+                Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
+            }
+        }));
+        holder.com_pro_linkedin.setOnClickListener((view ->
+        {
+            String u = model.getSocialurls().get(FirebasePath.USER_LINKEDIN);
+            if(u!=null){
+                Uri url=Uri.parse(u);
+                context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+            }else{
+                Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
+            }
+        }));
+        holder.com_pro_github.setOnClickListener((view ->
+        {
+            String u = model.getSocialurls().get(FirebasePath.USER_GITHUB);
+            if(u!=null){
+                Uri url=Uri.parse(u);
+                context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+            }else{
+                Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
+            }
+        }));
 
         holder.rel_info_cd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +141,7 @@ ArrayList<CommunityModel> list;
     // view (here "CommunityModel.xml")
     public static class CommunityProfileViewholder extends RecyclerView.ViewHolder {
         TextView name, designation, persuingyr;
-        ImageView profileImg;
+        ImageView profileImg,com_pro_github,com_pro_instagram,com_pro_linkedin,com_pro_twitter;
 
         RelativeLayout rel_info_cd,rel_main_comm;
         LinearLayout social_lin;
@@ -110,6 +155,12 @@ ArrayList<CommunityModel> list;
             social_lin= itemView.findViewById(R.id.social_lin);
             persuingyr = itemView.findViewById(R.id.community_profile_year_txt);
             profileImg=itemView.findViewById(R.id.item_card_profile_img);
+
+
+            com_pro_github=itemView.findViewById(R.id.com_pro_github);
+            com_pro_instagram=itemView.findViewById(R.id.com_pro_instagram);
+            com_pro_linkedin=itemView.findViewById(R.id.com_pro_linkedin);
+            com_pro_twitter=itemView.findViewById(R.id.com_pro_twitter);
         }
     }
 }

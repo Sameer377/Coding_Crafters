@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ProfileMessages">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/baseline_arrow_back_24"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Messages"
+            android:textColor="@color/teal_200"
+            android:fontFamily="@font/inter_extrabold"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"/>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Empty !\nMessages not found "
+        android:textColor="@color/white"
+        android:id="@+id/no_msg_dialog"
+        android:visibility="visible"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textSize="13dp"
+        android:background="@drawable/guide_txt_outline"
+        android:padding="20dp"
+        android:layout_marginBottom="1dp"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        />
+
+    <ListView
+        android:layout_margin="20dp"
+        android:id="@+id/messegelist_recycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>

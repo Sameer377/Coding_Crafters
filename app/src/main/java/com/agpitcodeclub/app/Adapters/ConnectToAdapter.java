@@ -75,7 +75,7 @@ public class ConnectToAdapter extends RecyclerView.Adapter< ConnectToAdapter.Com
                 intent.putExtra("ImageUrl",model.getProfile());
                 intent.putExtra("username",model.getName());
                 intent.putExtra("User_Des",model.getDesignation());
-                String chatpath="";
+                String chatpath=model.getDesignation()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;
                 if(model.getDesignation()==FirebasePath.DEVELOPER||model.getDesignation().equals(FirebasePath.DEVELOPER)){
                    chatpath =FirebasePath.DEVELOPER+"/"+model.getUserid()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;
 

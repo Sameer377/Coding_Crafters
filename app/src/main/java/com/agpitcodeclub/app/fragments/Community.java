@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Community extends Fragment {
 
@@ -100,6 +101,7 @@ public class Community extends Fragment {
         list=new ArrayList<>();
         adapter = new CommunityProfileAdapter(context,list);
         recyclerView.setAdapter(adapter);
+        
         String t="DB status";
         ArrayList<CommunityModel> listinner=new ArrayList<>();
         Log.v(t,"Entering.......");
@@ -124,6 +126,12 @@ public class Community extends Fragment {
                                     user1.setDesignation(dataSnapshot.getKey().substring(2));
 //                                    System.out.println("Name : "+user1.getName());
 //                                    System.out.println("des2 : "+user1.getDesignation());
+
+                                    HashMap<String,String> url = new HashMap<>();
+                                    for(DataSnapshot dataSnapshot2 : dataSnapshot1.child(FirebasePath.SOCIAL).getChildren()){
+                                        url.put(dataSnapshot2.getKey().toString(),dataSnapshot2.getValue().toString());
+                                    }
+                                    user1.setSocialurls(url);
                                     list.add(user1);
 
                                     System.out.println("list status : "+list.contains(user1));
@@ -143,6 +151,11 @@ public class Community extends Fragment {
 
 
                     }else {
+                        HashMap<String,String> url = new HashMap<>();
+                        for(DataSnapshot dataSnapshot1 : dataSnapshot.child(FirebasePath.SOCIAL).getChildren()){
+                            url.put(dataSnapshot1.getKey().toString(),dataSnapshot1.getValue().toString());
+                        }
+                        user.setSocialurls(url);
                         list.add(user);
                         community_prg.setVisibility(View.GONE);
 

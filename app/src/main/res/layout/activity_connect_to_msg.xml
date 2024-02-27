@@ -63,12 +63,13 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-    <!--  <TextView
+      <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Hey 👋🏻 this is vaishnavi ask me anything i will guide you "
           android:textColor="@color/white"
-            android:id="@+id/guide_txt"
+          android:id="@+id/guide_txt"
+          android:visibility="visible"
           android:layout_marginLeft="50dp"
           android:layout_marginRight="50dp"
           android:layout_marginTop="20dp"
@@ -78,8 +79,9 @@
           android:padding="20dp"
           android:layout_marginBottom="1dp"
           android:fontFamily="@font/baloo_bhai_2_medium"
-          />-->
+          />
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/guide_txt"
         android:orientation="vertical"
         android:background="@color/background"
         android:id="@+id/connectto_recycle"

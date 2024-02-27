@@ -1,6 +1,8 @@
 package com.agpitcodeclub.app.Models;
 
 
+import java.util.HashMap;
+
 public class CommunityModel {
     private String name;
     private String email;
@@ -80,6 +82,16 @@ public class CommunityModel {
     }
 
 
+    public HashMap<String, String> getSocialurls() {
+        return socialurls;
+    }
+
+    public void setSocialurls(HashMap<String, String> socialurls) {
+        this.socialurls = socialurls;
+    }
+
+    HashMap<String,String> socialurls = new HashMap<>();
+
     public CommunityModel(String name, String email, String password, String username, String profile, String description, String persuing, String designation, String userid) {
         this.name = name;
         this.email = email;
@@ -91,7 +103,18 @@ public class CommunityModel {
         this.designation = designation;
         this.userid = userid;
     }
-
+    public CommunityModel(String name, String email, String password, String username, String profile, String description, String persuing, String designation, String userid,HashMap<String,String> url) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.profile = profile;
+        this.description = description;
+        this.persuing = persuing;
+        this.designation = designation;
+        this.userid = userid;
+        this.socialurls=url;
+    }
     public String getUserid() {
         return userid;
     }

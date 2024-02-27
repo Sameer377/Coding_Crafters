@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.agpitcodeclub.app" >
+    package="com.agpitcodeclub.app">
 
     <uses-feature
         android:name="android.hardware.telephony"
@@ -21,7 +21,10 @@
         android:label="Coding Crafters"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AGPITCodeClub" >
+        android:theme="@style/Theme.AGPITCodeClub">
+        <activity
+            android:name=".fragments.ProfileMessages"
+            android:exported="false" />
         <activity
             android:name=".fragments.ConnectToMsg"
             android:exported="false"
@@ -50,13 +53,17 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".fragments.ProfileSendMessageActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".credentials.AddMember"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,7 +74,7 @@
         <service
             android:name=".services.NotificationService"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.Send" >
+            android:permission="com.google.android.c2dm.permission.Send">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.android.c2dm.intent.Recieve" />

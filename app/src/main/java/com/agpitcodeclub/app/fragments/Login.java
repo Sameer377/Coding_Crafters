@@ -175,7 +175,7 @@ public class Login extends Fragment implements View.OnClickListener {
                                 mFirebaseDatabase       .child(userId).setValue(user1);
                                 signup_status_prg.setVisibility(View.GONE);
                                 userLogin=true;
-                                storeUserData(email,password,name,null,null, null,userId);
+                                storeUserData(email,password,name,null,null, null,userId,"");
                                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                                 ft.replace(R.id.dashboardframe, new Profile(), "NewFragmentTag");
                                 ft.commit();
@@ -253,7 +253,8 @@ public class Login extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                            UserID= FirebaseAuth.getInstance().getCurrentUser().getUid();
                             isMember=checkbox_mem.isChecked();
-                            checkDataInDatabase();
+                           try{ checkDataInDatabase();
+                           }catch (Exception e){}
                             Log.v("User data ....... "," user found ");
 
                         } else {
@@ -270,8 +271,10 @@ public class Login extends Fragment implements View.OnClickListener {
     private String token_des = null;
     private DatabaseReference reference;
 
+    String userpath="";
 
-    public void checkDataInDatabase(){
+
+    public void checkDataInDatabase() throws Exception{
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.dashboardframe, new Profile(), "NewFragmentTag");
         if(isMember){
@@ -295,7 +298,10 @@ public class Login extends Fragment implements View.OnClickListener {
                         reference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY);
 
                         Toast.makeText(getContext(),"Designation : "+token_des,Toast.LENGTH_LONG).show();
-                        token_des=token_des.trim();
+                        try{
+                            token_des=token_des.trim();
+
+                        }catch (Exception e){}
                         Toast.makeText(getContext(),(token_des!=FirebasePath.DEVELOPER&& token_des!=FirebasePath.MEMBER) +"",Toast.LENGTH_LONG).show();
                         try {
                             if (!token_des.equals(FirebasePath.DEVELOPER) && !token_des.equals(FirebasePath.MEMBER)) {
@@ -307,7 +313,7 @@ public class Login extends Fragment implements View.OnClickListener {
                                         if (user != null) {
                                             userLogin = true;
 
-                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID);
+                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID,token_des);
                                             ft.commit();
 
                                         } else {
@@ -330,7 +336,7 @@ public class Login extends Fragment implements View.OnClickListener {
                                         if (user != null) {
                                             userLogin = true;
 
-                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID);
+                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID,FirebasePath.DEVELOPER);
 
                                             ft.commit();
 
@@ -354,7 +360,7 @@ public class Login extends Fragment implements View.OnClickListener {
                                         if (user != null) {
                                             userLogin = true;
 
-                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID);
+                                            storeUserData(user.getemail(), user.getPassword(), user.getName(), user.getPersuing(), token_des, user.getProfile(), UserID,"");
                                             ft.commit();
 
                                         } else {
@@ -388,7 +394,7 @@ public class Login extends Fragment implements View.OnClickListener {
                     CommunityModel user = snapshot.getValue(CommunityModel.class);
                     if (user != null) {
                         userLogin=true;
-                        storeUserData(user.getemail(),user.getPassword(),user.getName(),null,FirebasePath.USERS,user.getProfile(),UserID);
+                        storeUserData(user.getemail(),user.getPassword(),user.getName(),null,FirebasePath.USERS,user.getProfile(),UserID,"");
                         ft.commit();
 
                     }else{
@@ -410,13 +416,13 @@ public class Login extends Fragment implements View.OnClickListener {
     }
 
 
-    private void storeUserData(String email,String pass,String name,String year,String designation,String imgAddress,String userid){
+    private void storeUserData(String email,String pass,String name,String year,String designation,String imgAddress,String userid,String userpath){
         SharedPreferences.Editor editor = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE).edit();
         editor.putString(Credentials.USER_EMAIL, email);
         editor.putString(Credentials.USER_PASS, pass);
         editor.putString(Credentials.USER_NAME,name);
         editor.putString(Credentials.USER_ID,userid);
-
+        editor.putString(Credentials.USER_PATH,userpath);
 
 
 

@@ -40,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_extrabold"
-            android:text="President"
             android:textColor="@color/soft_red"
             android:textSize="25dp" />
 
@@ -56,8 +55,9 @@
     </LinearLayout>
 </RelativeLayout>
 
- <ScrollView
+ <androidx.core.widget.NestedScrollView
      android:scrollbars="none"
+     android:id="@+id/nsScroll"
      android:padding="20dp"
      android:layout_marginTop="2dp"
      android:layout_width="match_parent"
@@ -191,6 +191,7 @@
          </androidx.cardview.widget.CardView>
 
          <LinearLayout
+
              android:visibility="gone"
              android:id="@+id/social_frame_lin"
              android:layout_width="match_parent"
@@ -281,6 +282,47 @@
          </androidx.cardview.widget.CardView>
 
          </LinearLayout>
+         <LinearLayout
+             android:id="@+id/pro_lin_messages"
+             android:visibility="gone"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+
+             <TextView
+                 android:layout_marginTop="10dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Messages"
+                 android:textColor="@color/soft_red"
+                 android:textSize="20dp"
+                 android:fontFamily="@font/inter_extrabold"/>
+
+             <androidx.cardview.widget.CardView
+                 android:id="@+id/check_msg_cv"
+                 app:cardCornerRadius="10dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 app:cardBackgroundColor="@color/cardbg"
+                 android:layout_marginTop="10dp"
+                 >
+
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="Check Messeges"
+                     android:fontFamily="@font/inter_extrabold"
+                     android:textSize="18dp"
+                     android:textColor="@color/white"
+                     android:gravity="center_vertical"
+                     android:layout_margin="20dp"
+                     />
+
+
+             </androidx.cardview.widget.CardView>
+
+         </LinearLayout>
 
          <androidx.appcompat.widget.AppCompatButton
              android:layout_width="100dp"
@@ -298,6 +340,6 @@
 
      </LinearLayout>
 
- </ScrollView>
+ </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
