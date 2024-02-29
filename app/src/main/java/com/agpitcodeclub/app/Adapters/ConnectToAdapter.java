@@ -30,7 +30,17 @@ public class ConnectToAdapter extends RecyclerView.Adapter< ConnectToAdapter.Com
     Context context;
     String Userid;
     ArrayList<CommunityModel> list;
-    public ConnectToAdapter(Context context, ArrayList<CommunityModel> list,String Userid) {
+    String Uid;
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
+
+    public ConnectToAdapter(Context context, ArrayList<CommunityModel> list, String Userid) {
         this.context =context;
         this.list=list;
         this.Userid=Userid;
@@ -64,34 +74,40 @@ public class ConnectToAdapter extends RecyclerView.Adapter< ConnectToAdapter.Com
         holder.profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String gt="Hey \uD83D\uDC4B\uD83C\uDFFB this is "+ model.getName().split(" ")[0]+" ask me anything i will guide you :) ";
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
-                SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
-                HashMap<String,String> intimsg = new HashMap<>();
-                intimsg.put("msg",gt);
-                intimsg.put("date", timeFormat.format(new Date())+"\t"+dateFormat.format(new Date()));
+                if(Userid!=null){
 
-                Intent intent = new Intent(context, ConnectToMsg.class);
-                intent.putExtra("ImageUrl",model.getProfile());
-                intent.putExtra("username",model.getName());
-                intent.putExtra("User_Des",model.getDesignation());
-                String chatpath=model.getDesignation()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;
-                if(model.getDesignation()==FirebasePath.DEVELOPER||model.getDesignation().equals(FirebasePath.DEVELOPER)){
-                   chatpath =FirebasePath.DEVELOPER+"/"+model.getUserid()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;
+                    String gt="Hey \uD83D\uDC4B\uD83C\uDFFB this is "+ model.getName().split(" ")[0]+" ask me anything i will guide you :) ";
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+                    HashMap<String,String> intimsg = new HashMap<>();
+                    intimsg.put("msg",gt);
+                    intimsg.put("date", timeFormat.format(new Date())+"\t"+dateFormat.format(new Date()));
+
+                    Intent intent = new Intent(context, ConnectToMsg.class);
+                    intent.putExtra("ImageUrl",model.getProfile());
+                    intent.putExtra("username",model.getName());
+                    intent.putExtra("User_Des",model.getDesignation());
+                    String chatpath=model.getDesignation()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;
+                    if(model.getDesignation()==FirebasePath.DEVELOPER||model.getDesignation().equals(FirebasePath.DEVELOPER)){
+                        chatpath =FirebasePath.DEVELOPER+"/"+model.getUserid()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;
 
 
+                    }else{
+                        mDatabase[0] = FirebaseDatabase.getInstance().getReference().child(FirebasePath.COMMUNITY).child(model.getDesignation()).child(FirebasePath.CONNECT_TO_CHATS);
+                        chatpath =model.getDesignation()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;
+                    }
+                    intent.putExtra("chatpath",chatpath);
+                    context.startActivity(intent);
                 }else{
-                    mDatabase[0] = FirebaseDatabase.getInstance().getReference().child(FirebasePath.COMMUNITY).child(model.getDesignation()).child(FirebasePath.CONNECT_TO_CHATS);
-                    chatpath =model.getDesignation()+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+Userid;
+                    Toast.makeText(context,"Login to connect",Toast.LENGTH_LONG).show();
+
                 }
-                intent.putExtra("chatpath",chatpath);
-                context.startActivity(intent);
 
 
 
 
 
-                Toast.makeText(context,Userid,Toast.LENGTH_LONG).show();
+
 
             }
         });

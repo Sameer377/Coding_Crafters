@@ -34,7 +34,6 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Announcement extends Fragment {
     //notification
@@ -112,7 +111,6 @@ public class Announcement extends Fragment {
 
 
 
-         Toast.makeText(getContext(),Userid+"",Toast.LENGTH_LONG).show();
 
     }
     private ArrayList<MsgModel> list;

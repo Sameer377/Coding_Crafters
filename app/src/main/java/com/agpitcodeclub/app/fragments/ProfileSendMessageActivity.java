@@ -61,11 +61,12 @@ public class ProfileSendMessageActivity  extends AppCompatActivity {
         username.setText(sender.split("___")[1]);
         User_Des.setVisibility(View.GONE);
         guide_txt.setVisibility(View.GONE);
-
-        chatpath = user_des+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+sender;
         if(user_des==FirebasePath.DEVELOPER){
             chatpath = user_des+"/"+uid+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+sender;
+        }else{
+            chatpath = user_des+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+sender;
         }
+
 
 
         findViewById(R.id.send_imgbtn).setOnClickListener((view -> {
