@@ -87,7 +87,7 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/baloo_bhai_2_medium"
         android:justificationMode="inter_word"
-        android:text="@string/benefits_of_club"
+
         android:textColor="@color/white"
         android:textSize="16dp" />
 
