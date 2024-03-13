@@ -34,6 +34,7 @@ import java.util.HashMap;
 public class ConnectToMsg extends AppCompatActivity {
 
     private EditText msg_edt;
+    private ImageView msg_back_btn;
     private RecyclerView connectto_recycle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,9 @@ public class ConnectToMsg extends AppCompatActivity {
         msg_edt=findViewById(R.id.msg_edt);
         connectto_recycle=findViewById(R.id.connectto_recycle);
         guide_txt=findViewById(R.id.guide_txt);
-
+        findViewById(R.id.msg_back_btn).setOnClickListener((view -> {
+            finish();
+        }));
         String gt="Hey \uD83D\uDC4B\uD83C\uDFFB this is "+ intent.getExtras().get("username").toString().split(" ")[0]+" ask me anything i will guide you :) ";
 
         Glide.with(getApplicationContext()).load(intent.getExtras().get("ImageUrl")).into((ImageView) findViewById(R.id.imgprofile_main));

@@ -254,11 +254,78 @@
                     />
 
 
+
+                <LinearLayout
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:id="@+id/lin_gform"
+                    android:gravity="center_horizontal"
+                    android:layout_below="@id/paymentbtn"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/guide_txt_outline"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Register for the event"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/baloo_bhai_2_medium"
+                        android:textSize="16dp"
+                        />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_marginTop="20dp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/baloo_bhai_2_medium"
+                        android:textColor="@color/teal_200"
+                        android:textAllCaps="false"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="Open"
+                        android:background="@drawable/community_profile_card"/>
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2"
+                        >
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:textAllCaps="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="upload url"
+                            android:background="@drawable/std_btn"
+                            android:layout_marginEnd="10dp"
+                            android:id="@+id/gfrom_url_upload"
+                            android:layout_weight="1"/>
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:textAllCaps="false"
+                            android:layout_marginStart="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/red_logout_btn_bg"
+                            android:text="Delete"
+                            android:id="@+id/gfrom_url_delete"
+                            android:layout_weight="1"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/txt_men"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/paymentbtn"
+                    android:layout_below="@id/lin_gform"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/inter_extrabold"
                     android:gravity="center"

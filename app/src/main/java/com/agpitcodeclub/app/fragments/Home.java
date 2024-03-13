@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -25,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
@@ -76,7 +78,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     private TextView txt_intro;
     private TextView txt_logo;
     private ImageView btn_pickimg;
-    private AppCompatButton btn_upload_up_img;
+    private AppCompatButton btn_upload_up_img,gfrom_url_upload;
     private GifImageView up_img;
     private EditText edt_des_up_img;
     private Uri fileUrl;
@@ -110,6 +112,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         btn_pickimg.setOnClickListener(this);
         btn_upload_up_img.setOnClickListener(this);
         upcomming_btn_prg=view.findViewById(R.id.upcomming_btn_prg);
+        gfrom_url_upload=view.findViewById(R.id.gfrom_url_upload);
         paymentbtn.setOnClickListener(this);
         setImageDetails();
 
@@ -128,6 +131,14 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
             btn_pickimg.setVisibility(View.GONE);
             edt_des_up_img.setEnabled(false);
         }
+        gform();
+    }
+
+    void gform(){
+
+        gfrom_url_upload.setOnClickListener((view -> {
+            showCustomDialog();
+        }));
     }
 
     @Override
@@ -174,6 +185,46 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         return view;
     }
 
+    private void showCustomDialog() {
+
+
+
+
+        // Inflate the custom layout
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
+        View customLayout = inflater.inflate(R.layout.gform_dialog, null);
+
+        // Find the EditText views in the custom layout
+        EditText editText1 = customLayout.findViewById(R.id.editText1);
+        EditText editText2 = customLayout.findViewById(R.id.editText2);
+
+        // Build the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder
+                .setView(customLayout)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Handle OK button click
+                        String text1 = editText1.getText().toString();
+                        String text2 = editText2.getText().toString();
+
+                        // Process the entered text
+                        // ...
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Handle Cancel button click
+                        dialog.dismiss();
+                    }
+                });
+
+        // Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
     Handler handler;
     private void displayTag() {
