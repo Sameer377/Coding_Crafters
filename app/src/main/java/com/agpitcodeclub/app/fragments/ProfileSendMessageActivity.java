@@ -33,6 +33,7 @@ import java.util.HashMap;
 public class ProfileSendMessageActivity  extends AppCompatActivity {
 
     private EditText msg_edt;
+    private ImageView msg_back_btn;
     private RecyclerView connectto_recycle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,11 @@ public class ProfileSendMessageActivity  extends AppCompatActivity {
         msg_edt=findViewById(R.id.msg_edt);
         connectto_recycle=findViewById(R.id.connectto_recycle);
         guide_txt=findViewById(R.id.guide_txt);
+        msg_back_btn=findViewById(R.id.msg_back_btn);
+
+        msg_back_btn.setOnClickListener((view -> {
+            finish();
+        }));
 
         ImageView imageView = findViewById(R.id.imgprofile_main);
         imageView.setVisibility(View.GONE);
@@ -61,7 +67,7 @@ public class ProfileSendMessageActivity  extends AppCompatActivity {
         username.setText(sender.split("___")[1]);
         User_Des.setVisibility(View.GONE);
         guide_txt.setVisibility(View.GONE);
-        if(user_des==FirebasePath.DEVELOPER){
+        if(user_des.equals(FirebasePath.DEVELOPER)){
             chatpath = user_des+"/"+uid+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+sender;
         }else{
             chatpath = user_des+"/"+FirebasePath.CONNECT_TO_CHATS+"/"+sender;

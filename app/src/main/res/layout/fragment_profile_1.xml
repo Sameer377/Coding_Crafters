@@ -23,7 +23,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/profilebg"
         android:scaleType="fitXY"
-        android:src="@drawable/person_filled"
+        android:src="@drawable/roboprofile"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
     <LinearLayout
@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_extrabold"
             android:textColor="@color/soft_red"
+            android:text="User"
             android:textSize="25dp" />
 
         <TextView
@@ -106,6 +107,7 @@
                      android:textColor="@color/white"
                      android:textSize="18dp"/>
                   <TextView
+                      android:visibility="gone"
                       android:layout_marginTop="5dp"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
@@ -115,6 +117,7 @@
                      android:textStyle="bold"
                      android:textSize="18dp"/>
                  <TextView
+                     android:visibility="gone"
                      android:id="@+id/phone_profile"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
@@ -159,31 +162,6 @@
                      android:textSize="18dp"/>
 
 
-                 <RelativeLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal">
-
-                     <TextView
-                         android:id="@+id/updated_profile"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_alignParentBottom="true"
-                         android:text="Updated on : 01 nov 2023"
-                         android:textColor="@color/white"
-                         android:textSize="10dp" />
-
-                     <androidx.appcompat.widget.AppCompatButton
-                         android:layout_alignParentRight="true"
-                         android:layout_width="wrap_content"
-                         android:layout_height="30dp"
-                         android:text="Edit Details"
-                         android:textAllCaps="false"
-                         android:textSize="12dp"
-                         android:fontFamily="@font/baloo_bhai_2_medium"
-                         android:textStyle="bold"
-                         android:background="@drawable/btn_teal"/>
-                 </RelativeLayout>
 
 
              </LinearLayout>

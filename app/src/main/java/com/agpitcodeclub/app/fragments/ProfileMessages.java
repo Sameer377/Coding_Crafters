@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -26,13 +27,19 @@ import java.util.ArrayList;
 
 public class ProfileMessages extends AppCompatActivity {
     private ListView messegelist_recycle;
-
+    private ImageView btn_profile_msg_back;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_messages);
         messegelist_recycle=findViewById(R.id.messegelist_recycle);
+        btn_profile_msg_back=findViewById(R.id.btn_profile_msg_back);
+
+        btn_profile_msg_back.setOnClickListener((view -> {
+            finish();
+        }));
+
         SharedPreferences prefs = getApplicationContext().getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
         UserID = prefs.getString(Credentials.USER_ID,null);
         userpath=prefs.getString(Credentials.USER_PATH,null);

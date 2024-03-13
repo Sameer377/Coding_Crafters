@@ -57,8 +57,13 @@ ArrayList<CommunityModel> list;
         {
             String u = model.getSocialurls().get(FirebasePath.USER_TWITTER);
             if(u!=null){
-                Uri url=Uri.parse(u);
-                context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+                try {
+                    Uri url=Uri.parse(u);
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+                }catch (Exception e){
+                    Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
+                }
+
             }else{
                 Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
             }
@@ -68,8 +73,12 @@ ArrayList<CommunityModel> list;
         {
             String u = model.getSocialurls().get(FirebasePath.USER_INSTAGRAM);
             if(u!=null){
-                Uri url=Uri.parse(u);
-                context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+                try {
+                    Uri url=Uri.parse(u);
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+                }catch (Exception e){
+                    Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
+                }
             }else{
                 Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
             }
@@ -78,8 +87,12 @@ ArrayList<CommunityModel> list;
         {
             String u = model.getSocialurls().get(FirebasePath.USER_LINKEDIN);
             if(u!=null){
-                Uri url=Uri.parse(u);
-                context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+                try {
+                    Uri url=Uri.parse(u);
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+                }catch (Exception e){
+                    Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
+                }
             }else{
                 Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
             }
@@ -88,8 +101,12 @@ ArrayList<CommunityModel> list;
         {
             String u = model.getSocialurls().get(FirebasePath.USER_GITHUB);
             if(u!=null){
-                Uri url=Uri.parse(u);
-                context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+                try {
+                    Uri url=Uri.parse(u);
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,url));
+                }catch (Exception e){
+                    Toast.makeText(context,"Invalid Url",Toast.LENGTH_SHORT).show();
+                }
             }else{
                 Toast.makeText(context,"Url not available",Toast.LENGTH_SHORT).show();
             }

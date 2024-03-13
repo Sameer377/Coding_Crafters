@@ -29,14 +29,21 @@ public class EditTextDialog {
 
         // Set the title for the dialog (optional)
         builder.setTitle("Add "+app+" url");
-
+        builder.setMessage("paste profile sharing url from the "+app+" application .");
         // Set positive button with click listener
         builder.setPositiveButton("OK", (dialog, which) -> {
             // Handle the positive button click, e.g., retrieve text from EditText
-            enteredText = editText.getText().toString();
-            databaseReference.setValue(enteredText);
-            Toast.makeText(context,"url added",Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
+            enteredText = editText.getText().toString().trim();
+
+            if(editText.getText().toString().trim().isEmpty()){
+                editText.setError("Invalid Url");
+            }else{
+                databaseReference.setValue(enteredText);
+                Toast.makeText(context,"url added",Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+
+
             // Do something with the entered text
         });
 

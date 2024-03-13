@@ -117,12 +117,12 @@ public class Profile extends Fragment implements View.OnClickListener{
         String phone_str="8999596143";
         UserID = prefs.getString(Credentials.USER_ID,null);
         userpath=prefs.getString(Credentials.USER_PATH,null);
-
+        persuing_profile.setText(year);
         phone.setText(phone_str);
         name_profile.setText(name);
         if(designation!=null){
             designation_profile.setText(designation.substring(2));
-            persuing_profile.setText(year);
+
             Glide.with(getContext()).load(image).into(imgprofile_main);
 
         }

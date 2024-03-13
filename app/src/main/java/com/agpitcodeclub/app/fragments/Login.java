@@ -10,9 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,12 +42,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 
 public class Login extends Fragment implements View.OnClickListener {
 
     private EditText cre_name, cre_email, cre_password;
+    private Spinner cre_persuingspinner;
     private AppCompatButton login_btn;
     private CheckBox checkbox_mem;
     private String userId="";
@@ -85,7 +90,6 @@ public class Login extends Fragment implements View.OnClickListener {
         login_btn.setOnClickListener(this);
         lin_page_t.setOnClickListener(this);
     }
-
     private void initUi(View view) {
         cre_name = view.findViewById(R.id.cre_name);
         cre_email = view.findViewById(R.id.cre_email);
@@ -97,6 +101,30 @@ public class Login extends Fragment implements View.OnClickListener {
         txt_link_signup=view.findViewById(R.id.txt_link_signup);
         txt_page_t=view.findViewById(R.id.txt_page_t);
         signup_status_prg=view.findViewById(R.id.signup_status_prg);
+        cre_persuingspinner=view.findViewById(R.id.cre_persuingspinner);
+
+        ArrayList<String> arrayList1 = new ArrayList<>();
+
+        arrayList1.add("Select year");
+        arrayList1.add("1st year");
+        arrayList1.add("2nd year");
+        arrayList1.add("3rd year");
+        arrayList1.add("Final year");
+        arrayList1.add("Other");
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getContext(),R.layout.spinner_custom_item, arrayList1);
+        arrayAdapter1.setDropDownViewResource(R.layout.spinner_custom_item);
+        cre_persuingspinner.setAdapter(arrayAdapter1);
+
+        cre_persuingspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                persuing = arrayList1.get(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+                Toast.makeText(getContext(),"Select year", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseInstance = FirebaseDatabase.getInstance();
@@ -116,6 +144,7 @@ public class Login extends Fragment implements View.OnClickListener {
         txt_link_signup.setText("Login");
         txt_page_t.setText("Already have  an Account ?");
         checkbox_mem.setVisibility(View.INVISIBLE);
+        cre_persuingspinner.setVisibility(View.VISIBLE);
     }
 
     private void login(){
@@ -128,15 +157,20 @@ public class Login extends Fragment implements View.OnClickListener {
         txt_page_t.setText("New User? ");
         txt_link_signup.setText("Sign Up");
         checkbox_mem.setVisibility(View.VISIBLE);
+        cre_persuingspinner.setVisibility(View.GONE);
+
     }
 
     public static boolean isMember=false;
+    String persuing = "";
 
     private void adduser() {
 
         String name = cre_name.getText().toString().trim();
         String email = cre_email.getText().toString().trim();
         String password = cre_password.getText().toString().trim();
+
+
 
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         //Compile regular expression to get the pattern
@@ -156,6 +190,11 @@ public class Login extends Fragment implements View.OnClickListener {
             return;
         }
 
+        if(persuing.equals("Select year")||persuing==""){
+            Toast.makeText(context, "Select year", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
             signup_status_prg.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
@@ -171,11 +210,11 @@ public class Login extends Fragment implements View.OnClickListener {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("status : ", "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                User user1=new User(name,email,password);
+                                User user1=new User(name,email,password,persuing);
                                 mFirebaseDatabase       .child(userId).setValue(user1);
                                 signup_status_prg.setVisibility(View.GONE);
                                 userLogin=true;
-                                storeUserData(email,password,name,null,null, null,userId,"");
+                                storeUserData(email,password,name,persuing,null, null,userId,"");
                                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                                 ft.replace(R.id.dashboardframe, new Profile(), "NewFragmentTag");
                                 ft.commit();
@@ -289,7 +328,7 @@ public class Login extends Fragment implements View.OnClickListener {
                         if (task.getResult().getValue()==null){
 
 
-                            Toast.makeText(getContext(),"1 User not found ! ",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"User not found ! ",Toast.LENGTH_SHORT).show();
 
                         }else{
                             token_des = task.getResult().getValue().toString();
@@ -297,12 +336,10 @@ public class Login extends Fragment implements View.OnClickListener {
 
                         reference = FirebaseDatabase.getInstance().getReference(FirebasePath.COMMUNITY);
 
-                        Toast.makeText(getContext(),"Designation : "+token_des,Toast.LENGTH_LONG).show();
                         try{
                             token_des=token_des.trim();
 
                         }catch (Exception e){}
-                        Toast.makeText(getContext(),(token_des!=FirebasePath.DEVELOPER&& token_des!=FirebasePath.MEMBER) +"",Toast.LENGTH_LONG).show();
                         try {
                             if (!token_des.equals(FirebasePath.DEVELOPER) && !token_des.equals(FirebasePath.MEMBER)) {
 
@@ -385,20 +422,19 @@ public class Login extends Fragment implements View.OnClickListener {
         }else{
 
             databaseReference = FirebaseDatabase.getInstance().getReference(FirebasePath.USERS);
-            Toast.makeText(getContext()," hello "+token_des,Toast.LENGTH_LONG).show();
 
 
             databaseReference.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
-                    CommunityModel user = snapshot.getValue(CommunityModel.class);
+                    User user = snapshot.getValue(User.class);
                     if (user != null) {
                         userLogin=true;
-                        storeUserData(user.getemail(),user.getPassword(),user.getName(),null,FirebasePath.USERS,user.getProfile(),UserID,"");
+                        storeUserData(user.getEmail(),user.getPassword(),user.getName(),user.getPersuing(),FirebasePath.USERS,user.getProfile(),UserID,"");
                         ft.commit();
 
                     }else{
-                        Toast.makeText(getContext(),"5 User not found !",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"User not found !",Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -423,16 +459,15 @@ public class Login extends Fragment implements View.OnClickListener {
         editor.putString(Credentials.USER_NAME,name);
         editor.putString(Credentials.USER_ID,userid);
         editor.putString(Credentials.USER_PATH,userpath);
+        editor.putString(Credentials.USER_YEAR,year);
 
 
 
            if(designation!=FirebasePath.USERS&&designation!=null){
                editor.putString(Credentials.USER_PROFILE_IMG,imgAddress);
-               editor.putString(Credentials.USER_YEAR,year);
                editor.putString(Credentials.USER_DESIGNATION,designation);
            }else {
                editor.putString(Credentials.USER_PROFILE_IMG,null);
-               editor.putString(Credentials.USER_YEAR,null);
                editor.putString(Credentials.USER_DESIGNATION,null);
 
            }
