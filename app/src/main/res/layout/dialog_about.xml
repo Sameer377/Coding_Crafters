@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+  android:minWidth="400dp"
+    android:paddingBottom="30dp"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/dialocback"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_round_close_24"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/logo"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="@color/background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coding "
+            android:textColor="@color/white"
+            android:fontFamily="@font/baloo_bhai"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crafters"
+            android:textColor="@color/soft_red"
+            android:fontFamily="@font/baloo_bhai_2_medium"
+            android:textSize="20dp"
+
+            />
+
+    </LinearLayout>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Developed by members of coding crafter.\n 2023 - 2024"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        android:textSize="16dp"
+        />  
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 2.0"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developers and Designers"
+        android:textColor="@color/teal_200"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        />
+    
+        <LinearLayout
+            android:background="@drawable/community_profile_card"
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            
+            <ImageView
+                android:scaleType="centerCrop"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/sameerimg"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sameer Shaikh"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter_extrabold"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sameershaikh01072004@gmail.com"
+                    android:textColor="@color/teal_200"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:layout_marginTop="5dp"
+                    android:textIsSelectable="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+91 8999596143"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:layout_marginTop="5dp"
+                    android:textIsSelectable="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CSE-TY ( AGPIT )"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_bhai_2_medium"
+                    android:layout_marginTop="5dp"
+                    android:textIsSelectable="true"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dept. Computer Engineering \n A. G. Patil Institute of technology"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        android:layout_marginTop="20dp"
+        android:textIsSelectable="true"
+        />
+    
+</LinearLayout>

@@ -256,6 +256,8 @@
 
 
                 <LinearLayout
+                    android:minHeight="150dp"
+                    android:paddingBottom="20dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginEnd="5dp"
                     android:padding="15dp"
@@ -273,6 +275,7 @@
                         android:layout_height="wrap_content"
                         android:text="Register for the event"
                         android:textColor="@color/white"
+                        android:id="@+id/gformtxt"
                         android:fontFamily="@font/baloo_bhai_2_medium"
                         android:textSize="16dp"
                         />
@@ -280,18 +283,21 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_marginTop="20dp"
+                        android:id="@+id/open_web"
                         android:textStyle="bold"
                         android:fontFamily="@font/baloo_bhai_2_medium"
-                        android:textColor="@color/teal_200"
+                        android:textColor="@color/background"
                         android:textAllCaps="false"
                         android:layout_width="match_parent"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:layout_height="wrap_content"
                         android:text="Open"
-                        android:background="@drawable/community_profile_card"/>
+                        android:textSize="16dp"
+                        android:background="@drawable/std_btn"/>
 
                     <LinearLayout
+                        android:id="@+id/gformcontrols"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
                         android:layout_width="match_parent"
@@ -638,6 +644,22 @@
                     android:layout_centerInParent="true"
                     android:background="#fff"
                     android:src="@drawable/team2" />
+
+                <TextView
+                    android:id="@+id/main_about"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:text="About"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#000"
+                    android:drawableStart="@drawable/baseline_info_outline_24"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:elevation="2dp"
+                    android:textSize="16dp"
+                    android:layout_marginBottom="20dp"/>
 
             </RelativeLayout>
 

@@ -3,7 +3,9 @@ package com.agpitcodeclub.app.fragments;
 import static android.app.Activity.RESULT_OK;
 import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +28,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
@@ -76,9 +79,9 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
     private ImageSlider imageSlider;
     private AppCompatButton paymentbtn;
     private TextView txt_intro;
-    private TextView txt_logo;
+    private TextView txt_logo,gformtxt;
     private ImageView btn_pickimg;
-    private AppCompatButton btn_upload_up_img,gfrom_url_upload;
+    private AppCompatButton btn_upload_up_img,gfrom_url_upload,gfrom_url_delete;
     private GifImageView up_img;
     private EditText edt_des_up_img;
     private Uri fileUrl;
@@ -94,8 +97,11 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         Home fragment = new Home();
         return fragment;
     }
+
+    private View fview;
     @Override
     public void onViewCreated( View view, @Nullable Bundle savedInstanceState) {
+        fview=view;
         initUi(view);
         sliderImage();
     }
@@ -113,6 +119,8 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         btn_upload_up_img.setOnClickListener(this);
         upcomming_btn_prg=view.findViewById(R.id.upcomming_btn_prg);
         gfrom_url_upload=view.findViewById(R.id.gfrom_url_upload);
+        gformtxt=view.findViewById(R.id.gformtxt);
+        gfrom_url_delete=view.findViewById(R.id.gfrom_url_delete);
         paymentbtn.setOnClickListener(this);
         setImageDetails();
 
@@ -126,19 +134,124 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         if (des.equals(FirebasePath.PRESIDENT)) {
             btn_upload_up_img.setVisibility(View.VISIBLE);
             btn_pickimg.setVisibility(View.VISIBLE);
+            gform(true);
         }else {
             btn_upload_up_img.setVisibility(View.GONE);
             btn_pickimg.setVisibility(View.GONE);
             edt_des_up_img.setEnabled(false);
+            gform(false);
         }
-        gform();
+
+        fview.findViewById(R.id.main_about).setOnClickListener(view1 -> {
+            about();
+        });
+
+
     }
 
-    void gform(){
+    private void about() {
+
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.dialog_about);
+
+        ImageView btnClose = dialog.findViewById(R.id.dialocback);
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss(); // Dismiss the dialog
+            }
+        });
+        dialog.show();
+    }
+
+    @SuppressLint("RestrictedApi")
+    void gform(boolean ispresident){
 
         gfrom_url_upload.setOnClickListener((view -> {
             showCustomDialog();
         }));
+
+        DatabaseReference database1 = FirebaseDatabase.getInstance().getReference().child("gform");
+        if(ispresident){
+            fview.findViewById(R.id.gformcontrols).setVisibility(View.VISIBLE);
+        }else {
+            fview.findViewById(R.id.gformcontrols).setVisibility(View.GONE);
+        }
+        database1.child("url").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                if (value != null) {
+                    // Do something with the retrieved value
+                    gfrom_url_delete.setVisibility(View.VISIBLE);
+                    fview.findViewById(R.id.open_web).setOnClickListener(view -> {
+                        Intent intent = new Intent(getContext(),GForm.class);
+                        intent.putExtra("url",value);
+                        startActivity(intent);
+                    });
+
+                }else{
+                    gfrom_url_delete.setVisibility(View.GONE);
+                    if(!ispresident){
+                        fview.findViewById(R.id.lin_gform).setVisibility(View.GONE);
+                    }else{
+                        fview.findViewById(R.id.lin_gform).setVisibility(View.VISIBLE);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        database1.child("des").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                if (value != null) {
+                    // Do something with the retrieved value
+                    gformtxt.setText(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+        gfrom_url_delete.setOnClickListener((view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Warning !")
+                    .setMessage("Are you sure you want to delete ?")
+                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User clicked Yes, perform your action here
+                            // For example, you can delete a record, submit a form, etc.
+                            DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("gform");
+                            database.setValue(null);
+
+                            dialog.dismiss(); // Close the dialog
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User clicked No, do nothing or handle accordingly
+                            dialog.dismiss(); // Close the dialog
+                        }
+                    })
+                    .show();
+
+        }));
+
     }
 
     @Override
@@ -198,16 +311,30 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
         EditText editText1 = customLayout.findViewById(R.id.editText1);
         EditText editText2 = customLayout.findViewById(R.id.editText2);
 
+
+
         // Build the AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder
                 .setView(customLayout)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Upload", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Handle OK button click
-                        String text1 = editText1.getText().toString();
-                        String text2 = editText2.getText().toString();
+                        String des = editText1.getText().toString().trim();
+                        String url = editText2.getText().toString().trim();
+
+                        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("gform");
+
+                        if(!des.equals("") && !url.equals("")){
+                            database.child("des").setValue(des);
+                            database.child("url").setValue(url);
+                            Toast.makeText(getContext(),"Uploaded",Toast.LENGTH_SHORT).show();
+
+                        }else{
+                            Toast.makeText(getContext(),"Empty Values",Toast.LENGTH_SHORT).show();
+                        }
+
 
                         // Process the entered text
                         // ...
