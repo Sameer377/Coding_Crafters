@@ -232,7 +232,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private DatabaseReference mDatabase;
 // ...
 
-    public static final float APPLICATION_VERSION_CODE=(float) 1.2;
+    public static final float APPLICATION_VERSION_CODE=(float) 2.0;
     void checkUpdates(){
         mDatabase   = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("update").addListenerForSingleValueEvent(new ValueEventListener() {
