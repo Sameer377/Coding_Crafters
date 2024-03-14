@@ -93,7 +93,7 @@ public class Announcement extends Fragment {
         return view;
     }
     private DatabaseReference databaseReference;
-
+    String designation="";
     private void initUi(View view) {
         inbox_recycle=view.findViewById(R.id.inbox_recycle);
         ann_prg=view.findViewById(R.id.ann_prg);
@@ -106,6 +106,7 @@ public class Announcement extends Fragment {
 
         SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
         Userid = prefs.getString(Credentials.USER_ID, null);
+        designation = prefs.getString(Credentials.USER_DESIGNATION, null);
         fetchData();
         loadConnectToInList ();
 
@@ -188,7 +189,8 @@ public class Announcement extends Fragment {
                                     user1.setUserid(dataSnapshot1.getKey().toString());
                                     user1.setDesignation(dataSnapshot.getKey().toString());
                                         System.out.println("1 Names : "+user1.getName()+"\n");
-                                        list1.add(user1);
+                                            list1.add(user1);
+
 
                                 }
                                 adapter1.notifyDataSetChanged();
@@ -203,8 +205,8 @@ public class Announcement extends Fragment {
 
 
                     }else if(!dataSnapshot.getKey().equals(FirebasePath.MEMBER)){
+                                list1.add(user);
 
-                            list1.add(user);
 
                     }
 

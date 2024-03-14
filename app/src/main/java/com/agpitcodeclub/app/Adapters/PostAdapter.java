@@ -102,7 +102,7 @@ public class PostAdapter extends RecyclerView.Adapter< PostAdapter.PostViewholde
     // Sub Class to create references of the views in Crad
     // view (here "CommunityModel.xml")
     public static class PostViewholder extends RecyclerView.ViewHolder {
-        TextView txt_post_title, post_description_txt,txt_read_more,btn_feedback_txt,post_uploaded_date;
+        TextView txt_post_title, post_description_txt,txt_read_more,post_uploaded_date;
         ImageSlider post_imgslider;
 
         public PostViewholder(@NotNull View itemView)
@@ -113,7 +113,6 @@ public class PostAdapter extends RecyclerView.Adapter< PostAdapter.PostViewholde
             post_imgslider= itemView.findViewById(R.id.post_imgslider);
             post_description_txt = itemView.findViewById(R.id.post_description_txt);
             txt_read_more=itemView.findViewById(R.id.txt_read_more);
-            btn_feedback_txt=itemView.findViewById(R.id.btn_add_addmember);
         }
     }
 }

@@ -77,7 +77,7 @@ public class Post extends Fragment {
             }
         });
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      /*  recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -87,7 +87,7 @@ public class Post extends Fragment {
                     addpost.show();
                 }
             }
-        });
+        });*/
 
         SharedPreferences prefs = getContext().getSharedPreferences(Credentials.USER_DATA, getContext().MODE_PRIVATE);
         String des = prefs.getString(Credentials.USER_DESIGNATION, null);

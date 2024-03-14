@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/rel_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="5dp">
@@ -42,24 +42,12 @@
                 android:fontFamily="@font/inter_extrabold"
                 android:maxWidth="250dp"
                 android:text="Group Discussion"
-                android:textColor="@color/soft_red"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/post_uploaded_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/baloo_bhai_2_medium"
-            android:text="Posted on : 18 / 08 / 023"
-            android:textColor="#B2B1B1"
-            android:textSize="12dp"
 
-            />
     </RelativeLayout>
 
 
@@ -87,22 +75,23 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/baloo_bhai_2_medium"
         android:justificationMode="inter_word"
-
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:textColorLink="@color/teal_200"
         android:textColor="@color/white"
         android:textSize="16dp" />
 
     <TextView
-        android:visibility="invisible"
-        android:id="@+id/btn_feedback_txt"
+        android:id="@+id/post_uploaded_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/post_description_txt"
         android:layout_alignParentRight="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:fontFamily="@font/baloo_bhai"
-        android:text="Give Feedback"
-        android:textColor="@color/teal_200" />
+        android:fontFamily="@font/baloo_bhai_2_medium"
+        android:text="1 FEB 2024"
+        android:textColor="@color/card_outline" />
 
     <TextView
         android:id="@+id/txt_read_more"
@@ -113,15 +102,15 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/baloo_bhai"
+        android:fontFamily="@font/inter_extrabold"
         android:text="Read more"
-        android:textColor="@color/teal_200" />
+        android:textColor="@color/card_outline" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@color/inputbg"
-        android:layout_below="@id/btn_feedback_txt"
+        android:layout_below="@id/txt_read_more"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         />

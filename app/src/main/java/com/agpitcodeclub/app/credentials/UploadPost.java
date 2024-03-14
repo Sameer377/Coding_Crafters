@@ -49,9 +49,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -154,7 +156,7 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
         }
 
         // Extract day, month, and year
-        int day = 0;
+   /*     int day = 0;
         int month=0;
         int year=0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -163,8 +165,10 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
        year = currentDate.getYear();
         }
 
-        uplodingdate=day+" / "+month+" / "+year;
-        postModel=new PostModel(edt_post_title.getText().toString().trim(),edt_post_desc.getText().toString().trim(),uplodingdate);
+        uplodingdate=day+" / "+month+" / "+year;*/
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        postModel=new PostModel(edt_post_title.getText().toString().trim(),edt_post_desc.getText().toString().trim(),dateFormat.format(new Date()));
 //        databaseReference.setValue(postModel);
 
         imgUrls="";

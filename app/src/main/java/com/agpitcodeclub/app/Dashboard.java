@@ -101,6 +101,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 //        back.setOnClickListener(this);
 //    }
 
+
+    boolean ishomefragment = false;
     private void navbar() {
 
         nav.setSelectedItemId(R.id.home);
@@ -119,11 +121,11 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                         if(InternetIsConnected()){
                             loginExistingUser();
                             loadFragment(new Home(), false);
-
+                            ishomefragment=true;
                         }
                         else {
                             loadFragment(new CheckInternet(), false);
-
+                            ishomefragment=true;
                         }
 
 
@@ -133,10 +135,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 //                        header.setVisibility(View.VISIBLE);
                         if(InternetIsConnected()){
                             loadFragment(new Community(Dashboard.this), false);
+                            ishomefragment=false;
 
                         }
                         else {
                             loadFragment(new CheckInternet(), false);
+                            ishomefragment=false;
 
                         }
                         break;
@@ -146,10 +150,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
                         if(InternetIsConnected()){
                             loadFragment(new Post(), false);
+                            ishomefragment=false;
 
                         }
                         else {
                             loadFragment(new CheckInternet(), false);
+                            ishomefragment=false;
 
                         }
                         break;
@@ -159,10 +165,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
                         if(InternetIsConnected()){
                             loadFragment(new Announcement(), false);
+                            ishomefragment=false;
 
                         }
                         else {
                             loadFragment(new CheckInternet(), false);
+                            ishomefragment=false;
 
                         }
                         break;
@@ -174,15 +182,17 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                         if(InternetIsConnected()){
                             if(userLogin){
                                 loadFragment(new Profile(), false);
+                                ishomefragment=false;
 
                             }else{
                                 loadFragment(new Login(), false);
-
+                                ishomefragment=false;
                             }
 
                         }
                         else {
                             loadFragment(new CheckInternet(), false);
+                            ishomefragment=false;
 
                         }
                         break;
@@ -293,5 +303,26 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 Log.d("token...",token);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(!ishomefragment){
+            if(InternetIsConnected()){
+                loginExistingUser();
+                loadFragment(new Home(), false);
+                ishomefragment=true;
+                nav.setSelectedItemId(R.id.home);
+
+            }
+            else {
+                loadFragment(new CheckInternet(), false);
+                ishomefragment=true;
+
+            }
+        }else {
+            finish();
+        }
     }
 }
