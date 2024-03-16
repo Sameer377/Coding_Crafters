@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/frag_bg"
+    android:background="@color/background"
     tools:context=".credentials.UploadPost">
 
     <RelativeLayout
@@ -12,15 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/inputbg"
+        android:background="@color/background"
         android:padding="10dp"
         >
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/postuploadback"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/back_arrow_white" />
+            android:src="@drawable/baseline_arrow_back_24" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,11 +54,11 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/post_filled"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/baloo_bhai"
+                android:fontFamily="@font/inter_extrabold"
                 android:padding="10dp"
                 android:text="Upload Image"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
             <RelativeLayout
                 android:id="@+id/rel_post_img"
@@ -108,11 +109,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rel_post_img"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/baloo_bhai"
+                android:fontFamily="@font/inter_extrabold"
                 android:padding="10dp"
                 android:text="Add Title"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/edt_post_title"
@@ -123,7 +124,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/post_desc_bg_input"
+                android:background="@drawable/community_profile_card"
                 android:fontFamily="@font/baloo_bhai_2_medium"
                 android:gravity="top"
                 android:hint="Event"
@@ -138,11 +139,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edt_post_title"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/baloo_bhai"
+                android:fontFamily="@font/inter_extrabold"
                 android:padding="10dp"
                 android:text="Add Description"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/edt_post_desc"
@@ -153,7 +154,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/post_desc_bg_input"
+                android:background="@drawable/community_profile_card"
                 android:fontFamily="@font/baloo_bhai_2_medium"
                 android:gravity="top"
                 android:hint="Description"
@@ -163,15 +164,19 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/upload_btn_post"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edt_post_desc"
                 android:layout_alignParentRight="true"
+                android:background="@drawable/std_btn"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/baloo_bhai_2_medium"
+                android:textAllCaps="false"
                 android:layout_marginEnd="10dp"
-                android:text="upload"
+                android:text="Upload"
+                android:textStyle="bold"
                 android:textSize="18dp" />
         </RelativeLayout>
 

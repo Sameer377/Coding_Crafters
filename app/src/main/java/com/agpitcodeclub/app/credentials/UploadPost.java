@@ -3,6 +3,7 @@ package com.agpitcodeclub.app.credentials;
 import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -20,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.agpitcodeclub.app.Adapters.FileTime;
 import com.agpitcodeclub.app.Models.PostModel;
@@ -30,7 +32,6 @@ import com.agpitcodeclub.app.utils.NotificationData;
 import com.agpitcodeclub.app.utils.PushNotification;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -64,7 +65,7 @@ import retrofit2.Response;
 public class UploadPost extends AppCompatActivity  implements View.OnClickListener, EasyPermissions.PermissionCallbacks{
     private RelativeLayout rel_upload_post_btn;
     private ArrayList<String> imgList;
-    private MaterialButton upload_btn_post;
+    private AppCompatButton upload_btn_post;
     private EditText edt_post_title,edt_post_desc;
     private String uplodingdate;
     ArrayList arrayListFileObjects=null;
@@ -89,6 +90,10 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
         upload_btn_post=findViewById(R.id.upload_btn_post);
         edt_post_desc=findViewById(R.id.edt_post_desc);
         edt_post_title=findViewById(R.id.edt_post_title);
+
+        findViewById(R.id.postuploadback).setOnClickListener(view -> {
+            finish();
+        });
     }
 
     @Override
@@ -99,14 +104,18 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
                 uploadPost();
                 break;
             case R.id.upload_btn_post:
-                pushContent(getArrayListFileObjects());
+                if(edt_post_title.getText().toString().trim().isEmpty()){
+                    edt_post_title.setError("Cannot be Empty");
+                }else {
+                    pushContent(getArrayListFileObjects());
+                }
                 break;
         }
     }
 
-    void toast(String s){
-        Toast.makeText(UploadPost.this,s,Toast.LENGTH_SHORT).show();
-    }
+//    void toast(String s){
+////        Toast.makeText(UploadPost.this,s,Toast.LENGTH_SHORT).show();
+//    }
 
     private void uploadPost() {
         pickImg();
@@ -137,7 +146,12 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
 
 
     public String imgUrls="";
+    int process = 0;
+    int prograssincrement;
     private void pushContent(ArrayList arrayList) {
+        process=arrayList.size();
+        showHorizontalProgressDialog();
+         prograssincrement = 100/process;
         fileKey= new FileTime().getFileTime();
         databaseReference= FirebaseDatabase.getInstance().getReference(FirebasePath.POST).child(fileKey);
 
@@ -155,17 +169,7 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
             String formattedDate = currentDate.format(formatter);
         }
 
-        // Extract day, month, and year
-   /*     int day = 0;
-        int month=0;
-        int year=0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            day = currentDate.getDayOfMonth();
-       month = currentDate.getMonthValue();
-       year = currentDate.getYear();
-        }
 
-        uplodingdate=day+" / "+month+" / "+year;*/
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
         postModel=new PostModel(edt_post_title.getText().toString().trim(),edt_post_desc.getText().toString().trim(),dateFormat.format(new Date()));
@@ -187,20 +191,16 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
             storageReference = FirebaseStorage.getInstance().getReference(FirebasePath.POST+"/"+fileKey+"/"+filename);
             setStorageReference(storageReference);
             StorageReference st=storageReference;
-            toast("Executing");
             int finalI = i;
             storageReference.putFile(fileuri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            toast("Entered in the success");
                             st.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    toast("Uploaded");
                                     Log.i("TAG","File path ..............:"+getStorageReference());
                                     String tempFile=filename.replaceAll("[+-_,.*/%$#@!&^]","");
-                                    toast(filename);
                                     if(imgUrls.equals("")){
                                         imgUrls=uri.toString();
                                         if(finalI ==0) {
@@ -213,6 +213,11 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
                                     }
                                     postModel.setImglist(imgUrls);
                                     databaseReference.child("imglist").setValue(getImgUrls());
+                                    progressDialog.setProgress(prograssincrement);
+                                    prograssincrement += prograssincrement;
+                                    if(finalI==arrayList.size()-1){
+                                        progressDialog.dismiss();
+                                    }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -295,7 +300,6 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
         arrayListFileObjects=new ArrayList();
         if(requestCode==101 && resultCode==RESULT_OK)
         {
-            toast(String.valueOf(data.getClipData()));
 
             if(data.getClipData()!=null)
             {
@@ -317,7 +321,6 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
 //                tv_filename1.setText(fff1);
 //                tv_filename1.setMovementMethod(new ScrollingMovementMethod());
             }
-            toast("Arrobj : "+arrayListFileObjects.size());
 
         }
 
@@ -362,7 +365,7 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
             @Override
             public void onResponse (Call<PushNotification> call, Response<PushNotification> response) {
                 if (response.isSuccessful())
-                    Toast.makeText(  getApplicationContext(),  "success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(  getApplicationContext(),  "Notification sent", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(getApplicationContext(),  "error", Toast.LENGTH_SHORT).show();
             }
@@ -413,5 +416,15 @@ public class UploadPost extends AppCompatActivity  implements View.OnClickListen
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
+
+    private ProgressDialog progressDialog;
+    private int progressStatus = 0;
+    private void showHorizontalProgressDialog() {
+        progressDialog = new ProgressDialog(UploadPost.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMax(100);
+        progressDialog.show();
+    }
 
 }

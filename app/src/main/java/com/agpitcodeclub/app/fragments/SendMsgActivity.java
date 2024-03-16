@@ -74,7 +74,9 @@ public class SendMsgActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_sendmsg:
-                sendMsg();
+
+                    sendMsg();
+
                 break;
             case R.id.close_btm_nav:
                 finish();
@@ -143,7 +145,7 @@ public class SendMsgActivity extends AppCompatActivity implements View.OnClickLi
             tf_msg.requestFocus();
             return;
         }else {
-
+            Toast.makeText(getApplicationContext(), "Uploading...", Toast.LENGTH_SHORT).show();
             String uploadtime = new FileTime().getFileTime().toString();
             SharedPreferences prefs = getSharedPreferences(Credentials.USER_DATA, MODE_PRIVATE);
             String designation = prefs.getString(Credentials.USER_DESIGNATION, null).substring(2);

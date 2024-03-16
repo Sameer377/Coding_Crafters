@@ -4,6 +4,7 @@ import static com.agpitcodeclub.app.utils.FirebasePath.FCM_TOPIC;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,6 @@ import com.agpitcodeclub.app.R;
 import com.agpitcodeclub.app.utils.ApiUtilities;
 import com.agpitcodeclub.app.utils.FirebasePath;
 import com.agpitcodeclub.app.utils.PushNotification;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -24,7 +24,7 @@ import retrofit2.Response;
 
 public class SendMessege extends AppCompatActivity implements View.OnClickListener {
 
-    TextInputEditText tf_msg;
+    EditText tf_msg;
     AppCompatButton btn_sendmsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

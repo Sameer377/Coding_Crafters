@@ -182,6 +182,7 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
                 if (value != null) {
+                    fview.findViewById(R.id.lin_gform).setVisibility(View.VISIBLE);
                     // Do something with the retrieved value
                     gfrom_url_delete.setVisibility(View.VISIBLE);
                     fview.findViewById(R.id.open_web).setOnClickListener(view -> {
@@ -196,7 +197,6 @@ public class Home extends Fragment implements View.OnClickListener,EasyPermissio
                         fview.findViewById(R.id.lin_gform).setVisibility(View.GONE);
                     }else{
                         fview.findViewById(R.id.lin_gform).setVisibility(View.VISIBLE);
-
                     }
                 }
             }

@@ -44,7 +44,7 @@ public class NotificationService extends FirebaseMessagingService {
         int notificationId = new Random().nextInt();
         createNotificationChannel(manager);
         intent.addFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent intent1 = PendingIntent.getActivities(this, 0, new Intent[]{intent}, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent intent1 = PendingIntent.getActivities(this, 0, new Intent[]{intent}, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 
 //      if(remoteMessage.getData().get("imageUrl" )==null) {
 
