@@ -7,23 +7,26 @@ This native Android application serves as a dynamic platform for fostering engag
 
 [👉🏻 Figma Design](https://www.figma.com/file/tUhDIMuZXwQflFZeUBunrj/Code-Club-APP?type=design&node-id=0%3A1&mode=design&t=k0zKieJSHMTMGSVm-1)
 
-[👉🏻 Download APK](https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/dash%2Fapp-release.apk?alt=media&token=fac46048-6bb3-4745-bf5b-91e741ab1217)
+[👉🏻 Download APK](https://firebasestorage.googleapis.com/v0/b/codingcrafters-fac21.appspot.com/o/raw%2FCodingCrafters.apk?alt=media&token=317f7d7d-ec2f-4661-abd3-a834b415681e)
 
 #### Project Screenshots
 
 <table>
 
   <tr>
-   <td><img src="./screenshorts/splashsc.jpeg" height=450></td>
-     <td><img src="./screenshorts/dashboard.jpeg" height=450></td>
-   <td><img src="./screenshorts/dashboard1.jpeg" height=450></td>
+   <td><img src="screenshorts/WhatsApp Image 2024-03-22 at 11.07.43 PM.jpeg" height=450></td>
+     <td><img src="screenshorts/WhatsApp Image 2024-03-22 at 11.08.42 PM.jpeg" height=450></td>
+   <td>
+   <tr>
+   <img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.36 AM (1).jpeg" height=450>
+   </tr>
+    <tr>
+   <img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.36 AM.jpeg" height=450>
+   </tr>
+   
+   </td>
   </tr>
 
-  <tr>
-   <td><img src="./screenshorts/community.jpeg" height=450></td>
-     <td><img src="./screenshorts/post.jpeg" height=450></td>
-   <td><img src="./screenshorts/profile.jpeg" height=450></td>
-  </tr>
 
 </table>
 
@@ -36,6 +39,9 @@ This native Android application serves as a dynamic platform for fostering engag
 * **Community Directory :**  Access a comprehensive list of all community members' profiles, fostering connections and collaboration.
 * **Announcements Hub :**  Receive timely announcements about club events and other important updates directly, ensuring you're always in the loop.
 * **Account Management :**   Easily manage your personal profile and account settings to customize your experience.
+* **Realtime Notification.**
+* **Realtime Chat :** Any logged in user can chat with individual designeted person.
+* **Event Registration Form :** Admin can add Google form url to integrate google form in this app.
 #### **Upcoming Features**
 * **Payment Integration :**  Useful for collecting event fees and other payments through a single platform .
 
