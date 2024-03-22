@@ -14,19 +14,16 @@ This native Android application serves as a dynamic platform for fostering engag
 <table>
 
   <tr>
-   <td><img src="screenshorts/WhatsApp Image 2024-03-22 at 11.07.43 PM.jpeg" height=450></td>
-     <td><img src="screenshorts/WhatsApp Image 2024-03-22 at 11.08.42 PM.jpeg" height=450></td>
-   <td>
-   <tr>
-   <img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.36 AM (1).jpeg" height=450>
-   </tr>
-    <tr>
-   <img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.36 AM.jpeg" height=450>
-   </tr>
-   
-   </td>
+   <td><img src="screenshorts/1.jpeg" height=450></td>
+     <td><img src="screenshorts/WhatsApp Image 2024-03-22 at 11.07.43 PM.jpeg" height=450></td>
+   <td><img src="screenshorts/WhatsApp Image 2024-03-22 at 11.08.42 PM.jpeg" height=450></td>
   </tr>
 
+  <tr>
+   <td><img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.36 AM (1).jpeg" height=450></td>
+     <td><img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.36 AM.jpeg" height=450></td>
+   <td><img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.37 AM.jpeg" height=450></td>
+  </tr>
 
 </table>
 
