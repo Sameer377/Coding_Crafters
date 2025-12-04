@@ -4,7 +4,7 @@
 This native Android application serves as a dynamic platform for fostering engaging discussions among club members and soliciting valuable feedback for upcoming events. It empowers students by facilitating the exchange of thoughts and ideas, which in turn fuels innovation in project development.
 
 ## Inaugrated by college management
-<img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.36 AM.jpeg" height=450>
+<img src="https://github.com/Sameer377/Coding_Crafters/blob/master/IMG_20251204_154623.jpg" width="100%">
 
 [👉🏻 Figma Prototype](https://lnkd.in/gBCWEchX)
 
