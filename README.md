@@ -3,6 +3,9 @@
 
 This native Android application serves as a dynamic platform for fostering engaging discussions among club members and soliciting valuable feedback for upcoming events. It empowers students by facilitating the exchange of thoughts and ideas, which in turn fuels innovation in project development.
 
+## Inaugrated by college management
+<img src="screenshorts/WhatsApp Image 2024-03-23 at 12.28.36 AM.jpeg" height=450>
+
 [👉🏻 Figma Prototype](https://lnkd.in/gBCWEchX)
 
 [👉🏻 Figma Design](https://www.figma.com/file/tUhDIMuZXwQflFZeUBunrj/Code-Club-APP?type=design&node-id=0%3A1&mode=design&t=k0zKieJSHMTMGSVm-1)
